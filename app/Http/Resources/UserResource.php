@@ -30,8 +30,7 @@ class UserResource extends JsonResource
                     return $permission['name'];
                 },
                 $this->getAllPermissions()->toArray()
-            ),
-            'avatar' => 'https://i.pravatar.cc',
+            )
         ];
     }
 }
