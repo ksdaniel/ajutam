@@ -77,9 +77,22 @@ export default {
       'avatar',
     ]),
   },
-  mounted() {
-    this.get();
+
+  watch: {
+    // will fire on route changes
+    // '$route.params.id': function(val, oldVal){ // Same
+    '$route.query': function(val, oldVal){
+      console.log(this.$route.params.id);
+      this.get();
+    },
   },
+  mounted() {
+    this.$nextTick(function() {
+      // some init codes for chart implementation
+      this.get();
+    });
+  },
+
   methods: {
     checkRole,
     getRole() {
@@ -113,6 +126,8 @@ export default {
               availability_details: 'Detalii disponibilitate',
               observations: 'Observatii',
             };
+
+            this.volunteerList = [];
 
             Object.entries(this.volunteer).forEach(entry => {
               const key = entry[0];

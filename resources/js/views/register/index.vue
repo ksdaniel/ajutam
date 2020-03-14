@@ -194,6 +194,10 @@ export default {
       'roles',
     ]),
   },
+  beforeRouteUpdate(to, from, next) {
+    this.get();
+    next();
+  },
   mounted(){
     this.get();
   },
@@ -221,7 +225,7 @@ export default {
           });
           this.centerDialogVisible = true;
           this.loading = false;
-          this.$router.push('/');
+          this.$router.push('/dashboard');
         })
         .catch(error => {
           console.log(error);
@@ -246,7 +250,7 @@ export default {
               });
               this.centerDialogVisible = true;
               this.loading = false;
-              this.$router.push('/');
+              this.$router.push('/dashboard');
             })
             .catch(error => {
               console.log(error);

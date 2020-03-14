@@ -3,7 +3,7 @@
     <div class=" clearfix">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="6">
-          <user-card />
+          <user-card ref="userCard" />
           <!--<user-bio />-->
         </el-col>
         <el-col :xs="24" :sm="24" :md="15" :lg="15" :xl="18">
