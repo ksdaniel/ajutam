@@ -8,6 +8,7 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
+  email: '',
   introduction: '',
   roles: [],
   permissions: [],
@@ -16,6 +17,9 @@ const state = {
 const mutations = {
   SET_ID: (state, id) => {
     state.id = id;
+  },
+  SET_EMAIL: (state, email) => {
+    state.email = email;
   },
   SET_TOKEN: (state, token) => {
     state.token = token;
@@ -79,7 +83,7 @@ const actions = {
             reject('Verification failed, please Login again.');
           }
 
-          const { roles, name, avatar, introduction, permissions, id } = data;
+          const { roles, name, avatar, introduction, permissions, id, email } = data;
           // roles must be a non-empty array
           if (!roles || roles.length <= 0) {
             reject('getInfo: roles must be a non-null array!');
@@ -91,6 +95,7 @@ const actions = {
           commit('SET_AVATAR', avatar);
           commit('SET_INTRODUCTION', introduction);
           commit('SET_ID', id);
+          commit('SET_EMAIL', email);
           resolve(data);
         })
         .catch(error => {

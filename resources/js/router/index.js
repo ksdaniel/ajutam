@@ -15,6 +15,7 @@ import Layout from '@/layout';
 /* Router for modules */
 import adminRoutes from './modules/admin';
 import errorRoutes from './modules/error';
+import voluntariRoutes from './modules/voluntari';
 
 /**
  * Sub-menu only appear when children.length>=1
@@ -103,8 +104,8 @@ export const constantRoutes = [
 export const asyncRoutes = [
 
   adminRoutes,
-
   errorRoutes,
+  voluntariRoutes,
 
   { path: '*', redirect: '/404', hidden: true },
 ];

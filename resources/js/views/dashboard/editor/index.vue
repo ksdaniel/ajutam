@@ -1,30 +1,55 @@
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
-      <pan-thumb :image="avatar" style="float: left">
-        Your roles:
-        <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
-      </pan-thumb>
-      <github-corner style="position: absolute; top: 0px; border: 0; right: 0;" />
-      <div class="info-container">
-        <span class="display_name">{{ name }}</span>
-        <span style="font-size:20px;padding-top:20px;display:inline-block;">{{ roles.join('|') }}'s Dashboard</span>
-      </div>
+      <el-row :gutter="20">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="6">
+          <user-card />
+          <!--<user-bio />-->
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="15" :lg="15" :xl="18">
+          <el-card>
+
+            <h4><strong>Bine ai venit {{ name }}!</strong></h4>
+            <p><span style="font-weight: 400;">Urmatoarele cateva saptamani, se anunta a fi grele pentru comunitatea noastra. Stim ca vom fi afectati de COVID 19, dar acesta nu este motiv de panica.&nbsp;</span></p>
+            <p><span style="font-weight: 400;">Este in schimb un motiv de mobilizare si organizare. Impreuna incercam sa formam grupuri de voluntari care sa ajute comunitatea noastra sa treaca peste aceasta criza.&nbsp;</span></p>
+            <p><span style="font-weight: 400;"><strong>Am identificat pana acum mai multe feluri in care putem face asta:</strong>&nbsp;</span></p>
+            <p>&nbsp;</p>
+            <ul>
+              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa organizam o retea de distribuire cat mai rapida a informatiilor relevante, verificate si urgente pe retelele de socializare si direct de la om la om.</span></li>
+            </ul>
+            <p>&nbsp;</p>
+            <ul>
+              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa contribuim responsabil la educarea populatie pe teme care tin de epidemia de COVID 19.&nbsp;</span></li>
+            </ul>
+            <p>&nbsp;</p>
+            <ul>
+              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa distribuim produse alimentare intr-un mod sigur, celor care sunt izolati la domiciliu.&nbsp;</span></li>
+            </ul>
+            <p><br><span style="font-weight: 400;">Daca vrei sa te alaturi acestei initiative, te rugam sa completezi formularul de pe site.&nbsp;</span></p>
+            <p>&nbsp;</p>
+            <p><strong>Nota:&nbsp;</strong></p>
+            <p><span style="font-weight: 400;">Ne confruntam cu o criza reala, oameni ca noi sunt afectati direct si au de suferit in fiecare zi. Suntem inca la inceputul acestei epidemii, si vor urma vremuri dificile.&nbsp;</span></p>
+            <p><span style="font-weight: 400;">Maturitatea si seriozitatea voluntarilor este esentiala pentru a avea o contributie pozitiva. Te rugam sa te gandesti foarte bine si sa-ti asumi sarcinile care sti ca le poti face.&nbsp;</span></p>
+            <p>&nbsp;</p>
+            <p><strong>Nu este un joc!</strong></p>
+          </el-card>
+
+        </el-col>
+
+      </el-row>
     </div>
-    <div>
-      <img :src="emptyGif" class="emptyGif">
-    </div>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import PanThumb from '@/components/PanThumb';
-import GithubCorner from '@/components/GithubCorner';
+
+import UserCard from './UserCard';
 
 export default {
   name: 'DashboardEditor',
-  components: { PanThumb, GithubCorner },
+  components: { UserCard },
   data() {
     return {
       emptyGif: 'https://media.giphy.com/media/Ai8iZqHx2i0fK/giphy.gif',
@@ -33,7 +58,6 @@ export default {
   computed: {
     ...mapGetters([
       'name',
-      'avatar',
       'roles',
     ]),
   },

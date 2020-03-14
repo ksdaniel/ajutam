@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('roles', 'RoleController')->middleware('permission:' . \App\Laravue\Acl::PERMISSION_PERMISSION_MANAGE);
     Route::get('roles/{role}/permissions', 'RoleController@permissions')->middleware('permission:' . \App\Laravue\Acl::PERMISSION_PERMISSION_MANAGE);
     Route::apiResource('permissions', 'PermissionController')->middleware('permission:' . \App\Laravue\Acl::PERMISSION_PERMISSION_MANAGE);
+    Route::apiResource('volunteers', 'VolunteersController');
 
     Route::post('upload-avatar-image', 'UserController@uploadImage');
 });
