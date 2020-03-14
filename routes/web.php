@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
+Route::get('/auth/{provider}/callback', 'LaravueController@index')->where('provider', '.*');
 
 
 
