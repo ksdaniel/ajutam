@@ -14,9 +14,28 @@ import * as filters from './filters'; // global filters
 
 import VeeValidate from 'vee-validate';
 
+import VueAxios from 'vue-axios';
+import VueSocialauth from 'vue-social-auth';
+import axios from 'axios';
+
 Vue.use(VueUpload);
 
 Vue.use(VeeValidate);
+
+Vue.use(VueAxios, axios);
+Vue.use(VueSocialauth, {
+
+  providers: {
+    facebook: {
+      clientId: '553013741975593',
+      redirectUri: 'https://ajutam.test/auth/facebook/callback', // Your client app URL
+    },
+    google: {
+      clientId: '459967688656-bbevqo566u4kqp7h52nre2mj7k3gvlmj.apps.googleusercontent.com',
+      redirectUri: 'https://ajutam.test/auth/google/callback', // Your client app URL
+    },
+  },
+});
 
 Vue.use(ElementUI, {
   size: Cookies.get('size') || 'medium', // set element-ui default size

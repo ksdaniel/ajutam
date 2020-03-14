@@ -8,6 +8,14 @@ export function login(data) {
   });
 }
 
+export function loginWithSocialAuth(data) {
+  return request({
+    url: '/sociallogin/' + data.provider,
+    method: 'post',
+    data: data.data,
+  });
+}
+
 export function getInfo(token) {
   return request({
     url: '/auth/user',

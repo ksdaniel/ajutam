@@ -17,6 +17,8 @@ use \App\Laravue\JsonResponse;
 
 Route::post('auth/login', 'AuthController@login');
 
+Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('auth/user', 'AuthController@user');
     Route::post('auth/logout', 'AuthController@logout');

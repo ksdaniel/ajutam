@@ -57,6 +57,11 @@ export const constantRoutes = [
     hidden: true,
   },
   {
+    path: '/register',
+    component: () => import('@/views/register/index'),
+    hidden: true,
+  },
+  {
     path: '/auth-redirect',
     component: () => import('@/views/login/AuthRedirect'),
     hidden: true,
@@ -72,6 +77,14 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true,
   },
+  {
+    path: '/auth/:provider/callback',
+    component: {
+      template: '<div class="auth-component"></div>',
+    },
+    hidden: true,
+  },
+
   {
     path: '',
     component: Layout,
