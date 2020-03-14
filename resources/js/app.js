@@ -28,11 +28,11 @@ Vue.use(VueSocialauth, {
   providers: {
     facebook: {
       clientId: '553013741975593',
-      redirectUri: 'https://ajutam.test/auth/facebook/callback', // Your client app URL
+      redirectUri: 'https://ajutam.civicsuport.ro/auth/facebook/callback', // Your client app URL
     },
     google: {
       clientId: '459967688656-bbevqo566u4kqp7h52nre2mj7k3gvlmj.apps.googleusercontent.com',
-      redirectUri: 'https://ajutam.test/auth/google/callback', // Your client app URL
+      redirectUri: 'https://ajutam.civicsuport.ro/auth/google/callback', // Your client app URL
     },
   },
 });
