@@ -70,7 +70,8 @@ export default {
   },
     data () {
     return {
-      nationalCount: null
+      nationalCount: null,
+      allPacients: null
     }
   },
   mounted () {
@@ -78,7 +79,8 @@ export default {
       .get('https://coronaproxy.azurewebsites.net/getPersoane')
       .then(response => {
           console.log(response);
-          this.nationalCount = response.data.count;
+          this.nationalCount = response.data.length;
+          this.allPacients = response.data;
         })
   },
 };
