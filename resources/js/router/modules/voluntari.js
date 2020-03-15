@@ -4,17 +4,24 @@ import Layout from '@/layout';
 const adminRoutes = {
   path: '/voluntari',
   component: Layout,
-  redirect: '/voluntari/inregistrare',
-  name: 'Administrator',
-  hidden: true,
+  redirect: '/voluntari/harta-voluntari',
+  name: 'Voluntari',
   children: [
-    /** User managements */
+    /** Voluntari managements */
     {
       path: 'inregistrare',
       component: () => import('@/views/register/index'),
       name: 'Inregistrare Voluntari',
-      meta: { title: 'userProfile', noCache: true },
+      meta: { title: 'Inregistrare voluntari', noCache: true },
       hidden: true,
+    },
+
+    /** Harta voluntari */
+    {
+      path: 'harta-voluntari',
+      component: () => import('@/views/voluntari/index'),
+      name: 'Inregistrare Voluntari',
+      meta: { title: 'Harta voluntari', noCache: true, icon: 'peoples' },
     },
   ],
 };

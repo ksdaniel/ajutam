@@ -14,7 +14,7 @@ class VolunteersController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(["volunteers"=>Volunteer::all()]);
     }
 
     /**

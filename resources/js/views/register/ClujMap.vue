@@ -23,6 +23,8 @@ export default {
       if (val){
         var geojson = L.geoJSON(val, {
           onEachFeature: (f, l) => {
+            // l.bindPopup('');
+
             this.drawnItems.addLayer(l);
           },
 
