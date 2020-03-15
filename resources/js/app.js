@@ -18,6 +18,14 @@ import VueAxios from 'vue-axios';
 import VueSocialauth from 'vue-social-auth';
 import axios from 'axios';
 
+import GAuth from 'vue-google-oauth2';
+const gauthOption = {
+  clientId: '459967688656-bbevqo566u4kqp7h52nre2mj7k3gvlmj.apps.googleusercontent.com',
+  scope: 'profile email',
+  prompt: 'select_account',
+};
+Vue.use(GAuth, gauthOption);
+
 Vue.use(VueUpload);
 
 Vue.use(VeeValidate);
