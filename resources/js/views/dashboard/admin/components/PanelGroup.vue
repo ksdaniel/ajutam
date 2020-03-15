@@ -7,9 +7,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Visits
+            Persoane contaminate
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="nationalCount" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -68,10 +68,15 @@ export default {
       this.$emit('handleSetLineChartData', type);
     },
   },
+    data () {
+    return {
+      nationalCount: null
+    }
+  },
   mounted () {
     axios
       .get('https://coronaproxy.azurewebsites.net/getPersoane')
-      .then(response => ( console.log(response)))
+      .then(response => (this.nationalCount = response.data.count))
   },
 };
 
