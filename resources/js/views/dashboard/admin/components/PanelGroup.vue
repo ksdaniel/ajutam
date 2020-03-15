@@ -7,22 +7,22 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Visits
+            Confirmati national
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="nationalCount" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
+        <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Messages
+            Confirmati Cluj
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="clujCount" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -68,12 +68,29 @@ export default {
       this.$emit('handleSetLineChartData', type);
     },
   },
+    data () {
+    return {
+      nationalCount: null,
+      allPacients: null, 
+      clujCount: null
+    }
+  },
   mounted () {
     axios
-      .get('https://covid19.hackout.ro/api/getJudet/Cluj')
-      .then(response => ( console.log(response)))
+      .get('https://coronaproxy.azurewebsites.net/getPersoane')
+      .then(response => {
+          console.log(response);
+          this.nationalCount = response.data.length;
+          this.allPacients = response.data;
+          this.clujCount = response.data.filter(filterJudet).length;
+
+        })
   },
 };
+
+function filterJudet(result){
+  return result.judet == "CLUJ"
+}
 
 </script>
 
