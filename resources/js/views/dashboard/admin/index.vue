@@ -2,6 +2,7 @@
   <div class="dashboard-editor-container">
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
+    <VoluntariMap></VoluntariMap>
 
   </div>
 </template>
@@ -16,6 +17,7 @@ import BarChart from './components/BarChart';
 import TransactionTable from './components/TransactionTable';
 import TodoList from './components/TodoList';
 import BoxCard from './components/BoxCard';
+import VoluntariMap from '@/views/voluntari/VoluntariMap';
 
 const lineChartData = {
   newVisitis: {
@@ -39,6 +41,7 @@ const lineChartData = {
 export default {
   name: 'DashboardAdmin',
   components: {
+      VoluntariMap,
     GithubCorner,
     PanelGroup,
     LineChart,
