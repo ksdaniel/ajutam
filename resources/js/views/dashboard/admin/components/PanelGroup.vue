@@ -76,7 +76,10 @@ export default {
   mounted () {
     axios
       .get('https://coronaproxy.azurewebsites.net/getPersoane')
-      .then(response => (this.nationalCount = response.data.count))
+      .then(response => {
+          console.log(response);
+          this.nationalCount = response.data.count;
+        })
   },
 };
 
