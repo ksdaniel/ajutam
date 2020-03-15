@@ -34,17 +34,17 @@
       </el-form-item>
 
       <div class="links">
-        <button class="loginBtn loginBtn--facebook" @click="AuthProvider('facebook')">
+        <el-button :loading="loading" type="button" class="loginBtn loginBtn--facebook" @click="loginWithFacebook">
           Login or Register cu Facebook
-        </button>
+        </el-button>
 
-        <button class="loginBtn loginBtn--google" @click="AuthProvider('google')">
+        <el-button :loading="loading" type="button" class="loginBtn loginBtn--google" @click="loginWithGoogle">
           Login or Register cu Google
-        </button>
+        </el-button>
       </div>
 
-      <div class="tips" />
     </el-form>
+
   </div>
 </template>
 
@@ -136,6 +136,36 @@ export default {
         })
         .catch(() => {
           this.loading = false;
+        });
+    },
+
+    loginWithFacebook(){
+      this.loading = true;
+      FB.getLoginStatus((response) => {
+        console.log(response);
+        if (response.status === 'connected'){
+          this.SocialLogin('facebook', { token: response.authResponse.accessToken });
+        } else {
+          FB.login((response) => {
+            if (response.status === 'connected'){
+              this.SocialLogin('facebook', { token: response.authResponse.accessToken });
+            }
+          }, { scope: 'public_profile,email' });
+        }
+      });
+    },
+
+    loginWithGoogle(){
+      this.$gAuth.getAuthCode()
+        .then(authCode => {
+          // on success
+          return this.SocialLogin('google', { code: authCode });
+        })
+        .then(response => {
+          // after ajax
+        })
+        .catch(error => {
+          // on fail do something
         });
     },
 
