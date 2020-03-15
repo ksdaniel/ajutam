@@ -23,7 +23,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Name">
+      <el-table-column align="center" label="Nume">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
@@ -38,6 +38,17 @@
       <el-table-column align="center" label="Role" width="120">
         <template slot-scope="scope">
           <span>{{ scope.row.roles.join(', ') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="Voluntar" width="150">
+        <template slot-scope="scope">
+          <el-tag
+            v-if="scope.row.volunteer"
+            style="cursor:pointer"
+            type="success"
+            effect="dark"
+            @click="viewVolunteerData(scope.row.volunteer)"
+          >Voluntar Inregistrat</el-tag>
         </template>
       </el-table-column>
 
@@ -122,6 +133,29 @@
       </div>
     </el-dialog>
 
+    <el-dialog
+      title="Date Voluntar"
+      :visible.sync="dialogVolunteerVisible"
+      width="40%"
+      center
+    >
+
+      <div class="box-social">
+        <el-table :data="currentVolunteer" :show-header="false">
+          <el-table-column prop="name" label="Name" />
+          <el-table-column prop="info" label="Info" align="left" />
+
+        </el-table>
+      </div>
+
+      <div slot="footer" class="dialog-footer">
+
+        <el-button @click="dialogVolunteerVisible = false">
+          {{ $t('table.cancel') }}
+        </el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -152,6 +186,8 @@ export default {
       list: null,
       total: 0,
       loading: true,
+      dialogVolunteerVisible: false,
+      currentVolunteer: false,
       downloading: false,
       userCreating: false,
       query: {
@@ -263,6 +299,37 @@ export default {
     }
   },
   methods: {
+    viewVolunteerData(data){
+      const mapFields = {
+        name: 'Nume',
+        email: 'Email',
+        phone: 'Telefon',
+        city: 'Oras',
+        address: 'Adresa',
+        neighborhood: 'Cartier',
+        activation_area: 'Zona activare',
+        involvement_type: 'Tip implicare',
+        availability: 'Disponibilitate',
+        availability_details: 'Detalii disponibilitate',
+        observations: 'Observatii',
+      };
+
+      this.currentVolunteer = [];
+
+      Object.entries(data).forEach(entry => {
+        const key = entry[0];
+        const value = entry[1];
+        if (mapFields[key]){
+          this.currentVolunteer.push({
+            name: mapFields[key],
+            info: value,
+
+          });
+        }
+      });
+
+      this.dialogVolunteerVisible = true;
+    },
     checkPermission,
     async getPermissions() {
       const { data } = await permissionResource.list({});

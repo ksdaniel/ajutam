@@ -2,6 +2,7 @@
 
 namespace App\Laravue\Models;
 
+use App\Volunteer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -83,5 +84,10 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function volunteer(){
+
+        return $this->hasOne(Volunteer::class,"user_id");
     }
 }
