@@ -57,6 +57,7 @@
 
 <script>
 import CountTo from 'vue-count-to';
+import axios from 'axios';
 
 export default {
   components: {
@@ -67,7 +68,13 @@ export default {
       this.$emit('handleSetLineChartData', type);
     },
   },
+  mounted () {
+    axios
+      .get('https://covid19.hackout.ro/api/getJudet/Cluj')
+      .then(response => ( console.log(response)))
+  },
 };
+
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
