@@ -70,7 +70,7 @@ export default {
   },
   mounted () {
     axios
-      .get('https://covid19.hackout.ro/api/getJudet/Cluj')
+      .get('https://coronaproxy.azurewebsites.net/getPersoane')
       .then(response => ( console.log(response)))
   },
 };
