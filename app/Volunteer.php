@@ -22,4 +22,9 @@ class Volunteer extends Model
         "observations",
         "geojson",
     ];
+
+    protected $casts=[
+
+        "geojson"=>"json"
+    ];
 }

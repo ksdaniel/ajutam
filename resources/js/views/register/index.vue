@@ -99,8 +99,10 @@
         </el-col>
 
         <el-col :xs="24" :sm="24" :md="14" :lg="14" :xl="8">
-          <el-card />
-          <iframe src="https://coronaclujstorage.z6.web.core.windows.net/" style="width: 100%;    height: 500px;" />
+          <el-card>
+            <h4>Selecteaza pe harta zonele unde doresti sa devii activ</h4>
+            <ClujMap ref="clujM" :geojson="form.geojson" />
+          </el-card>
         </el-col>
 
       </el-row>
@@ -142,11 +144,12 @@
 import { mapGetters } from 'vuex';
 import { validEmail } from '@/utils/validate';
 import Resource from '@/api/resource';
+import ClujMap from './ClujMap';
 const volunteersResource = new Resource('volunteers');
 
 export default {
   name: 'DashboardEditor',
-  components: { },
+  components: { ClujMap },
   data() {
     const validateEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -183,6 +186,7 @@ export default {
         availability: '',
         availability_details: '',
         observations: '',
+        geojson: '',
       },
     };
   },
@@ -215,6 +219,7 @@ export default {
       });
     },
     validateAcord(){
+      this.form.geojson = this.$refs.clujM.getGeoJSON();
       volunteersResource
         .store(this.form)
         .then(response => {
@@ -236,6 +241,8 @@ export default {
     },
 
     update(){
+      this.form.geojson = this.$refs.clujM.getGeoJSON();
+
       this.$refs.register.validate(valid => {
         if (valid) {
           this.loading = true;
