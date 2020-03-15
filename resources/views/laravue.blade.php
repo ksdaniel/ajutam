@@ -31,6 +31,7 @@
         FB.init({
             appId      : '553013741975593',
             cookie     : true,
+            status     : true,
             xfbml      : true,
             version    : 'v6.0'
         });
