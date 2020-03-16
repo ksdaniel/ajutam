@@ -94,6 +94,12 @@ class AuthController extends Controller
 
         $user=$this->handleSocialReponse($socialUser,$provider);
 
+        if(!$user){
+
+            return response()->json(new JsonResponse([], 'Contul de facebook nu are adresa de email ori nu ati oferit drepturile necesare aplicatiei pentru a prelua adresa de email.'), Response::HTTP_UNAUTHORIZED);
+
+        }
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->save();
@@ -105,8 +111,9 @@ class AuthController extends Controller
 
 
         $email=trim($socialUser->getEmail());
+
         if(empty($email)){
-            return redirect('/#/login');
+            return false;
         }
 
         $user=User::where('email',$email)->first();
