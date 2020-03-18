@@ -108,7 +108,7 @@
                 <el-form-item :label="ruleForm.additional_responses.question_11.label" prop="question_11">
                     <el-col :span="24">
 
-                        <el-input type="textarea" v-model="ruleForm.additional_responses.question_11.answer"></el-input>
+                        <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="ruleForm.additional_responses.question_11.answer"></el-input>
                     </el-col>
                 </el-form-item>
 
@@ -344,6 +344,10 @@
 <style rel="stylesheet/scss" lang="scss" >
     body{
         background: #2d3a4b;
+    }
+
+    .app-main{
+        background: white;
     }
 </style>
 
