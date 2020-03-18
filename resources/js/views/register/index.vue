@@ -231,6 +231,8 @@ export default {
           this.centerDialogVisible = true;
           this.loading = false;
           this.$router.push('/dashboard');
+            this.$store.dispatch('user/getInfo');
+
         })
         .catch(error => {
           console.log(error);
