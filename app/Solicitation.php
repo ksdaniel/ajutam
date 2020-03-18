@@ -31,6 +31,6 @@ class Solicitation extends Model
 
     public function volunteer(){
 
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }
