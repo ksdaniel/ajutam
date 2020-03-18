@@ -90,6 +90,17 @@
               Renunta
             </el-button>
 
+            <el-popover
+                    placement="top-start"
+                    title=""
+                    width="200"
+                    trigger="hover"
+                    content="Solutioneaza solicitarea.">
+              <el-button slot="reference" v-role="['user']" v-if="scope.row.volunteer_id" type="success" icon="el-icon-check" size="mini" circle @click="solutioneaza(scope.row)"></el-button>
+
+            </el-popover>
+
+
             <el-button v-permission="['manage user']" type="primary" size="mini" icon="el-icon-edit" @click="editDialog(scope.row)">
               Edit
             </el-button>
@@ -269,7 +280,6 @@ export default {
 
         ]),
 
-
     },
   mounted(){
     this.getList();
@@ -290,6 +300,33 @@ export default {
       handleClose(done) {
           this.dialogVisible=false;
 
+      },
+      solutioneaza(solicitare){
+          this.loadingButton=true;
+
+          solicitationsResource
+              .update(solicitare.id, {solicitation:solicitare, action:'solutioneaza'})
+              .then(response => {
+                  this.loadingButton=false;
+
+
+                      this.$message({
+                          message: 'Solicitarea a fost solutionata cu secces',
+                          type: 'success',
+                          duration: 5 * 1000
+                      });
+
+
+
+
+                  this.handleFilter();
+
+              })
+              .catch(error => {
+                  console.log(error);
+                  this.loadingButton=false;
+
+              });
       },
       updateSolicitation(action){
           this.loadingButton=true;

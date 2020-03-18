@@ -32,7 +32,7 @@
             Login or Register cu Google
           </el-button>
 
-          <!--<el-button @click="handleLogin()">Login</el-button>-->
+          <el-button @click="handleLogin()">Login</el-button>
         </div>
       </el-card>
 

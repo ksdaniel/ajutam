@@ -112,6 +112,10 @@ class SolicitationsController extends Controller
             $data['solicitation']['status']='necesita_voluntar';
         }
 
+        if($data['action'] == 'solutioneaza') {
+            $data['solicitation']['status']='finalizat';
+        }
+
             $solicitation->update($data['solicitation']);
 
         return response()->json(["success"=>true]);
