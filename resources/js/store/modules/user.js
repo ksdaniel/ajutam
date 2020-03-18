@@ -12,6 +12,7 @@ const state = {
   introduction: '',
   roles: [],
   permissions: [],
+    volunteer:[]
 };
 
 const mutations = {
@@ -38,6 +39,9 @@ const mutations = {
   },
   SET_PERMISSIONS: (state, permissions) => {
     state.permissions = permissions;
+  },
+    SET_VOLUNTEER: (state, volunteer) => {
+    state.volunteer = volunteer;
   },
 };
 
@@ -83,7 +87,7 @@ const actions = {
             reject('Verification failed, please Login again.');
           }
 
-          const { roles, name, avatar, introduction, permissions, id, email } = data;
+          const { roles, name, avatar, introduction, permissions, id, email , volunteer} = data;
           // roles must be a non-empty array
           if (!roles || roles.length <= 0) {
             reject('getInfo: roles must be a non-null array!');
@@ -96,6 +100,7 @@ const actions = {
           commit('SET_INTRODUCTION', introduction);
           commit('SET_ID', id);
           commit('SET_EMAIL', email);
+          commit('SET_VOLUNTEER', volunteer);
           resolve(data);
         })
         .catch(error => {

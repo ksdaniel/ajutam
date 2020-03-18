@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('volunteers', 'VolunteersController');
 
     Route::apiResource('solicitations', 'SolicitationsController');
+    Route::put('solicitation/{id}', 'SolicitationsController@update');
 
 
 

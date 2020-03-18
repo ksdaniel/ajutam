@@ -72,7 +72,7 @@ class SolicitationsController extends Controller
         $data=$request->toArray();
         $data['categories']='alimente';
         $data['emergency']='test';
-        $data['status']='In triaj';
+        $data['status']='triaj';
         $solicitation=Solicitation::create($data);
 
         return response()->json(["success"=>true]);
@@ -98,7 +98,23 @@ class SolicitationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->toArray();
+        $user=$request->user();
+        $solicitation=Solicitation::find($id);
+
+        if($data['action'] == 'preluare'){
+            $data['solicitation']['volunteer_id']=$user->id;
+            $data['solicitation']['status']='solutionare';
+        }
+
+        if($data['action'] == 'renunta') {
+            $data['solicitation']['volunteer_id']=null;
+            $data['solicitation']['status']='necesita_voluntar';
+        }
+
+            $solicitation->update($data['solicitation']);
+
+        return response()->json(["success"=>true]);
     }
 
     /**
