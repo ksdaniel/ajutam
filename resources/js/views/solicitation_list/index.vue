@@ -92,6 +92,17 @@
               Renunta
             </el-button>
 
+            <el-popover
+              placement="top-start"
+              title=""
+              width="200"
+              trigger="hover"
+              content="Solutioneaza solicitarea."
+            >
+              <el-button v-if="scope.row.volunteer_id" slot="reference" v-role="['user']" type="success" icon="el-icon-check" size="mini" circle @click="solutioneaza(scope.row)" />
+
+            </el-popover>
+
             <el-button v-permission="['manage user']" type="primary" size="mini" icon="el-icon-edit" @click="editDialog(scope.row)">
               Edit
             </el-button>
@@ -274,10 +285,12 @@ export default {
     ]),
 
   },
+
   mounted(){
     this.getList();
   },
   methods: {
+
     editDialog(solicitare){
       this.solicitareModel = solicitare;
       this.dialogVisible = true;
@@ -292,6 +305,27 @@ export default {
     },
     handleClose(done) {
       this.dialogVisible = false;
+    },
+    solutioneaza(solicitare){
+      this.loadingButton = true;
+
+      solicitationsResource
+        .update(solicitare.id, { solicitation: solicitare, action: 'solutioneaza' })
+        .then(response => {
+          this.loadingButton = false;
+
+          this.$message({
+            message: 'Solicitarea a fost solutionata cu secces',
+            type: 'success',
+            duration: 5 * 1000,
+          });
+
+          this.handleFilter();
+        })
+        .catch(error => {
+          console.log(error);
+          this.loadingButton = false;
+        });
     },
     updateSolicitation(action){
       this.loadingButton = true;
@@ -324,6 +358,7 @@ export default {
           this.loadingButton = false;
         });
     },
+
     async getList() {
       const { limit, page } = this.query;
       this.loading = true;
