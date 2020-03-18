@@ -14,7 +14,7 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
 
-        <lang-select class="right-menu-item hover-effect" />
+
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
