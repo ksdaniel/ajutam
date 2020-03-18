@@ -27,4 +27,10 @@ class Solicitation extends Model
 
         "additional_responses"=>"json"
     ];
+
+
+    public function volunteer(){
+
+        return $this->hasOne(User::class);
+    }
 }

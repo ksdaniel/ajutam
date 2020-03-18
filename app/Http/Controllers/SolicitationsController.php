@@ -35,6 +35,8 @@ class SolicitationsController extends Controller
             $userQuery->where("status",$status);
         }
 
+           $userQuery->with("volunteer");
+
         if (!empty($keyword)) {
 
             $userQuery->where('name', 'LIKE', '%' . $keyword . '%');
