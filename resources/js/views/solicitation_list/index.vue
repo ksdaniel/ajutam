@@ -73,7 +73,7 @@
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
             <el-tag v-if="scope.row.status==='respins'" type="danger">Respins</el-tag>
 
-            <span v-if="scope.row.status==='solutionare' && scope.row.volunteer"> {{ cope.row.volunteer.name }}</span>
+            <span v-if="scope.row.status==='solutionare' && scope.row.volunteer"> {{ scope.row.volunteer.name }}</span>
           </template>
         </el-table-column>
 
