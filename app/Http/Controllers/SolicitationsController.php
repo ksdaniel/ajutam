@@ -35,6 +35,8 @@ class SolicitationsController extends Controller
             $userQuery->where("status",$status);
         }
 
+           $userQuery->with("volunteer");
+
         if (!empty($keyword)) {
 
             $userQuery->where('name', 'LIKE', '%' . $keyword . '%');
@@ -47,9 +49,9 @@ class SolicitationsController extends Controller
 
         if(!$authUser->hasRole('admin')){
 
-            $userQuery->where(function($q){
+            $userQuery->where(function($q) use ($authUser){
 
-                $q->where("status","solutionare")->orWhere("status","necesita_voluntar");
+                $q->where("status","necesita_voluntar")->orWhere("volunteer_id",$authUser->id);
 
             });
 
