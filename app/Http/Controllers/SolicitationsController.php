@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SolicitationCollection;
 use App\Solicitation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitationsController extends Controller
 {
@@ -12,9 +15,49 @@ class SolicitationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $authUser=Auth::user();
+
+        $searchParams = $request->all();
+        $userQuery = Solicitation::query();
+        $limit = Arr::get($searchParams, 'limit', 15);
+        $categories= Arr::get($searchParams, 'categories', '');
+        $status = Arr::get($searchParams, 'status', '');
+
+        $keyword = Arr::get($searchParams, 'keyword', '');
+
+        if (!empty($categories)) {
+            $userQuery->where("categories",$categories);
+        }
+
+        if (!empty($status) && $authUser->hasRole('admin')) {
+            $userQuery->where("status",$status);
+        }
+
+        if (!empty($keyword)) {
+
+            $userQuery->where('name', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where('last_name', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where('phone', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where('address', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where('neighborhood', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where('city', 'LIKE', '%' . $keyword . '%');
+        }
+
+        if(!$authUser->hasRole('admin')){
+
+            $userQuery->where(function($q){
+
+                $q->where("status","solutionare")->orWhere("status","necesita_voluntar");
+
+            });
+
+        }
+
+
+
+        return new SolicitationCollection($userQuery->paginate($limit));
     }
 
     /**
