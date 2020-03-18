@@ -58,8 +58,13 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '/solicitation',
+    path: '/solicitare',
     component: () => import('@/views/solicitation/index'),
+    hidden: true,
+  },
+  {
+    path: '/succes',
+    component: () => import('@/views/solicitation/thankYou'),
     hidden: true,
   },
   {

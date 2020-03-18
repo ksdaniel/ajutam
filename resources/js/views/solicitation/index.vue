@@ -122,7 +122,7 @@
                 </el-form-item>
 
                 <div class="links">
-                    <el-button type="success" class="loginBtn" @click="createSolicitation()">Trimite Solicitarea</el-button>
+                    <el-button type="success" :loading="loading" class="loginBtn" @click="createSolicitation()">Trimite Solicitarea</el-button>
                 </div>
             </el-card>
 
@@ -149,10 +149,68 @@
                 }
             };
             const validatePass = (rule, value, callback) => {
-                if (value.length < 4) {
-                    callback(new Error('Password cannot be less than 4 digits'));
-                } else {
+                if (this.ruleForm.additional_responses.question_1.answer === '') {
+                    callback(new Error('Camp obligatoriu'));
+                }else{
                     callback();
+
+                }
+
+                if (this.ruleForm.additional_responses.question_2.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_3.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_4.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_5.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_6.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_7.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_8.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
+                }
+                if (this.ruleForm.additional_responses.question_9.answer === '')  {
+                    callback(new Error('Camp obligatoriu'));
+
+                }else{
+                    callback();
+
                 }
             };
             return {
@@ -165,16 +223,15 @@
                     address: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
                     neighborhood: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
                     county: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_1: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_2: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_3: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_4: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_5: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_6: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_7: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_8: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-                    question_9: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
-
+                    question_1: [{required: true, validator: validatePass , trigger: 'blur' }],
+                    question_2: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_3: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_4: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_5: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_6: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_7: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_8: [{ required: true, validator: validatePass, trigger: 'blur' }],
+                    question_9: [{ required: true, validator: validatePass, trigger: 'blur' }],
                 },
                 loading: false,
                 pwdType: 'password',
@@ -243,21 +300,29 @@
         methods: {
             createSolicitation() {
 
+                this.loading=true;
+
                 this.$refs['ruleForm'].validate((valid) => {
                     if (valid) {
                         solicitationsResource
                             .store(this.ruleForm)
                             .then(response => {
+                                this.loading=false;
 
+                                this.$router.push({ path: '/succes' });
 
                             })
                             .catch(error => {
+                                this.loading=false;
+
                                 console.log(error);
                             })
                             .finally(() => {
 
                             });
                     } else {
+                        this.loading=false;
+
                         console.log('error submit!!');
                         return false;
                     }
@@ -273,7 +338,6 @@
     $light_gray:#eee;
 
     /* reset element-ui css */
-
 
 </style>
 
