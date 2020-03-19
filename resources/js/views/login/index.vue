@@ -96,15 +96,15 @@ export default {
     handleLogin() {
       // this.$refs.loginForm.validate(valid => {
       //   if (valid) {
-          this.loading = true;
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || '/' });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
+      this.loading = true;
+      this.$store.dispatch('user/login', this.loginForm)
+        .then(() => {
+          this.$router.push({ path: this.redirect || '/' });
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
       //   } else {
       //     console.log('error submit!!');
       //     return false;
@@ -123,8 +123,13 @@ export default {
     },
     SocialLogin(provider, response){
       this.$store.dispatch('user/loginWithSocialNetworks', { provider: provider, data: response })
-        .then(() => {
-          this.$router.push({ path: this.redirect || '/' });
+        .then((resp) => {
+          if (resp.roles.includes('user') && !resp.volunteer){
+            this.$router.push({ path: '/voluntari/inregistrare' });
+          } else {
+            this.$router.push({ path: this.redirect || '/' });
+          }
+
           this.loading = false;
         })
         .catch(() => {

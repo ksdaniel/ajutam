@@ -37,6 +37,23 @@
         </el-col>
 
       </el-row>
+
+      <el-dialog
+        title="Notificare"
+        :visible.sync="centerDialogVisible"
+        width="70%"
+        center
+      >
+        <div style="text-align: center">
+          <p>{{ name }}, am observat ca esti inregistrat ca voluntar. Te rugam sa completezi formularul de inscriere.</p>
+
+        </div>
+        <span slot="footer" class="dialog-footer">
+
+          <el-button type="primary" @click="redirectToFormular">Completeaza Formular </el-button>
+
+        </span>
+      </el-dialog>
     </div>
 
   </div>
@@ -52,14 +69,30 @@ export default {
   components: { UserCard },
   data() {
     return {
-      emptyGif: 'https://media.giphy.com/media/Ai8iZqHx2i0fK/giphy.gif',
+      centerDialogVisible: false,
     };
   },
+
   computed: {
     ...mapGetters([
       'name',
+      'volunteer',
       'roles',
     ]),
+
+  },
+  mounted(){
+    if (this.roles.includes('user') && !this.volunteer){
+      this.centerDialogVisible = true;
+    }
+  },
+  methods: {
+
+    redirectToFormular(){
+      this.centerDialogVisible = false;
+      this.$router.push({ path: '/voluntari/inregistrare' });
+    },
+
   },
 };
 </script>
