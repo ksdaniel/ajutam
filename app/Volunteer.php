@@ -21,6 +21,14 @@ class Volunteer extends Model
         "availability_details",
         "observations",
         "geojson",
+        "ci",
+        "cnp",
+        "loc_domiciliu",
+        "str_domiciliu",
+        "nr_domiciliu",
+        "ap_domiciliu",
+        "ip_acord",
+        "data_acord",
     ];
 
     protected $casts=[

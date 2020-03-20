@@ -127,7 +127,11 @@ export default {
           if (resp.roles.includes('user') && !resp.volunteer){
             this.$router.push({ path: '/voluntari/inregistrare' });
           } else {
-            this.$router.push({ path: this.redirect || '/' });
+            if (!resp.volunteer.data_acord){
+                this.$router.push({ path: '/voluntari/inregistrare?semneaza=true' });
+            } else {
+              this.$router.push({ path: this.redirect || '/' });
+            }
           }
 
           this.loading = false;

@@ -21,9 +21,15 @@
                 <el-input v-model="form.phone" />
               </el-form-item>
 
+              <el-form-item label="Judet" prop="county">
+                <el-select v-model="form.county" filterable placeholder="Selecteaza judetul" @change="getOraseJudet">
+                  <el-option v-for="judet in judete" :key="judet.auto" :label="judet.nume" :value="judet.auto" />
+                </el-select>
+              </el-form-item>
+
               <el-form-item label="Oras" prop="city">
-                <el-select v-model="form.city" placeholder="Selecteaza orasul">
-                  <el-option label="Cluj-Napoca" value="cluj-napoca" />
+                <el-select v-model="form.city" filterable placeholder="Selecteaza orasul">
+                  <el-option v-for="(oras,index) in orase" :key="oras.nume+'-oras'+index" :label="oras.nume" :value="oras.nume" />
                 </el-select>
               </el-form-item>
 
@@ -108,30 +114,95 @@
       </el-row>
 
       <el-dialog
-        title="Acord"
+        title="DECLARAȚIE PE PROPRIE RĂSPUNDERE"
         :visible.sync="centerDialogVisible"
-        width="60%"
+        width="80%"
         center
       >
 
-        <p style="text-align: center;"><strong>DECLARAȚIE DE VOLUNTARIAT</strong></p>
-        <p><span style="font-weight: 400;">&icirc;n acțiunile mișcării civice</span><strong> &bdquo;Vă ajutăm din Cluj&rdquo;</strong><span style="font-weight: 400;"> de susținere și ajutorare a locuitorilor din mun. Cluj-Napoca pentru a face față răsp&acirc;ndirii și infectării cu virusul Covid-19</span></p>
-        <p>&nbsp;</p>
-        <p><span style="font-weight: 400;">Subsemnatul <strong>{{ form.name }}</strong> cu domiciliul in Cluj-Napoca, {{ form.address }}, jud. Cluj, telefon <strong>{{ form.phone }}</strong>, email <strong>{{ form.name }}</strong></span></p>
-        <p><span style="font-weight: 400;">declar pe proprie răspundere următoarele:</span></p>
-        <ol>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">am decis de bună-voie să mă implic &icirc;n mișcarea civică </span><strong>&bdquo;Vă ajutăm din Cluj&rdquo;</strong><span style="font-weight: 400;">;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">sunt de acord să mă implic voluntar &icirc;n aceste activități, fără a pretinde vreo remunerare sau recompensare;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">accept că scopul implicării mele este unul eminamente civic. Ca urmare, nu voi urmări niciun scop politic sau economic;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">mă oblig să mă informez &icirc;n mod constant cu privire la activitățile mișcării civice de pe grupul de facebook special creat;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">mă oblig să &icirc;ndeplinesc atribuțiile pe care mi le asum și, &icirc;n caz de imposibilitate, să &icirc;nștiințez imediat inițiatorii acestei mișcări;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">nu voi folosi &icirc;n interes privat informațiile conțin&acirc;nd date personale ale celor cu care intru &icirc;n contact și nu voi dezvălui publicului aceste informații;</span></li>
-          <li style="font-weight: 400;"><span style="font-weight: 400;">sunt de acord ca datele mele de contact să fie folosite exclusiv pentru buna desfășurare a activităților din mișcarea civică menționată.</span></li>
-        </ol>
+        <el-row>
+
+          <el-col>
+            <p style="text-align: center;"><strong>ACORD DE PRELUCRARE A DATELOR CU CARACTER PERSONAL</strong></p>
+            <p style="text-align: center;">&nbsp;</p>
+            <p>Subsemnatul  <el-input
+              v-model="form.name"
+              v-validate="'required'"
+              name="form.name"
+              class="special-form-input-text "
+              placeholder="Numele complet"
+            />, identificat cu C.I. seria  nr. <el-input
+              v-model="form.ci"
+              v-validate="'required'"
+              name="form.ci"
+              class="special-form-input-text "
+              placeholder="Ex: CJ 000000"
+            />, CNP <el-input
+              v-model="form.cnp"
+              v-validate="'required'"
+              name="form.cnp"
+              class="special-form-input-text "
+              placeholder="Ex: 1890909090900"
+            />, cu domiciliul in loc <el-input
+              v-model="form.loc_domiciliu"
+              v-validate="'required'"
+              name="form.loc_domiciliu"
+              class="special-form-input-text "
+              placeholder="Ex: Cluj-Napoca, Cluj"
+            />, str <el-input
+              v-model="form.str_domiciliu"
+              v-validate="'required'"
+              name="form.str_domiciliu"
+              class="special-form-input-text "
+              placeholder="Ex: Fierului"
+            /> nr. <el-input
+              v-model="form.nr_domiciliu"
+              v-validate="'required'"
+              name="form.nr_domiciliu"
+              class="special-form-input-text-no-width"
+              style="width: 100px"
+              placeholder="Ex: 22/A"
+            />, ap. <el-input
+              v-model="form.ap_domiciliu"
+              v-validate="'required'"
+              name="form.ap_domiciliu"
+              class="special-form-input-text-no-width"
+              style="width: 80px"
+              placeholder="Ex: 9"
+            />, nr. tel. <el-input
+              v-model="form.phone"
+              v-validate="'required'"
+              name="form.phone"
+              class="special-form-input-text "
+              placeholder="Ex: 075890375"
+            />, email <el-input
+              v-model="form.email"
+              v-validate="'required|email'"
+              class="special-form-input-text-no-width"
+              style="width: 250px"
+              name="form.email"
+              placeholder="Ex: ioan.pop@example.com"
+            />, <strong>declar că particip &icirc;n mod voluntar la activitățile de sprijinire a persoanelor care se află &icirc;n monitorizarea autorităților locale și a cadrelor medicale, &icirc;n contextul aplicării de către autorități a măsurilor de prevenire a infectării populației cu noul coronavirus(COVID-19</strong><strong>)</strong>.</p>
+            <p>Declar prin prezenta că sunt conștient de natura activității care urmează să o desfășor și &icirc;mi asum eventualele consecințe &icirc;n cazul &icirc;n care voi suferi un accident sau voi fi vătămat, din cauze av&acirc;nd &icirc;n mod direct sau indirect legătură cu natura activității.&nbsp;</p>
+            <p>Mă angajez să respect regulile de lucru pe care cadrele medicale si autoritațile le stabilesc și regulile de siguranță comunicate de către acestea.</p>
+            <p>Autorizez și &icirc;mi dau consimțăm&acirc;ntul expres de a fi transportat la spital și de a mi se asigura asistența medicală &icirc;n cazul &icirc;n care acestea sunt necesare.</p>
+            <p>Acord dreptul de a fi &icirc;nregistrat foto, audio și video pe perioada desfășurării activitaților și nu voi avea ulterior nici o pretenție materială sau de altă natură. Cunosc&acirc;nd că falsul &icirc;n declarații este pedepsit de legea penală, declar pe propria răspundere următoarele: sunt apt pentru participarea la aceste activitați de sprijin a persoanelor afectate de noul coronavirus; nu sufăr de afecţiuni grave sau contagioase care ar putea infuenţa activitatea desfașurată; voi urma toate instrucțiunile medicale si organizatorice comunicate de autorități.</p>
+            <p>Declar pe propria răspundere că am luat cunoștința de prevederile legale referitoare la protecția datelor cu caracter personal si <strong>consimt să păstrez confidențialitatea datelor cu caracter personal </strong>a căror prelucrare o efectuez și a oricăror informații și date de care iau cunoștinta prin natura activității desfășurate, inclusiv după incetarea activității. Cunosc faptul ca &icirc;ncălcarea normelor legale privind protecția datelor pe care mi-am asumat-o prin prezenta, atrage răspunderea civilă si penală.&nbsp;</p>
+            <p><strong>Declar că am fost informat cu privire la procesarea datelor cu caracter personal de către autoritați şi prin semnarea acestei declarații imi exprim consimţăm&acirc;ntul &icirc;n vederea prelucrării acestora, in scopurile pe care autoritățile le consideră necesare &icirc;n vederea desfășurării activitații pentru care m-am oferit voluntar.&nbsp;</strong></p>
+            <p>AM SEMNAT PREZENTUL DOCUMENT DUPĂ CE L-AM CITIT CU ATENȚIE ȘI AM &Icirc;NȚELES PE DEPLIN IMPLICAȚIILE REZULTATE DIN SEMNAREA LUI.</p>
+            <p><strong>Denumirea organizatiei din care face parte voluntarul:</strong></p>
+            <p>Inițiativa Civică &ldquo;Vă ajutăm din Cluj&rdquo;, fondată pe baza protocolului de colaborare &icirc;ntre organizațiile Asociația Voci pentru Democrație și Justiție (VeDem Just), Asociația Civic Support, Asociația Clujul Sustenabil.</p>
+            <p>Data: </p>
+            <p><strong>{{ new Date().toLocaleDateString() }}</strong></p>
+            <p>Nume și prenume</p>
+            <p><strong>{{ form.name }}</strong></p>
+          </el-col>
+        </el-row>
 
         <span slot="footer" class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="validateAcord">Sunt de acord</el-button>
+
+          <el-button style="margin-top: 8px" type="primary" @click="validateAcord">Sunt de acord si semnez</el-button>
+          <el-button style="margin-top: 8px" @click="centerDialogVisible = false">Cancel</el-button>
         </span>
       </el-dialog>
 
@@ -146,6 +217,7 @@ import { validEmail } from '@/utils/validate';
 import Resource from '@/api/resource';
 import ClujMap from './ClujMap';
 const volunteersResource = new Resource('volunteers');
+import axios from 'axios';
 
 export default {
   name: 'DashboardEditor',
@@ -159,6 +231,8 @@ export default {
       }
     };
     return {
+      judete: [],
+      orase: [],
       loading: false,
       centerDialogVisible: false,
       loginRules: {
@@ -175,9 +249,11 @@ export default {
 
       },
       form: {
+        acord_semnat: false,
         name: '',
         email: '',
         phone: '',
+        county: 'CJ',
         city: '',
         address: '',
         neighborhood: '',
@@ -187,6 +263,12 @@ export default {
         availability_details: '',
         observations: '',
         geojson: '',
+        ci: '',
+        cnp: '',
+        loc_domiciliu: '',
+        str_domiciliu: '',
+        nr_domiciliu: '',
+        ap_domiciliu: '',
       },
     };
   },
@@ -198,12 +280,23 @@ export default {
       'roles',
     ]),
   },
-  beforeRouteUpdate(to, from, next) {
-    this.get();
-    next();
+  watch: {
+    '$route.query.semneaza': (acord) => {
+      this.centerDialogVisible = true;
+    },
   },
   mounted(){
     this.get();
+
+    axios.get('https://roloca.coldfuse.io/judete').then(resp => {
+      this.judete = resp.data;
+    });
+
+    if (this.$route.query['semneaza']){
+      this.centerDialogVisible = true;
+    }
+
+    this.getOraseJudet();
   },
 
   methods: {
@@ -219,6 +312,27 @@ export default {
       });
     },
     validateAcord(){
+      console.log('validate click');
+
+      this.$validator.validateAll().then(res => {
+        if (res){
+          this.form.acord_semnat = true;
+          if (this.form.id){
+            this.update();
+          } else {
+            this.registerVolunteer();
+          }
+        } else {
+          this.$message({
+            message: 'Trebuie sa completezi toate datele acordului',
+            type: 'error',
+            duration: 5 * 1000,
+          });
+        }
+      });
+    },
+
+    registerVolunteer(){
       this.form.geojson = this.$refs.clujM.getGeoJSON();
       volunteersResource
         .store(this.form)
@@ -231,8 +345,7 @@ export default {
           this.centerDialogVisible = true;
           this.loading = false;
           this.$router.push('/dashboard');
-            this.$store.dispatch('user/getInfo');
-
+          this.$store.dispatch('user/getInfo');
         })
         .catch(error => {
           console.log(error);
@@ -259,6 +372,7 @@ export default {
               });
               this.centerDialogVisible = true;
               this.loading = false;
+              this.$store.dispatch('user/getInfo');
               this.$router.push('/dashboard');
             })
             .catch(error => {
@@ -281,6 +395,10 @@ export default {
 
           if (response.volunteer){
             this.form = response.volunteer;
+            if (!this.form.county){
+              this.form.county = 'CJ';
+              this.form.city = 'Cluj-Napoca';
+            }
           } else {
             this.form.name = this.name;
             this.form.email = this.email;
@@ -293,11 +411,71 @@ export default {
           this.loading = false;
         });
     },
+    getOraseJudet(){
+      axios.get('https://roloca.coldfuse.io/orase/' + this.form.county).then(resp => {
+        this.orase = resp.data;
+      });
+    },
   },
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" >
+
+  .special-form-input-text {
+
+    input {
+
+      border-top: 0!important;
+      border-left: 0!important;
+      border-right: 0!important;
+      border-radius: 0!important;
+      border-color: black!important;
+      border-bottom-style: dashed!important;
+      font-weight: bold;
+      color: #000;
+    }
+
+    border-radius: 0!important;
+    margin-bottom: 10px;
+
+  }
+
+  @media screen and (max-width: 767px) {
+
+    .special-form-input-text {
+
+      width: 100%!important;
+    }
+
+  }
+
+  @media screen and (min-width: 768px) {
+    .special-form-input-text {
+
+      width: 160px!important;
+    }
+  }
+
+  .special-form-input-text-no-width {
+
+    input {
+
+      border-top: 0!important;
+      border-left: 0!important;
+      border-right: 0!important;
+      border-radius: 0!important;
+      border-color: black!important;
+      border-bottom-style: dashed!important;
+      font-weight: bold;
+      color: #000;
+    }
+
+    border-radius: 0!important;
+    margin-bottom: 10px;
+
+  }
+
   .emptyGif {
     display: block;
     width: 45%;

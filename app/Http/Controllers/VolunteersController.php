@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Volunteer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VolunteersController extends Controller
@@ -28,7 +29,16 @@ class VolunteersController extends Controller
         $user=$request->user();
         $data=$request->toArray();
         $data["user_id"]=$user->id;
+
+        if(isset($data["acord_semnat"]) && $data["acord_semnat"]){
+
+            $data["ip_acord"]=$request->ip();
+            $data["data_acord"]=Carbon::now()->toDateTimeString();
+        }
+
         $volunteer=Volunteer::updateOrCreate(["user_id"=>$user->id],$data);
+
+
 
         return response()->json(["success"=>true]);
     }
@@ -56,7 +66,15 @@ class VolunteersController extends Controller
     {
         $volunteer=Volunteer::find($id);
 
-        return response()->json(["volunteer"=>$volunteer->update($request->toArray())]);
+        $data=$request->toArray();
+
+        if(isset($data["acord_semnat"]) && $data["acord_semnat"]){
+
+            $data["ip_acord"]=$request->ip();
+            $data["data_acord"]=Carbon::now()->toDateTimeString();
+        }
+
+        return response()->json(["volunteer"=>$volunteer->update($data)]);
     }
 
     /**

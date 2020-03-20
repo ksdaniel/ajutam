@@ -54,6 +54,23 @@
 
         </span>
       </el-dialog>
+
+      <el-dialog
+        title="Notificare"
+        :visible.sync="centerDialogVisible2"
+        width="70%"
+        center
+      >
+        <div style="text-align: center">
+          <p>{{ name }}, am observat ca nu ai semnat acordul pentru voluntari. Te rugam sa semnezi acordul pentru voluntari.</p>
+
+        </div>
+        <span slot="footer" class="dialog-footer">
+
+          <el-button type="primary" @click="redirectToAcord">Completeaza Acord </el-button>
+
+        </span>
+      </el-dialog>
     </div>
 
   </div>
@@ -70,6 +87,7 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
+      centerDialogVisible2: false,
     };
   },
 
@@ -85,12 +103,22 @@ export default {
     if (this.roles.includes('user') && !this.volunteer){
       this.centerDialogVisible = true;
     }
+
+    if (this.roles.includes('user') && this.volunteer){
+      if (!this.volunteer.data_acord){
+        this.centerDialogVisible2 = true;
+      }
+    }
   },
   methods: {
 
     redirectToFormular(){
       this.centerDialogVisible = false;
       this.$router.push({ path: '/voluntari/inregistrare' });
+    },
+    redirectToAcord(){
+      this.centerDialogVisible = false;
+      this.$router.push({ path: '/voluntari/inregistrare?semneaza=true' });
     },
 
   },
