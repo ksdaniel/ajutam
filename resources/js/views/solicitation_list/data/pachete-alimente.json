@@ -1,0 +1,209 @@
+{
+  "pachete":[
+    {
+      "key":"cos1",
+      "label":"COS1 - neperisabile de baza",
+      "price":"20",
+      "image":""
+    },
+    {
+      "key":"cos2",
+      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne ",
+      "price":"60",
+      "image":""
+    },
+    {
+      "key":"cos3",
+      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris)",
+      "price":"60",
+      "image":""
+    },
+    {
+      "key":"cos4",
+      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui)",
+      "price":"75",
+      "image":""
+    }
+  ],
+
+  "produsePachetPersonalizat":[
+    {
+      "key":"produs-1",
+      "label":"Făină 1 KG",
+      "price":"2.59"
+
+    },
+    {
+      "key":"produs-2",
+      "label":"Zahăr 1KG",
+      "price":"2.49"
+
+    },
+    {
+      "key":"produs-3",
+      "label":"Orez 1KG",
+      "price":"3.99"
+
+    },
+    {
+      "key":"produs-4",
+      "label":"Mălai 1KG",
+      "price":"3.65"
+
+    },
+    {
+      "key":"produs-5",
+      "label":"Griș 250 gr",
+      "price":"2.77"
+
+    },
+    {
+      "key":"produs-6",
+      "label":"Unt 200 gr",
+      "price":"8.89"
+
+    },
+    {
+      "key":"produs-7",
+      "label":"Ulei de floarea soarelui 1L",
+      "price":"4.69"
+
+    },
+    {
+      "key":"produs-8",
+      "label":"10 ouă mărimea M",
+      "price":"5.89"
+
+    },
+    {
+      "key":"produs-9",
+      "label":"Brânză telemea 400 g",
+      "price":"7.56"
+
+    },
+    {
+      "key":"produs-10",
+      "label":"Cașcaval Rucăr 400 g",
+      "price":"11.59"
+
+    },
+    {
+      "key":"produs-11",
+      "label":"Miere poliflora 500g",
+      "price":"12.19"
+
+    },
+    {
+      "key":"produs-12",
+      "label":"Lapte 3,5% 2L",
+      "price":"9.32"
+
+    },
+    {
+      "key":"produs-13",
+      "label":"Suc de roșii - 750 gr",
+      "price":"3.8"
+
+    },
+    {
+      "key":"produs-14",
+      "label":"Masline verzi fara samburi 185 g",
+      "price":"4.09"
+
+    },
+    {
+      "key":"produs-15",
+      "label":"Legume mix pentru supă 500 g",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-16",
+      "label":"Mere Red 2 kg",
+      "price":"7.99"
+
+    },
+    {
+      "key":"produs-17",
+      "label":"Portocale plasa 1Kg",
+      "price":"3.99"
+
+    },
+    {
+      "key":"produs-18",
+      "label":"Lamăi plasa 500g",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-19",
+      "label":"Iaurt CORA - 3% 900 g",
+      "price":"3.98"
+
+    },
+    {
+      "key":"produs-20",
+      "label":"Cartofi albi 2kg",
+      "price":"5.58"
+
+    },
+    {
+      "key":"produs-21",
+      "label":"Paste fainoase cu ou Baneasa Scoici 400g",
+      "price":"4.08"
+
+    },
+    {
+      "key":"produs-22",
+      "label":"Pâine feliată, bob intreg 400g 2 buc",
+      "price":"5.78"
+
+    },
+    {
+      "key":"produs-23",
+      "label":"Ceapa galbenă plasă 1 kg",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-24",
+      "label":"Ferma Vranceana pui grill la kg (1,5kg)",
+      "price":"15.74"
+
+    },
+    {
+      "key":"produs-25",
+      "label":"Saci menajeri 60L",
+      "price":"1.79"
+
+    }
+  ],
+
+  "produseAditionale":[
+    {
+      "key":"produs-add-1",
+      "label":"Sapun",
+      "price":"1.89"
+
+    },
+    {
+      "key":"produs-add-2",
+      "label":"Absorbante",
+      "price":"10.43"
+
+    },
+    {
+      "key":"produs-add-3",
+      "label":"Hartie igienica",
+      "price":"3.29"
+
+    },
+    {
+      "key":"produs-add-4",
+      "label":"Cafea",
+      "price":"10.81"
+
+    }
+  ]
+}
+

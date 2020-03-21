@@ -1,0 +1,117 @@
+{
+  "intrebariStabilireUrgenta":[
+
+    {
+      "key":"motiv_izolare",
+      "type":"text",
+      "label":"Care este motivul pentru care sunteți izolat la domiciliu?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este necesara completarea",
+        "trigger": "blur"
+    }
+
+    },
+    {
+      "key":"prezentare_simtome_covid_19",
+      "type":"text",
+      "label":"Prezentați simptome asociate Covid-19? Dacă da, care?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este nesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+
+    {
+      "key":"ati_intrat_in_contact_cu_covid_19",
+      "type":"text",
+      "label":"Ați intrat în contact, din ce știți dvs, cu o persoană diagnosticată cu Covid-19?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este nesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+
+    {
+      "key":"ati_calatorit_in_zona_cu_covid_19",
+      "type":"text",
+      "label":"Ați călătorit/veniți dintr-o zonă afectată de virus? Dacă da, în ce dată?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este nesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+
+    {
+      "key":"varsta_beneficiar",
+      "type":"text",
+      "label":"Ce vârstă aveți?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este nesara completarea",
+        "trigger": "blur"
+      }
+
+    }
+
+
+  ],
+
+  "intrebariMedicamente":[
+
+    {
+      "key":"denumire_medicamente",
+      "type":"textarea",
+      "label":"Denumire medicament (daca e cazul si gramaj)",
+      "validationRules": {
+        "required": "true",
+        "message": "Este necesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+
+    {
+      "key":"necesita_reteta",
+      "type":"text",
+      "label":"Este pe baza de reteta?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este necesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+    {
+      "key":"timp_livrare_medicament",
+      "type":"text",
+      "label":" Pana cand ar trebui sa ajunga la destinatie?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este necesara completarea",
+        "trigger": "blur"
+      }
+
+    },
+
+    {
+      "key":"ati_mai_folosit_medicamentul",
+      "type":"text",
+      "label":" Ati mai folosit pana acum astfel de medicamente?",
+      "validationRules": {
+        "required": "true",
+        "message": "Este necesara completarea",
+        "trigger": "blur"
+      }
+
+    }
+
+  ]
+
+}

@@ -6,13 +6,27 @@ const solicitariRoutes = {
   component: Layout,
   redirect: '/voluntari/lista',
   name: 'Solicitari',
+  meta: {
+    title: 'Solicitari',
+    icon: 'form',
+    roles: ['admin', 'callcenter'],
+  },
   children: [
     /** Solicitari managements */
     {
       path: 'lista',
       component: () => import('@/views/solicitation_list/index'),
-      name: 'Solicitari',
-      meta: { title: 'Solicitari', noCache: true, icon: 'form' },
+      name: 'Lista solicitari',
+      meta: { title: 'Solicitari', noCache: true, icon: 'form', roles: ['admin', 'callcenter'] },
+
+    },
+    /** Solicitari managements */
+    {
+      path: 'add',
+      component: () => import('@/views/solicitation_list/add'),
+      name: 'AddSolicitare',
+      meta: { title: 'Adauga Solicitare', noCache: true, icon: 'form', roles: ['admin', 'callcenter'] },
+      hidden: true,
 
     },
   ],

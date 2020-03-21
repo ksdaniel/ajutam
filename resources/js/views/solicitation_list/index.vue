@@ -31,6 +31,12 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Cauta
       </el-button>
+
+      <router-link to="/solicitari/add">
+        <el-button v-waves type="primary" class="filter-item">
+          Adauga solicitare
+        </el-button>
+      </router-link>
     </div>
 
     <div v-if="volunteer && roles[0] === 'user' || roles[0] === 'admin'" class="table-container">
@@ -80,39 +86,8 @@
         <el-table-column align="center" label="Actiuni" width="370">
           <template slot-scope="scope">
 
-            <el-button v-if="!scope.row.volunteer_id" v-role="['user']" type="primary" size="mini" icon="el-icon-document-checked" @click="preluareDialog(scope.row)">
-              Preia solicitarea
-            </el-button>
-
-            <el-button v-if="scope.row.volunteer_id" v-role="['user']" type="warning" size="mini" icon="el-icon-edit" @click="raspunsuriFormularDialog(scope.row)">
-              Raspunsuri formular
-            </el-button>
-
-            <el-button v-if="scope.row.volunteer_id" v-role="['user']" type="danger" size="mini" icon="el-icon-s-release" @click="handleRenunta(scope.row.id, scope.row.name);">
-              Renunta
-            </el-button>
-
-            <el-popover
-              placement="top-start"
-              title=""
-              width="200"
-              trigger="hover"
-              content="Solutioneaza solicitarea."
-            >
-              <el-button v-if="scope.row.volunteer_id" slot="reference" v-role="['user']" type="success" icon="el-icon-check" size="mini" circle @click="solutioneaza(scope.row)" />
-
-            </el-popover>
-
             <el-button v-permission="['manage user']" type="primary" size="mini" icon="el-icon-edit" @click="editDialog(scope.row)">
-              Edit
-            </el-button>
-
-            <el-button v-permission="['manage user']" type="warning" size="mini" icon="el-icon-edit" @click="raspunsuriFormularDialog(scope.row)">
-              Raspunsuri formular
-            </el-button>
-
-            <el-button v-permission="['manage user']" type="danger" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row.id, scope.row.name);">
-              Delete
+              Vezi solicitare
             </el-button>
 
           </template>
