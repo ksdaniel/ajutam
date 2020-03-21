@@ -6,31 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Solicitation extends Model
 {
-    protected $fillable=[
-        "name",
-        "last_name",
-        "phone",
-        "city",
-        "address",
-        "neighborhood",
-        "county",
+    protected $fillable = [
+
+        "beneficiary_id",
+        "volunteer_id",
         "categories",
         "emergency",
         "status",
         "additional_responses",
         "observations",
         "finish_date",
-        "volunteer_id",
     ];
 
-    protected $casts=[
+    protected $casts = [
 
-        "additional_responses"=>"json"
+        "additional_responses" => "json"
     ];
 
-
-    public function volunteer(){
+    public function volunteer()
+    {
 
         return $this->belongsTo(User::class);
+    }
+
+    public function beneficiary()
+    {
+
+        return $this->belongsTo(Beneficiary::class);
     }
 }
