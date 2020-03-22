@@ -4,8 +4,12 @@ import Layout from '@/layout';
 const adminRoutes = {
   path: '/voluntari',
   component: Layout,
-  redirect: '/voluntari/harta-voluntari',
+  redirect: '/voluntari/list',
   name: 'Voluntari',
+  meta: {
+    title: 'voluntari',
+    icon: 'peoples',
+  },
   children: [
     /** Voluntari managements */
     {
@@ -14,6 +18,14 @@ const adminRoutes = {
       name: 'Inregistrare Voluntari',
       meta: { title: 'Inregistrare voluntari', noCache: true },
       hidden: true,
+    },
+
+    /** Lista voluntari */
+    {
+      path: 'list',
+      component: () => import('@/views/voluntari/listaVoluntari'),
+      name: 'Lista Voluntari',
+      meta: { title: 'Lista voluntari', noCache: true, icon: 'peoples' },
     },
 
     /** Harta voluntari */
