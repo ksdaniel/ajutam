@@ -123,6 +123,7 @@ export default {
               activation_area: 'Zona activare',
               involvement_type: 'Tip implicare',
               availability: 'Disponibilitate',
+              involvement_direction: 'Disponibilitate',
               availability_details: 'Detalii disponibilitate',
               observations: 'Observatii',
             };
