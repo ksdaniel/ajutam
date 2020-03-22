@@ -78,10 +78,11 @@
             <el-form :model="currentUser" label-width="80px" label-position="top">
               <el-form-item label="Roluri utilizator">
 
-                <el-select v-model="currentUser.roles" placeholder="Rol" clearable style="width: 200px" class="filter-item">
+                <el-select v-model="currentUser.roles" placeholder="Rol" clearable style="width: 250px" class="filter-item">
                   <el-option label="Administrator" value="admin" />
                   <el-option label="Dispecer" value="dispecer" />
                   <el-option label="Coordonator voluntari" value="coordonator" />
+                  <el-option label="Voluntar simplu (view)" value="user" />
                 </el-select>
               </el-form-item>
             </el-form>
