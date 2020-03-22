@@ -25,6 +25,8 @@ class SolicitationsController extends Controller
 
         $limit = Arr::get($searchParams, 'limit', 15);
         $categories = Arr::get($searchParams, 'categories', '');
+        $payment_status= Arr::get($searchParams, 'payment_status', '');
+        $volunteer_id= Arr::get($searchParams, 'volunteer_id', '');
         $status = Arr::get($searchParams, 'status', '');
 
         $keyword = Arr::get($searchParams, 'keyword', '');
@@ -37,8 +39,19 @@ class SolicitationsController extends Controller
             $userQuery->where("status", $status);
         }
 
+
+        if (!empty($payment_status)) {
+            $userQuery->where("payment_status", $payment_status);
+        }
+
+        if (!empty($volunteer_id)) {
+            $userQuery->where("volunteer_id", $volunteer_id);
+        }
+
+
         $userQuery->with("beneficiary");
         $userQuery->with("volunteer");
+        $userQuery->with("creator");
 
         if (!empty($keyword)) {
             $userQuery->leftJoin('beneficiaries', 'solicitations.beneficiary_id', '=', 'beneficiaries.id');
@@ -51,15 +64,6 @@ class SolicitationsController extends Controller
             $userQuery->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
         }
 
-        if (!$authUser->hasRole('admin')) {
-
-            $userQuery->where(function ($q) use ($authUser) {
-
-                $q->where("status", "necesita_voluntar")->orWhere("volunteer_id", $authUser->id);
-
-            });
-
-        }
 
         return new SolicitationCollection($userQuery->paginate($limit));
     }
@@ -75,31 +79,24 @@ class SolicitationsController extends Controller
         $user = $request->user();
         $data = $request->toArray();
 
-        $phone = '0745000001';
+        $beneficiary = Beneficiary::where('phone', $data["beneficiar"]["phone"])->first();
 
-        $beneficiary = Beneficiary::where('phone', $phone)->first();
         if (!$beneficiary) {
-            $newBeneficiary = [
-                'first_name' => 'First',
-                'last_name' => 'Last',
-                'phone' => $phone,
-                'address' => 'Principala nr 1',
-                'neighborhood' => 'Marasti',
-                'city' => 'Cluj-Napoca',
-                'county' => 'Cluj'
-            ];
+            $newBeneficiary = $data["beneficiar"];
             $beneficiary = Beneficiary::create($newBeneficiary);
         }
-        $data['beneficiary_id'] = $beneficiary->id;
-        $data['categories'] = 'alimente';
-        $data['emergency'] = 'test';
-        $data['status'] = 'triaj';
-        $data['payment_type'] = 'card';
-        $data['payment_status'] = 'neachitat';
-        $data['payment_value'] = '9.90';
-        $data['additional_responses'] = 'test test';
 
-        $solicitation = Solicitation::create($data);
+        $data["solicitation"]['beneficiary_id'] = $beneficiary->id;
+        $data["solicitation"]["created_by"]=$user->id;
+
+
+        do {
+
+            $newHash = rand ( 10000 , 99999 );
+
+        } while (Solicitation::where('code', '=', $newHash)->count() > 0);
+        $data["solicitation"]["code"]=$newHash;
+        Solicitation::create($data["solicitation"]);
 
         return response()->json(["success" => true]);
     }
@@ -112,7 +109,9 @@ class SolicitationsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        //
+        $solicitation=Solicitation::where("id",$id)->with(["beneficiary","volunteer"])->first();
+
+        return response()->json(["solicitation"=>$solicitation]);
     }
 
     /**
@@ -125,21 +124,15 @@ class SolicitationsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->toArray();
-        $user = $request->user();
+
         $solicitation = Solicitation::find($id);
 
-        if ($data['action'] == 'preluare') {
-            $data['solicitation']['volunteer_id'] = $user->id;
-            $data['solicitation']['status'] = 'solutionare';
-        }
 
-        if ($data['action'] == 'renunta') {
-            $data['solicitation']['volunteer_id'] = null;
-            $data['solicitation']['status'] = 'necesita_voluntar';
-        }
+        $beneficiary = Beneficiary::where('id', $data['solicitation']["beneficiary_id"])->first();
 
-        if ($data['action'] == 'solutioneaza') {
-            $data['solicitation']['status'] = 'finalizat';
+        if($beneficiary){
+
+            $beneficiary->update($data['beneficiar']);
         }
 
         $solicitation->update($data['solicitation']);

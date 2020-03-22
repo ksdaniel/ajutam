@@ -14,9 +14,9 @@ class AddBeneficiaryIdToSolicitationsTable extends Migration
     public function up()
     {
         Schema::table('solicitations', function (Blueprint $table) {
-            $table->string('payment_type');
-            $table->string('payment_status');
-            $table->decimal('payment_value');
+//            $table->string('payment_type');
+//            $table->string('payment_status');
+//            $table->decimal('payment_value');
 
             $table->foreignId('beneficiary_id')->references('id')->on('beneficiaries');
         });

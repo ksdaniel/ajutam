@@ -112,6 +112,18 @@
 
     }
 
+  ],
+
+  "intrebariAlimente":[
+    {
+      "key":"feedback_alimente",
+      "type":"textarea",
+      "label":"Ce alte produse considerati ca sunt necesare si ar trebui adaugate in lista de mai sus? (nu le putem cumpara acum, dar le putem adauga pe viitor) ",
+      "validationRules": {
+
+      }
+
+    }
   ]
 
 }

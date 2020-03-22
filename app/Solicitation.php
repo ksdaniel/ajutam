@@ -16,6 +16,11 @@ class Solicitation extends Model
         "additional_responses",
         "observations",
         "finish_date",
+        "created_by",
+        "payment_type",
+        "payment_status",
+        "payment_value",
+        "code",
     ];
 
     protected $casts = [
@@ -26,12 +31,18 @@ class Solicitation extends Model
     public function volunteer()
     {
 
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Volunteer::class,"volunteer_id","id");
     }
 
     public function beneficiary()
     {
 
         return $this->belongsTo(Beneficiary::class);
+    }
+
+    public function creator()
+    {
+
+        return $this->belongsTo(User::class,"created_by");
     }
 }

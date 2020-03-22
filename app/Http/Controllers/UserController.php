@@ -154,18 +154,12 @@ class UserController extends Controller
 //            return response()->json(['error' => 'Admin can not be modified'], 403);
 //        }
 
-        $permissionIds = $request->get('permissions', []);
-        $rolePermissionIds = array_map(
-            function($permission) {
-                return $permission['id'];
-            },
+        $rolesIds = $request->get('roles', "");
 
-            $user->getPermissionsViaRoles()->toArray()
-        );
+        $roleID=Role::findByName($rolesIds);
 
-        $newPermissionIds = array_diff($permissionIds, $rolePermissionIds);
-        $permissions = Permission::allowed()->whereIn('id', $newPermissionIds)->get();
-        $user->syncPermissions($permissions);
+        $user->syncRoles([$roleID]);
+
         return new UserResource($user);
     }
 

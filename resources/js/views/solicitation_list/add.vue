@@ -47,7 +47,7 @@
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Judet"
-                prop="beneficiar.country"
+                prop="beneficiar.county"
                 :rules="{
                   required: true,
                   message: 'Este necesara selectarea judetului',
@@ -192,10 +192,10 @@
 
           <el-form-item
             label="Tip solicitare"
-            prop="beneficiar.address"
+            prop="solicitation.categories"
             :rules="{
               required: true,
-              message: 'Este necesar sa introduceti adresa',
+              message: 'Este necesar sa selectati tipul solicitarii',
               trigger: 'blur'
             }"
           >
@@ -226,7 +226,7 @@
           <div v-if="formData.solicitation.categories==='alimente'">
             <el-form-item
               label="Tip pachet alimente"
-              prop="beneficiar.address"
+              prop="solicitation.additional_responses.tip_cos"
               :rules="{
                 required: true,
                 message: 'Este necesar sa selectati tipul de pachet',
@@ -236,16 +236,17 @@
               <el-select v-model="formData.solicitation.additional_responses.tip_cos" placeholder="Cos alimente" clearable style="width: 100%" class="filter-item" @change="calculPret">
                 <el-option v-for="pachet in pacheteAlimente" :key="pachet.key" :label="pachet.label" :value="pachet.key" />
                 <el-option label="Pachet personalizat" value="personalizat" />
+                <el-option label="Nu este nevoie de pachet" value="nada" />
               </el-select>
 
             </el-form-item>
 
-            <div v-if="formData.solicitation.additional_responses.tip_cos && formData.solicitation.additional_responses.tip_cos!=='personalizat'">
+            <div v-if="formData.solicitation.additional_responses.tip_cos && formData.solicitation.additional_responses.tip_cos!=='personalizat' && formData.solicitation.additional_responses.tip_cos!=='nada'">
               <img style="width: 100%" :src="'/images/'+formData.solicitation.additional_responses.tip_cos+'.png'">
 
             </div>
 
-            <el-form-item v-if="formData.solicitation.additional_responses.tip_cos==='personalizat'" label="Cos pesonalizat ">
+            <el-form-item v-if="formData.solicitation.additional_responses.tip_cos==='personalizat'" label="Cos pesonalizat " class="checkbox-list">
               <el-checkbox-group v-model="formData.solicitation.additional_responses.cos_personalizat" :max="8">
                 <el-checkbox v-for="produs in produsePachetPersonalizat" :key="produs.key" :label="produs.label" name="cos_personalizat" :value="produs.key" @change="calculPret" />
 
@@ -254,11 +255,27 @@
 
             <div>
 
-              <el-form-item label="Produse Aditionale">
-                <el-checkbox-group v-model="formData.solicitation.additional_responses.produse_aditionale" :max="1">
+              <el-form-item label="Produse Aditionale" class="checkbox-list">
+                <el-checkbox-group v-model="formData.solicitation.additional_responses.produse_aditionale">
                   <el-checkbox v-for="produs in produseAditionale" :key="produs.key" :label="produs.label" name="cos_personalizat" :value="produs.key" @change="calculPret" />
 
                 </el-checkbox-group>
+              </el-form-item>
+
+            </div>
+
+            <div class="clearfix">
+              <el-form-item
+                v-for="(intrebare) in intrebari.intrebariAlimente"
+                :key="intrebare.key"
+                class="intrebari-label"
+                :label="intrebare.label"
+                :prop="'solicitation.additional_responses.' + intrebare.key"
+                :rules="intrebare.validationRules"
+              >
+                <el-input v-if="intrebare.type==='text'" v-model="formData.solicitation.additional_responses[intrebare.key]" />
+                <el-input v-if="intrebare.type==='textarea'" v-model="formData.solicitation.additional_responses[intrebare.key]" type="textarea" :autosize="{ minRows: 2, maxRows: 6}" />
+
               </el-form-item>
 
             </div>
@@ -269,7 +286,7 @@
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Metoda Plata"
-                prop="solicitation.payment_method"
+                prop="solicitation.payment_type"
                 :rules="{
                   required: true,
                   message: 'Este necesara completarea',
@@ -277,7 +294,7 @@
                 }"
               >
 
-                <el-select v-model="formData.solicitation.payment_method" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
+                <el-select v-model="formData.solicitation.payment_type" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
                   <el-option label="Plata Cash" value="plata_cash" />
                   <el-option label="Plata Card" value="plata_card" />
                 </el-select>
@@ -288,10 +305,10 @@
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Status Plata"
-                prop="solicitation.status_plata"
+                prop="solicitation.payment_status"
               >
 
-                <el-select v-model="formData.solicitation.status_plata" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
+                <el-select v-model="formData.solicitation.payment_status" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
                   <el-option label="Achitat" value="Achitat" />
                   <el-option label="Neachitat" value="Neachitat" />
                 </el-select>
@@ -302,20 +319,21 @@
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Pret pachet aproximativ"
-                prop="solicitation.status_plata"
+                prop="solicitation.payment_value"
               >
 
-                <el-input-number v-model="formData.solicitation.price" :precision="2" :step="0.1" />
+                <el-input-number v-model="formData.solicitation.payment_value" :precision="2" :step="5" />
 
               </el-form-item>
             </el-col>
           </div>
 
           <div>
-            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+
+            <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
-                label="Status solicitate"
-                prop="solicitation.status"
+                label="Urgenta"
+                prop="solicitation.emergency"
                 :rules="{
                   required: true,
                   message: 'Este necesara completarea',
@@ -323,29 +341,15 @@
                 }"
               >
 
-                <el-select v-model="formData.solicitation.status" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
-                  <el-option label="Necesita Voluntar" value="necesita_voluntar" />
-                  <el-option label="Planificat" value="planificat" />
-                  <el-option label="In lucru" value="in_lucru" />
-                  <el-option label="In proces de livrare" value="proces_livrare" />
-                  <el-option label="Livrat" value="livrat" />
+                <el-select v-model="formData.solicitation.emergency" placeholder="Nivel urgenta" clearable style="width: 100%" class="filter-item">
+                  <el-option label="Livrare normala" value="normal" />
+                  <el-option label="Livrare urgenta" value="urgent" />
                 </el-select>
 
               </el-form-item>
             </el-col>
 
-            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
-              <el-form-item
-                label="Voluntari"
-                prop="solicitation.volunteer_id"
-              >
-
-                <el-select v-model="formData.solicitation.volunteer_id" placeholder="Nume voluntar" clearable style="width: 100%" class="filter-item" />
-
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="24" :xs="24" style="margin-bottom: 5px">
+            <el-col :span="16" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Observatii"
                 prop="solicitation.observations"
@@ -356,13 +360,17 @@
             </el-col>
           </div>
 
-        </el-card></el-col></el-row></el-form></div>
+          <el-col :span="24" :xs="24" style="margin-bottom: 5px">
+            <el-button type="primary" class="pull-right" @click="add">Adauga Solicitare</el-button>
+          </el-col>
 
-  </el-card></el-col>
+        </el-card>
 
-  </el-row>
+        </el-col>
 
-  </el-form>
+      </el-row>
+
+    </el-form>
 
   </div>
 </template>
@@ -371,7 +379,9 @@
 import axios from 'axios';
 import intrebari from './data/intrebari';
 import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale } from './data/pachete-alimente';
-
+import { mapGetters } from 'vuex';
+import Resource from '@/api/resource';
+const solicitationsResource = new Resource('solicitations');
 export default {
   name: 'AddSolicitatin',
   data: () => {
@@ -392,16 +402,19 @@ export default {
         },
         solicitation: {
           additional_responses: {
+            tip_cos: '',
             cos_personalizat: [],
             produse_aditionale: [],
 
           },
-          price: 0,
-          payment_method: 'plata_cash',
-          status_plata: 'Neachitat',
+          payment_value: 0,
+          payment_type: 'plata_cash',
+          payment_status: 'Neachitat',
           status: 'necesita_voluntar',
+          emergency: 'normal',
+          categories: '',
+          volunteer_id: '',
         },
-
       },
       intrebari,
       pacheteAlimente,
@@ -410,12 +423,21 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters([
+      'roles',
+
+    ]),
+
+  },
+
   mounted(){
     axios.get('https://roloca.coldfuse.io/judete').then(resp => {
       this.judete = resp.data;
     });
     this.getOraseJudet();
   },
+
   methods: {
     getOraseJudet(){
       axios.get('https://roloca.coldfuse.io/orase/' + this.formData.beneficiar.county).then(resp => {
@@ -440,17 +462,51 @@ export default {
             }
           });
         }
-
-        this.formData.solicitation.additional_responses.produse_aditionale.forEach(res => {
-          const produs = this.produseAditionale.find(r => r.label === res);
-          if (produs){
-            priceArray.push(parseFloat(produs.price));
-          }
-        });
       }
 
-      this.formData.solicitation.price = priceArray.reduce((a, b) => a + b, 0).toFixed(2);
+      this.formData.solicitation.additional_responses.produse_aditionale.forEach(res => {
+        const produs = this.produseAditionale.find(r => r.label === res);
+        if (produs){
+          priceArray.push(parseFloat(produs.price));
+        }
+      });
+
+      this.formData.solicitation.payment_value = priceArray.reduce((a, b) => a + b, 0).toFixed(2);
     },
+    add(){
+      this.loading = true;
+
+      this.$refs['addForm'].validate((valid) => {
+        if (valid) {
+          solicitationsResource
+            .store(this.formData)
+            .then(response => {
+              this.loading = false;
+
+              this.$message({
+                type: 'success',
+                message: 'Solicitare a fost adaugata',
+              });
+
+              this.$router.push({ path: '/solicitari/lista' });
+            })
+            .catch(error => {
+              this.loading = false;
+
+              console.log(error);
+            })
+            .finally(() => {
+
+            });
+        } else {
+          this.loading = false;
+
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
   },
 };
 </script>
@@ -478,8 +534,31 @@ export default {
     padding: 5px 10px!important;
   }
 
+    .el-input-number__decrease {
+
+      display: none;
+    }
+
     .el-checkbox{
       width: 300px;
+    }
+
+    .checkbox-list {
+
+      label{
+        text-align: left!important;
+        float: none!important;
+        display: block!important;
+
+      }
+    }
+
+    .intrebari-label {
+
+      label {
+        text-align: left;
+        line-height: 20px;
+      }
     }
   }
 

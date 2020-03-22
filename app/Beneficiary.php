@@ -13,8 +13,16 @@ class Beneficiary extends Model
         'address',
         'neighborhood',
         'city',
-        'county'
+        'county',
+        'observations',
+        'additional_responses',
     ];
+
+    protected $casts = [
+
+        "additional_responses" => "json"
+    ];
+
 
     public function solicitation()
     {

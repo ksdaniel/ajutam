@@ -59,8 +59,8 @@
               Edit
             </el-button>
           </router-link>
-          <el-button v-if="!scope.row.roles.includes('admin')" v-permission="['manage permission']" type="warning" size="small" icon="el-icon-edit" @click="handleEditPermissions(scope.row.id);">
-            Permissions
+          <el-button v-role="['admin']" type="warning" size="small" icon="el-icon-edit" @click="handleEditPermissions(scope.row.id);">
+            Schimba roluri
           </el-button>
           <el-button v-if="scope.row.roles.includes('user')" v-permission="['manage user']" type="danger" size="small" icon="el-icon-delete" @click="handleDelete(scope.row.id, scope.row.name);">
             Delete
@@ -71,23 +71,22 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
 
-    <el-dialog :visible.sync="dialogPermissionVisible" :title="'Edit Permissions - ' + currentUser.name">
+    <el-dialog :visible.sync="dialogPermissionVisible" :title="'Edit Roles - ' + currentUser.name">
       <div v-if="currentUser.name" v-loading="dialogPermissionLoading" class="form-container">
         <div class="permissions-container">
           <div class="block">
             <el-form :model="currentUser" label-width="80px" label-position="top">
-              <el-form-item label="Menus">
-                <el-tree ref="menuPermissions" :data="normalizedMenuPermissions" :default-checked-keys="permissionKeys(userMenuPermissions)" :props="permissionProps" show-checkbox node-key="id" class="permission-tree" />
+              <el-form-item label="Roluri utilizator">
+
+                <el-select v-model="currentUser.roles" placeholder="Rol" clearable style="width: 200px" class="filter-item">
+                  <el-option label="Administrator" value="admin" />
+                  <el-option label="Dispecer" value="dispecer" />
+                  <el-option label="Coordonator voluntari" value="coordonator" />
+                </el-select>
               </el-form-item>
             </el-form>
           </div>
-          <div class="block">
-            <el-form :model="currentUser" label-width="80px" label-position="top">
-              <el-form-item label="Permissions">
-                <el-tree ref="otherPermissions" :data="normalizedOtherPermissions" :default-checked-keys="permissionKeys(userOtherPermissions)" :props="permissionProps" show-checkbox node-key="id" class="permission-tree" />
-              </el-form-item>
-            </el-form>
-          </div>
+
           <div class="clear-left" />
         </div>
         <div style="text-align:right;">
@@ -166,14 +165,14 @@ import Resource from '@/api/resource';
 import waves from '@/directive/waves'; // Waves directive
 import permission from '@/directive/permission'; // Permission directive
 import checkPermission from '@/utils/permission'; // Permission checking
-
+import role from '@/directive/role/index.js';
 const userResource = new UserResource();
 const permissionResource = new Resource('permissions');
 
 export default {
   name: 'UserList',
   components: { Pagination },
-  directives: { waves, permission },
+  directives: { waves, permission, role },
   data() {
     var validateConfirmPassword = (rule, value, callback) => {
       if (value !== this.newUser.password) {
@@ -206,7 +205,7 @@ export default {
       currentUser: {
         name: '',
         permissions: [],
-        rolePermissions: [],
+        roles: [],
       },
       rules: {
         role: [{ required: true, message: 'Role is required', trigger: 'change' }],
@@ -388,17 +387,15 @@ export default {
       this.dialogPermissionLoading = true;
       this.dialogPermissionVisible = true;
       const found = this.list.find(user => user.id === id);
-      const { data } = await userResource.permissions(id);
+
+      console.log(found);
+
       this.currentUser = {
         id: found.id,
         name: found.name,
-        permissions: data,
+        roles: found.roles[0],
       };
       this.dialogPermissionLoading = false;
-      this.$nextTick(() => {
-        this.$refs.menuPermissions.setCheckedKeys(this.permissionKeys(this.userMenuPermissions));
-        this.$refs.otherPermissions.setCheckedKeys(this.permissionKeys(this.userOtherPermissions));
-      });
     },
     createUser() {
       this.$refs['userForm'].validate((valid) => {
@@ -482,19 +479,18 @@ export default {
     },
 
     confirmPermission() {
-      const checkedMenu = this.$refs.menuPermissions.getCheckedKeys();
-      const checkedOther = this.$refs.otherPermissions.getCheckedKeys();
-      const checkedPermissions = checkedMenu.concat(checkedOther);
       this.dialogPermissionLoading = true;
 
-      userResource.updatePermission(this.currentUserId, { permissions: checkedPermissions }).then(response => {
+      userResource.updatePermission(this.currentUserId, { roles: this.currentUser.roles }).then(response => {
         this.$message({
-          message: 'Permissions has been updated successfully',
+          message: 'Roles has been updated successfully',
           type: 'success',
           duration: 5 * 1000,
         });
         this.dialogPermissionLoading = false;
         this.dialogPermissionVisible = false;
+
+        this.getList();
       });
     },
   },

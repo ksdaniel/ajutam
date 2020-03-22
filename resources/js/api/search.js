@@ -7,3 +7,11 @@ export function userSearch(name) {
     params: { name },
   });
 }
+
+export function searchVolunteers(name) {
+  return request({
+    url: '/search/volunteers',
+    method: 'get',
+    params: { name },
+  });
+}

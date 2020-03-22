@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('solicitations', 'SolicitationsController');
     Route::put('solicitation/{id}', 'SolicitationsController@update');
 
+    Route::get('/search/volunteers', 'VolunteersController@search');
+
 
 
     Route::post('upload-avatar-image', 'UserController@uploadImage');

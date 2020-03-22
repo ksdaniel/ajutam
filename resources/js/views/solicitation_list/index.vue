@@ -11,21 +11,48 @@
       </div>
     </div>
 
-    <div v-if="volunteer && roles[0] === 'user' || roles[0] === 'admin'" class="filter-container">
+    <div class="filter-container">
       <el-input v-model="query.keyword" placeholder="Cuvinte cheie" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
       <el-select v-model="query.categories" placeholder="Categorie" clearable style="width: 150px" class="filter-item" @change="handleFilter">
         <el-option label="Alimente" value="alimente" />
         <el-option label="Medicamente" value="medicamente" />
-        <el-option label="Personalizat" value="personalizat" />
       </el-select>
 
-      <el-select v-model="query.status" v-permission="['manage user']" placeholder="Status" clearable style="width: 250px" class="filter-item" @change="handleFilter">
-        <el-option label="In Triaj" value="triaj" />
-        <el-option label="Necesita voluntar" value="necesita_voluntar" />
-        <el-option label="In proces de solutionare" value="solutionare" />
-        <el-option label="Finalizat" value="finalizat" />
-        <el-option label="Respins" value="respins" />
+      <el-select v-model="query.status" placeholder="Status" clearable style="width: 150px" class="filter-item" @change="handleFilter">
+        <el-option label="Necesita Voluntar" value="necesita_voluntar" />
+        <el-option label="Planificat" value="planificat" />
+        <el-option label="In lucru" value="in_lucru" />
+        <el-option label="In proces de livrare" value="proces_livrare" />
+        <el-option label="Livrat" value="livrat" />
+
+      </el-select>
+
+      <el-select v-model="query.payment_status" placeholder="Status Plata" clearable style="width: 150px" class="filter-item" @change="handleFilter">
+        <el-option label="Achitat" value="Achitat" />
+        <el-option label="Neachitat" value="Neachitat" />
+
+      </el-select>
+
+      <el-select
+        v-model="query.volunteer_id"
+        placeholder="Scrie nume voluntar"
+        clearable
+        filterable
+        remote
+        style="width: 250px"
+        class="filter-item"
+        :remote-method="searchVoluntar"
+        :loading="seaarchLoading"
+        @change="handleFilter"
+      >
+
+        <el-option
+          v-for="item in volunteers"
+          :key="'vol'+item.id"
+          :label="item.name + ' ( '+item.phone+' )'"
+          :value="item.id"
+        />
 
       </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -39,56 +66,76 @@
       </router-link>
     </div>
 
-    <div  class="table-container">
+    <div class="table-container">
       <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
-        <el-table-column align="center" label="ID" width="80">
+        <el-table-column align="center" label="Cod" width="80">
           <template slot-scope="scope">
-            <span>{{ scope.row.index }}</span>
+            <span>{{ scope.row.code }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Nume">
+        <el-table-column align="center" label="Beneficiar" width="250">
           <template slot-scope="scope">
-            <span>{{ scope.row.beneficiary.first_name }} {{ scope.row.beneficiary.last_name }}</span>
+            <strong>{{ scope.row.beneficiary.first_name }} {{ scope.row.beneficiary.last_name }}</strong><br>
+            <span>{{ scope.row.beneficiary.address }}, {{ scope.row.beneficiary.neighborhood }}, {{ scope.row.beneficiary.city }}, {{ scope.row.beneficiary.county }}</span><br>
+            <span>Telefon: {{ scope.row.beneficiary.phone }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Telefon">
+        <el-table-column align="center" label="Creat acum" width="100">
           <template slot-scope="scope">
-            <span>{{ scope.row.beneficiary.phone }}</span>
+            <span>{{ new Date(scope.row.created_at).getTime()/1000 | timeAgo }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Adresa">
+        <el-table-column align="center" label="Creat de" width="120">
           <template slot-scope="scope">
-            <span>{{ scope.row.beneficiary.address }}, {{ scope.row.beneficiary.neighborhood }}, {{ scope.row.beneficiary.city }}, {{ scope.row.beneficiary.county }}</span>
-          </template>
+            <strong v-if="scope.row.creator">{{ scope.row.creator.name }} </strong>        </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Categorie" width="150">
+        <el-table-column align="center" label="Tip Solicitare" width="120">
           <template slot-scope="scope">
             <span>{{ scope.row.categories | uppercaseFirst }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Status" width="180">
+        <el-table-column align="center" label="Status" width="140">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.status==='finalizat'" type="success">Finalizat</el-tag>
-            <el-tag v-if="scope.row.status==='triaj'">In Triaj</el-tag>
-            <el-tag v-if="scope.row.status==='solutionare'" type="info">In proces de solutionare</el-tag>
+            <el-tag v-if="scope.row.status==='livrat'" type="success">Livrat</el-tag>
+            <el-tag v-if="scope.row.status==='planificat'">Planificat</el-tag>
+            <el-tag v-if="scope.row.status==='in_lucru'" type="info">In lucru</el-tag>
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
-            <el-tag v-if="scope.row.status==='respins'" type="danger">Respins</el-tag>
 
-            <span v-if="scope.row.status==='solutionare' && scope.row.volunteer"> {{ scope.row.volunteer.name }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column align="center" label="Status Plata" width="180">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
+            <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
+            <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
+          </template>
+        </el-table-column>
+
+        <el-table-column align="center" label="Voluntar" width="180">
+          <template slot-scope="scope">
+
+            <span v-if="scope.row.volunteer"> {{ scope.row.volunteer.name }}</span>
+            <span v-else>Nealocat</span>
+            <br>
+            <span v-if="scope.row.volunteer"> {{ scope.row.volunteer.phone }}</span>
+
           </template>
         </el-table-column>
 
         <el-table-column align="center" label="Actiuni" width="370">
           <template slot-scope="scope">
 
-            <el-button v-permission="['manage user']" type="primary" size="mini" icon="el-icon-edit" @click="editDialog(scope.row)">
-              Vezi solicitare
-            </el-button>
+            <router-link :to="'/solicitari/edit/'+scope.row.id">
+              <el-button type="primary" size="mini" icon="el-icon-edit">
+                Modifica
+              </el-button>
+            </router-link>
 
           </template>
         </el-table-column>
@@ -226,7 +273,7 @@ import Pagination from '@/components/Pagination'; // Secondary package based on 
 import waves from '@/directive/waves'; // Waves directive
 import permission from '@/directive/permission'; // Permission directive
 import role from '@/directive/role'; // Permission directive (v-role)
-import checkPermission from '@/utils/permission'; // Permission checking
+import { searchVolunteers } from '@/api/search';
 import { mapGetters } from 'vuex';
 const solicitationsResource = new Resource('solicitations');
 export default {
@@ -235,6 +282,8 @@ export default {
   directives: { waves, permission, role },
   data(){
     return {
+      seaarchLoading: false,
+      volunteers: [],
       dialogVisible: false,
       dialogRasp: false,
       dialogPreluare: false,
@@ -247,6 +296,8 @@ export default {
         keyword: '',
         categories: '',
         status: '',
+        payment_status: '',
+        volunteer_id: '',
       },
       solicitareModel: '',
       loadingButton: false,
@@ -394,6 +445,16 @@ export default {
         });
       });
     },
+    searchVoluntar(query){
+      this.seaarchLoading = true;
+      searchVolunteers(query).then(resp => {
+        this.seaarchLoading = false;
+        this.volunteers = resp.volunteers;
+      }).then(res => {
+        this.seaarchLoading = false;
+      });
+    },
+
   },
 };
 </script>

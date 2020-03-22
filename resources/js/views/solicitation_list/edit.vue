@@ -363,8 +363,10 @@
           <div>
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
               <el-form-item
-                label="Status solicitate"
+                v-role="['admin', 'coordonator']"
+                label="Status solicitare"
                 prop="solicitation.status"
+
                 :rules="{
                   required: true,
                   message: 'Este necesara completarea',
@@ -372,7 +374,7 @@
                 }"
               >
 
-                <el-select v-model="formData.solicitation.status" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
+                <el-select v-model="formData.solicitation.status" placeholder="Status" clearable style="width: 100%" class="filter-item">
                   <el-option label="Necesita Voluntar" value="necesita_voluntar" />
                   <el-option label="Planificat" value="planificat" />
                   <el-option label="In lucru" value="in_lucru" />
@@ -389,14 +391,34 @@
                 prop="solicitation.volunteer_id"
               >
 
-                <el-select v-model="formData.solicitation.volunteer_id" placeholder="Nume voluntar" clearable style="width: 100%" class="filter-item" />
+                <el-select
+                  v-model="formData.solicitation.volunteer_id"
+                  v-role="['admin', 'coordonator']"
+                  placeholder="Scrie Nume voluntar"
+                  clearable
+                  filterable
+                  remote
+                  style="width: 100%"
+                  class="filter-item"
+                  :remote-method="searchVoluntar"
+                  :loading="seaarchLoading"
+                >
+
+                  <el-option
+                    v-for="item in volunteers"
+                    :key="'vol'+item.id"
+                    :label="item.name + ' ( '+item.phone+' )'"
+                    :value="item.id"
+                  />
+
+                </el-select>
 
               </el-form-item>
             </el-col>
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
-            <el-button type="primary" class="pull-right" @click="add">Adauga Solicitare</el-button>
+            <el-button type="primary" class="pull-right" @click="add">Modifica Solicitare</el-button>
           </el-col>
 
         </el-card>
@@ -417,10 +439,16 @@ import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditional
 import { mapGetters } from 'vuex';
 import Resource from '@/api/resource';
 const solicitationsResource = new Resource('solicitations');
+import { searchVolunteers } from '@/api/search';
+import role from '@/directive/role/index.js';
 export default {
-  name: 'AddSolicitatin',
+  name: 'ModificaSolicitare',
+  directives: { role },
+
   data: () => {
     return {
+      seaarchLoading: false,
+      volunteers: [],
       judete: [],
       orase: [],
       formData: {
@@ -471,9 +499,27 @@ export default {
       this.judete = resp.data;
     });
     this.getOraseJudet();
+    this.getSolicitation();
   },
 
   methods: {
+
+    getSolicitation(){
+      solicitationsResource.get(this.$route.params.id).then(res => {
+        if (res.solicitation){
+          this.formData = {
+            beneficiar: res.solicitation.beneficiary,
+            solicitation: res.solicitation,
+          };
+
+          if (res.solicitation.volunteer){
+            this.volunteers.push(res.solicitation.volunteer);
+          }
+        } else {
+          this.$router.push('/voluntari/lista');
+        }
+      });
+    },
     getOraseJudet(){
       axios.get('https://roloca.coldfuse.io/orase/' + this.formData.beneficiar.county).then(resp => {
         this.orase = resp.data;
@@ -514,13 +560,13 @@ export default {
       this.$refs['addForm'].validate((valid) => {
         if (valid) {
           solicitationsResource
-            .store(this.formData)
+            .update(this.formData.solicitation.id, this.formData)
             .then(response => {
               this.loading = false;
 
               this.$message({
                 type: 'success',
-                message: 'Solicitare a fost adaugata',
+                message: 'Solicitare a fost modificata',
               });
 
               this.$router.push({ path: '/solicitari/lista' });
@@ -539,6 +585,16 @@ export default {
           console.log('error submit!!');
           return false;
         }
+      });
+    },
+
+    searchVoluntar(query){
+      this.seaarchLoading = true;
+      searchVolunteers(query).then(resp => {
+        this.seaarchLoading = false;
+        this.volunteers = resp.volunteers;
+      }).then(res => {
+        this.seaarchLoading = false;
       });
     },
 
