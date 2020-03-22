@@ -128,7 +128,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Actiuni" width="370">
+        <el-table-column align="center" label="Actiuni">
           <template slot-scope="scope">
 
             <router-link :to="'/solicitari/edit/'+scope.row.id">
