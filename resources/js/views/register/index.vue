@@ -78,6 +78,14 @@
                 </el-select>
               </el-form-item>
 
+              <el-form-item label="Directie Implicare" prop="involvement_direction">
+                <el-select v-model="form.involvement_direction" placeholder="Directie Implicare">
+                  <el-option label="Call Center" value="Call Center" />
+                  <el-option label="Medicamente" value="Medicamente" />
+                  <el-option label="Alimente" value="Alimente" />
+                </el-select>
+              </el-form-item>
+
               <el-form-item label="Disponibilitate" prop="availability">
                 <el-select v-model="form.availability" placeholder="Selecteaza disponibilitatea">
                   <el-option label="Zilnica" value="Zilnica" />
@@ -244,6 +252,7 @@ export default {
         neighborhood: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         activation_area: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         involvement_type: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
+        involvement_direction: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         availability: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         availability_details: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
 
@@ -259,6 +268,7 @@ export default {
         neighborhood: '',
         activation_area: '',
         involvement_type: '',
+        involvement_direction: '',
         availability: '',
         availability_details: '',
         observations: '',

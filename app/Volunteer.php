@@ -29,6 +29,7 @@ class Volunteer extends Model
         "ap_domiciliu",
         "ip_acord",
         "data_acord",
+        "involvement_direction",
     ];
 
     protected $casts=[
