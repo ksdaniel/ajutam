@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSolicitariTable extends Migration
+class CreateBeneficiariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,15 @@ class CreateSolicitariTable extends Migration
      */
     public function up()
     {
-        Schema::create('solicitations', function (Blueprint $table) {
-            $table->id();
-
-            $table->string("name");
+        Schema::create('beneficiaries', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string("first_name");
             $table->string("last_name");
-            $table->string("phone");
+            $table->string("phone")->index()->unique();
             $table->string("address");
             $table->string("neighborhood");
             $table->string("city");
             $table->string("county");
-            $table->string('categories');
-            $table->string('emergency');
-            $table->string('status');
-            $table->text('additional_responses');
-            $table->text("observations")->nullable();
-            $table->dateTime('finish_date');
-            $table->integer("volunteer_id")->index()->unsigned();
 
             $table->timestamps();
         });
@@ -42,6 +34,6 @@ class CreateSolicitariTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solicitations');
+        Schema::dropIfExists('beneficiaries');
     }
 }

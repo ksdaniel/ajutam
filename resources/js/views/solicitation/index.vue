@@ -9,122 +9,126 @@
 
         <el-form-item label="Nume" prop="name">
           <el-input v-model="ruleForm.name" />
-        </el-form-item>
 
-        <el-form-item label="Prenume" prop="last_name">
-          <el-input v-model="ruleForm.last_name" />
-        </el-form-item>
+          <el-form-item label="Nume" prop="first_name">
+            <el-input v-model="ruleForm.first_name" />
 
-        <el-form-item label="Numar de telefon" prop="phone">
-          <el-input v-model="ruleForm.phone" />
-        </el-form-item>
+          </el-form-item>
 
-        <el-form-item label="Strada" prop="address">
-          <el-input v-model="ruleForm.address" />
-        </el-form-item>
+          <el-form-item label="Prenume" prop="last_name">
+            <el-input v-model="ruleForm.last_name" />
+          </el-form-item>
 
-        <el-form-item label="Cartier" prop="neighborhood">
-          <el-input v-model="ruleForm.neighborhood" />
-        </el-form-item>
+          <el-form-item label="Numar de telefon" prop="phone">
+            <el-input v-model="ruleForm.phone" />
+          </el-form-item>
 
-        <el-form-item label="Oras" prop="city">
-          <el-input v-model="ruleForm.city" />
-        </el-form-item>
+          <el-form-item label="Strada" prop="address">
+            <el-input v-model="ruleForm.address" />
+          </el-form-item>
 
-        <el-form-item label="Judet" prop="county">
-          <el-input v-model="ruleForm.county" />
-        </el-form-item>
+          <el-form-item label="Cartier" prop="neighborhood">
+            <el-input v-model="ruleForm.neighborhood" />
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_10.label" prop="question_10">
-          <el-col :span="24">
+          <el-form-item label="Oras" prop="city">
+            <el-input v-model="ruleForm.city" />
+          </el-form-item>
 
-            <el-input v-model="ruleForm.additional_responses.question_10.answer" />
-          </el-col>
-        </el-form-item>
+          <el-form-item label="Judet" prop="county">
+            <el-input v-model="ruleForm.county" />
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_1.label" prop="question_1">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_10.label" prop="question_10">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_1.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_10.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_2.label" prop="question_2">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_1.label" prop="question_1">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_2.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_1.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_3.label" prop="question_3">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_2.label" prop="question_2">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_3.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_2.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_4.label" prop="question_4">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_3.label" prop="question_3">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_4.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_3.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_5.label" prop="question_5">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_4.label" prop="question_4">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_5.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_4.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_6.label" prop="question_6">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_5.label" prop="question_5">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_6.answer" />
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_5.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_7.label" prop="question_7">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_6.label" prop="question_6">
+            <el-col :span="24">
 
-            <el-radio-group v-model="ruleForm.additional_responses.question_7.answer">
-              <el-radio label="Am nevoie ca livrarea să fie făcută în cursul zilei de azi" style="margin-bottom: 10px">Am nevoie ca livrarea să fie făcută în cursul zilei de azi</el-radio>
-              <el-radio label="Livrarea poate fi făcută în următoarele două, trei zile" style="margin-bottom: 10px">Livrarea poate fi făcută în următoarele două, trei zile</el-radio>
-              <el-radio label="Livrarea poate fi făcută în cursul acestei săptămâni">Livrarea poate fi făcută în cursul acestei săptămâni</el-radio>
-            </el-radio-group>
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_6.answer" />
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_8.label" prop="question_8">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_7.label" prop="question_7">
+            <el-col :span="24">
 
-            <el-radio-group v-model="ruleForm.additional_responses.question_8.answer">
-              <el-radio label="Cash" style="margin-bottom: 10px">Cash</el-radio>
-              <el-radio label="Card">Card</el-radio>
-            </el-radio-group>
-          </el-col>
-        </el-form-item>
+              <el-radio-group v-model="ruleForm.additional_responses.question_7.answer">
+                <el-radio label="Am nevoie ca livrarea să fie făcută în cursul zilei de azi" style="margin-bottom: 10px">Am nevoie ca livrarea să fie făcută în cursul zilei de azi</el-radio>
+                <el-radio label="Livrarea poate fi făcută în următoarele două, trei zile" style="margin-bottom: 10px">Livrarea poate fi făcută în următoarele două, trei zile</el-radio>
+                <el-radio label="Livrarea poate fi făcută în cursul acestei săptămâni">Livrarea poate fi făcută în cursul acestei săptămâni</el-radio>
+              </el-radio-group>
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_11.label" prop="question_11">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_8.label" prop="question_8">
+            <el-col :span="24">
 
-            <el-input v-model="ruleForm.additional_responses.question_11.answer" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
-          </el-col>
-        </el-form-item>
+              <el-radio-group v-model="ruleForm.additional_responses.question_8.answer">
+                <el-radio label="Cash" style="margin-bottom: 10px">Cash</el-radio>
+                <el-radio label="Card">Card</el-radio>
+              </el-radio-group>
+            </el-col>
+          </el-form-item>
 
-        <el-form-item :label="ruleForm.additional_responses.question_9.label" prop="question_9">
-          <el-col :span="24">
+          <el-form-item :label="ruleForm.additional_responses.question_11.label" prop="question_11">
+            <el-col :span="24">
 
-            <el-radio-group v-model="ruleForm.additional_responses.question_9.answer">
-              <el-radio label="Da" style="margin-bottom: 10px">Da</el-radio>
-            </el-radio-group>
-          </el-col>
-        </el-form-item>
+              <el-input v-model="ruleForm.additional_responses.question_11.answer" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+            </el-col>
+          </el-form-item>
 
-        <div class="links">
-          <el-button type="success" :loading="loading" class="loginBtn" @click="createSolicitation()">Trimite Solicitarea</el-button>
-        </div>
-      </el-card>
+          <el-form-item :label="ruleForm.additional_responses.question_9.label" prop="question_9">
+            <el-col :span="24">
+
+              <el-radio-group v-model="ruleForm.additional_responses.question_9.answer">
+                <el-radio label="Da" style="margin-bottom: 10px">Da</el-radio>
+              </el-radio-group>
+            </el-col>
+          </el-form-item>
+
+          <div class="links">
+            <el-button type="success" :loading="loading" class="loginBtn" @click="createSolicitation()">Trimite Solicitarea</el-button>
+          </div>
+        </el-form-item></el-card>
 
     </el-form>
 
@@ -199,7 +203,11 @@ export default {
     return {
 
       rules: {
+
         name: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
+
+        first_name: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
+
         last_name: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
         phone: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
         city: [{ required: true, message: 'Camp obligatoriu', trigger: 'blur' }],
@@ -220,7 +228,11 @@ export default {
       pwdType: 'password',
       redirect: undefined,
       ruleForm: {
+
         name: '',
+
+        first_name: '',
+
         last_name: '',
         phone: '',
         city: '',

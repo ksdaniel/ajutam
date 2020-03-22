@@ -20,6 +20,7 @@ final class Acl
 {
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
+    const ROLE_VOLUNTAR = 'voluntar';
 
     const PERMISSION_VIEW_MENU_ELEMENT_UI = 'view menu element ui';
     const PERMISSION_VIEW_MENU_PERMISSION = 'view menu permission';

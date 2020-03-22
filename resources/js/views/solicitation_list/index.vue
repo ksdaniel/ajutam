@@ -39,7 +39,7 @@
       </router-link>
     </div>
 
-    <div v-if="volunteer && roles[0] === 'user' || roles[0] === 'admin'" class="table-container">
+    <div  class="table-container">
       <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
         <el-table-column align="center" label="ID" width="80">
           <template slot-scope="scope">
@@ -49,19 +49,19 @@
 
         <el-table-column align="center" label="Nume">
           <template slot-scope="scope">
-            <span>{{ scope.row.name }} {{ scope.row.last_name }}</span>
+            <span>{{ scope.row.beneficiary.first_name }} {{ scope.row.beneficiary.last_name }}</span>
           </template>
         </el-table-column>
 
         <el-table-column align="center" label="Telefon">
           <template slot-scope="scope">
-            <span>{{ scope.row.phone }}</span>
+            <span>{{ scope.row.beneficiary.phone }}</span>
           </template>
         </el-table-column>
 
         <el-table-column align="center" label="Adresa">
           <template slot-scope="scope">
-            <span>{{ scope.row.address }}, {{ scope.row.neighborhood }}, {{ scope.row.city }}, {{ scope.row.county }}</span>
+            <span>{{ scope.row.beneficiary.address }}, {{ scope.row.beneficiary.neighborhood }}, {{ scope.row.beneficiary.city }}, {{ scope.row.beneficiary.county }}</span>
           </template>
         </el-table-column>
 
@@ -108,7 +108,7 @@
       <el-form ref="form" :model="solicitareModel" label-width="120px" label-position="left">
 
         <el-form-item label="Nume">
-          <el-input v-model="solicitareModel.name" />
+          <el-input v-model="solicitareModel.first_name" />
         </el-form-item>
 
         <el-form-item label="Prenume">

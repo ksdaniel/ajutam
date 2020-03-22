@@ -20,10 +20,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('ERipt88s6bJ1'),
         ]);
 
-
         $adminRole = Role::findByName(\App\Laravue\Acl::ROLE_ADMIN);
         $admin->syncRoles($adminRole);
 
-
+        factory(App\Solicitation::class, 50)->create();
     }
 }
