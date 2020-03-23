@@ -9,13 +9,14 @@
         <el-option label="Alimente" value="Alimente" />
       </el-select>
 
-      <el-select v-model="query.type" placeholder="Tip voluntar" class="filter-item" clearable  @change="handleFilter">
+      <el-select v-model="query.type" placeholder="Tip voluntar" class="filter-item" clearable @change="handleFilter">
 
         <el-option label="Livrator Medicamente" value="livrator_medicamente" />
         <el-option label="Livrator Alimente" value="livrator_alimente" />
         <el-option label="Dispecer" value="dispecer" />
         <el-option label="Coordonator voluntari" value="coordonator" />
         <el-option label="Vizitator" value="viewer" />
+        <el-option label="Administrator" value="admin" />
       </el-select>
 
       <el-select v-model="query.has_car" clearable placeholder="Detine masina" class="filter-item" @change="handleFilter">
@@ -93,6 +94,7 @@
             <el-button v-role="['admin', 'coordonator']" type="primary" size="small" icon="el-icon-edit" @click="editVolunteerDialog(scope.row)">
               Edit
             </el-button>
+            <div v-if="scope.row.user.roles[0].name==='admin'">Administrator</div>
           </template>
         </el-table-column>
       </el-table>

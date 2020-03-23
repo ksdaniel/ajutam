@@ -43,8 +43,15 @@ class VolunteersController extends Controller
             });
         }
 
-        if (!empty($type)) {
+        $userQuery->with("user.roles");
+
+        if (!empty($type) && $type !='admin') {
             $userQuery->where('type', '=', $type);
+        } elseif (!empty($type) && $type ='admin'){
+
+            $userQuery->whereHas("user.roles",function ($q){
+                $q->where("name","admin");
+            });
         }
 
         if (!empty($has_car)) {
@@ -121,6 +128,7 @@ class VolunteersController extends Controller
 
         if(isset($data["type"])){
         $volunteerUser=User::find($data["user_id"]);
+
         if($data["type"]=="dispecer"){
 
 
@@ -168,8 +176,11 @@ class VolunteersController extends Controller
     public function search(Request $request){
 
         $query=$request->name;
+        $type=$request->type;
 
-        $volunters=Volunteer::where("name","like","%$query%")->get();
+        $volunters=Volunteer::where("name","like","%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use($type){
+            return $q->where("type",$type);
+        })->get();
 
         return response()->json(["volunteers"=>$volunters]);
     }
