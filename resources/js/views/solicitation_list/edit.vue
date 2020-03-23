@@ -359,10 +359,10 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="16" :xs="24" style="margin-bottom: 5px;float: right" v-role="['admin', 'coordonator']">
+            <el-col v-role="['admin', 'coordonator']" :span="16" :xs="24" style="margin-bottom: 5px;float: right">
               <el-form-item
-                      label="Observatii livrare"
-                      prop="solicitation.delivery_observation"
+                label="Observatii livrare"
+                prop="solicitation.delivery_observation"
               >
 
                 <el-input v-model="formData.solicitation.delivery_observation" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
@@ -428,7 +428,7 @@
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
-            <el-button type="primary" class="pull-right" @click="add">Modifica Solicitare</el-button>
+            <el-button :loading="loading" type="primary" class="pull-right" @click="add">Modifica Solicitare</el-button>
           </el-col>
 
         </el-card>
@@ -461,6 +461,7 @@ export default {
       volunteers: [],
       judete: [],
       orase: [],
+      loading: false,
       formData: {
         beneficiar: {
           additional_responses: {},

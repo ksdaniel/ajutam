@@ -166,7 +166,7 @@
 
               </el-form-item>
 
-              <div v-if="lastOrder">Ultima comanda: <a target="_blank" style="color: darkblue" :href="'/#/solicitari/edit/2'"> #{{ lastOrder.code }} - acum {{  new Date(lastOrder.created_at).getTime()/1000 | timeAgo  }} </a> </div>
+              <div v-if="lastOrder">Ultima comanda: <a target="_blank" style="color: darkblue" :href="'/#/solicitari/edit/2'"> #{{ lastOrder.code }} - acum {{ new Date(lastOrder.created_at).getTime()/1000 | timeAgo }} </a> </div>
             </el-col>
 
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
@@ -378,7 +378,7 @@
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
-            <el-button type="primary" class="pull-right" @click="add">Adauga Solicitare</el-button>
+            <el-button :loading="loading" type="primary" class="pull-right" @click="add">Adauga Solicitare</el-button>
           </el-col>
 
         </el-card>
@@ -407,6 +407,7 @@ export default {
       judete: [],
       orase: [],
       lastOrder: '',
+      loading: false,
       formData: {
         beneficiar: {
           additional_responses: {},

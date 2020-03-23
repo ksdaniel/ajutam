@@ -141,7 +141,8 @@ class SolicitationsController extends Controller
             $beneficiary->update($data['beneficiar']);
         }
 
-        if(!$solicitation->volunteer_id && $solicitation->volunteer_id != $data['solicitation']['volunteer_id'] || $data['solicitation']['volunteer_id'] && $solicitation->volunteer_id != $data['solicitation']['volunteer_id']){
+        if(!$solicitation->volunteer_id && $solicitation->volunteer_id != (int) $data['solicitation']['volunteer_id'] ){
+
             Mail::send('emails.volunteerNotification', [
                 "volunteer_name"=>$volunteer->name,
                 "code"=>$solicitation->code,
@@ -154,8 +155,8 @@ class SolicitationsController extends Controller
                 "nr_call_center"=>""
 
             ], function ($message) use ($volunteer) {
-                $message->from( "test@ajutam.com",'Va ajutam de la Cluj!');
-                $message->subject("Ai o comanda!");
+                $message->from( "ajutam@civicsuport.ro",'Va ajutam de la Cluj!');
+                $message->subject("Va ajutam din Cluj - Task de livrare nou!");
                 $message->to($volunteer->email);
             });
         }
