@@ -137,6 +137,7 @@ class SolicitationsController extends Controller
 
         if($beneficiary){
 
+
             $beneficiary->update($data['beneficiar']);
         }
 
