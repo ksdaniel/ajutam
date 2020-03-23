@@ -161,4 +161,18 @@ class SolicitationsController extends Controller
     {
         return Beneficiary::where('phone', 'LIKE', '%' . $phone . '%')->get();
     }
+
+    public function search(Request $request){
+        $phone=$request->phone;
+        $beneficiari=[];
+        if($phone){
+
+            $beneficiari=Beneficiary::where("phone","like","%$phone")->with("solicitation")->get();
+
+
+        }
+
+
+        return response()->json($beneficiari);
+    }
 }

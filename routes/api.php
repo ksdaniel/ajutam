@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/search/volunteers', 'VolunteersController@search');
     Route::get('/volunteers-map', 'VolunteersController@volunteerMap');
+    Route::get('/search/beneficiaries', 'SolicitationsController@search');
 
 
 

@@ -147,9 +147,26 @@
                 }"
               >
 
-                <el-input v-model="formData.beneficiar.phone" />
+                <el-autocomplete
+
+                  v-model="formData.beneficiar.phone"
+                  style="width: 100%"
+                  clearable
+                  :fetch-suggestions="searchOldOrders"
+                  placeholder="Scrie numar"
+                  value-key="phone"
+                  @select="handleSelect"
+                >
+                  <template slot-scope="{ item }">
+                    <p class="search-results"> <strong class="value">{{ item.first_name }} {{ item.first_name }}</strong> </p>
+                    <p class="search-results">{{ item.phone }}</p>
+                  </template>
+
+                </el-autocomplete>
 
               </el-form-item>
+
+              <div v-if="lastOrder">Ultima comanda: <a target="_blank" style="color: darkblue" :href="'/#/solicitari/edit/2'"> #{{ lastOrder.code }} - acum {{  new Date(lastOrder.created_at).getTime()/1000 | timeAgo  }} </a> </div>
             </el-col>
 
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
@@ -381,6 +398,7 @@ import intrebari from './data/intrebari';
 import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale } from './data/pachete-alimente';
 import { mapGetters } from 'vuex';
 import Resource from '@/api/resource';
+import { searchBeneficiaries } from '@/api/search';
 const solicitationsResource = new Resource('solicitations');
 export default {
   name: 'AddSolicitatin',
@@ -388,6 +406,7 @@ export default {
     return {
       judete: [],
       orase: [],
+      lastOrder: '',
       formData: {
         beneficiar: {
           additional_responses: {},
@@ -507,6 +526,20 @@ export default {
       });
     },
 
+    searchOldOrders(queryString, cb){
+      searchBeneficiaries(queryString).then(results => {
+        cb(results);
+      });
+    },
+
+    handleSelect(option){
+      console.log(option);
+
+      this.formData.beneficiar = option;
+
+      this.lastOrder = option.solicitation.length > 0 ? option.solicitation[0] : '';
+    },
+
   },
 };
 </script>
@@ -560,6 +593,11 @@ export default {
         line-height: 20px;
       }
     }
+  }
+
+  .search-results {
+    margin: 3px;
+    line-height: 12px;
   }
 
 </style>

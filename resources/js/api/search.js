@@ -23,3 +23,11 @@ export function getMapVolunteers(name) {
     params: { name },
   });
 }
+
+export function searchBeneficiaries(phone) {
+  return request({
+    url: '/search/beneficiaries',
+    method: 'get',
+    params: { phone },
+  });
+}

@@ -26,6 +26,6 @@ class Beneficiary extends Model
 
     public function solicitation()
     {
-        return $this->hasMany(Solicitation::class);
+        return $this->hasMany(Solicitation::class)->take(1)->latest();
     }
 }
