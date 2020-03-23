@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\VolunteerCollection;
+use App\Laravue\Models\Role;
+use App\Laravue\Models\User;
 use App\Solicitation;
+
 use App\Volunteer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -115,6 +118,34 @@ class VolunteersController extends Controller
             $data["ip_acord"] = $request->ip();
             $data["data_acord"] = Carbon::now()->toDateTimeString();
         }
+
+        $volunteerUser=User::find($data["user_id"]);
+        if($data["type"]=="dispecer"){
+
+
+
+            $userRole = Role::findByName("dispecer");
+            $volunteerUser->syncRoles($userRole);
+
+        }  elseif ($data["type"]=="coordonator"){
+
+            $volunteerUser=User::find($data["user_id"]);
+            $userRole = Role::findByName("coordonator");
+            $volunteerUser->syncRoles($userRole);
+
+        } else {
+
+            if(!$volunteerUser->isAdmin()){
+
+                $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
+                $volunteerUser->syncRoles($userRole);
+
+            }
+
+        }
+
+
+
 
         $volunteer->update($data);
         return response()->json(["volunteer"=>$volunteer]);

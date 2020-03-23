@@ -179,8 +179,8 @@ class AuthController extends Controller
             if(empty($user->roles->toArray())){
 
                 $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
-
                 $user->syncRoles($userRole);
+
             }
 
         }
