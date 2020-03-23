@@ -109,6 +109,12 @@ const actions = {
     });
   },
 
+  addVolunteer({ commit, state }, volunteer) {
+    return new Promise((resolve, reject) => {
+      commit('SET_VOLUNTEER', volunteer);
+    });
+  },
+
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {

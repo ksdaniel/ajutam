@@ -40,7 +40,7 @@ class VolunteersController extends Controller
 
 
 
-        return response()->json(["success"=>true]);
+        return response()->json(["success"=>$volunteer]);
     }
 
     /**
@@ -73,8 +73,8 @@ class VolunteersController extends Controller
             $data["ip_acord"]=$request->ip();
             $data["data_acord"]=Carbon::now()->toDateTimeString();
         }
-
-        return response()->json(["volunteer"=>$volunteer->update($data)]);
+        $volunteer->update($data);
+        return response()->json(["volunteer"=>$volunteer]);
     }
 
     /**

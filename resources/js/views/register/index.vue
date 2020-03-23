@@ -355,7 +355,7 @@ export default {
           this.centerDialogVisible = true;
           this.loading = false;
           this.$router.push('/dashboard');
-          this.$store.dispatch('user/getInfo');
+          this.$store.dispatch('user/addVolunteer', response.volunteer);
         })
         .catch(error => {
           console.log(error);
@@ -382,7 +382,7 @@ export default {
               });
               this.centerDialogVisible = true;
               this.loading = false;
-              this.$store.dispatch('user/getInfo');
+              this.$store.dispatch('user/addVolunteer', response.volunteer);
               this.$router.push('/dashboard');
             })
             .catch(error => {

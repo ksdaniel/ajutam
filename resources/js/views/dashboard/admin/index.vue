@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
-    <VoluntariMap></VoluntariMap>
+    <VoluntariMap />
 
   </div>
 </template>
@@ -41,7 +41,7 @@ const lineChartData = {
 export default {
   name: 'DashboardAdmin',
   components: {
-      VoluntariMap,
+    VoluntariMap,
     GithubCorner,
     PanelGroup,
     LineChart,
