@@ -45,12 +45,12 @@ class VolunteersController extends Controller
 
         $userQuery->with("user.roles");
 
-        if (!empty($type) && $type !='admin') {
+        if (!empty($type) && $type != 'admin') {
             $userQuery->where('type', '=', $type);
-        } elseif (!empty($type) && $type ='admin'){
+        } elseif (!empty($type) && $type = 'admin') {
 
-            $userQuery->whereHas("user.roles",function ($q){
-                $q->where("name","admin");
+            $userQuery->whereHas("user.roles", function ($q) {
+                $q->where("name", "admin");
             });
         }
 
@@ -90,8 +90,7 @@ class VolunteersController extends Controller
         $volunteer = Volunteer::updateOrCreate(["user_id" => $user->id], $data);
 
 
-
-        return response()->json(["success"=>$volunteer]);
+        return response()->json(["success" => $volunteer]);
 
     }
 
@@ -126,38 +125,36 @@ class VolunteersController extends Controller
             $data["data_acord"] = Carbon::now()->toDateTimeString();
         }
 
-        if(isset($data["type"])){
-        $volunteerUser=User::find($data["user_id"]);
+        if (isset($data["type"])) {
+            $volunteerUser = User::find($data["user_id"]);
 
-        if($data["type"]=="dispecer"){
+            if ($data["type"] == "dispecer") {
 
 
-
-            $userRole = Role::findByName("dispecer");
-            $volunteerUser->syncRoles($userRole);
-
-        }  elseif ($data["type"]=="coordonator"){
-
-            $volunteerUser=User::find($data["user_id"]);
-            $userRole = Role::findByName("coordonator");
-            $volunteerUser->syncRoles($userRole);
-
-        } else {
-
-            if(!$volunteerUser->isAdmin()){
-
-                $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
+                $userRole = Role::findByName("dispecer");
                 $volunteerUser->syncRoles($userRole);
 
+            } elseif ($data["type"] == "coordonator") {
+
+                $volunteerUser = User::find($data["user_id"]);
+                $userRole = Role::findByName("coordonator");
+                $volunteerUser->syncRoles($userRole);
+
+            } else {
+
+                if (!$volunteerUser->isAdmin()) {
+
+                    $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
+                    $volunteerUser->syncRoles($userRole);
+
+                }
+
             }
-
         }
-        }
-
 
 
         $volunteer->update($data);
-        return response()->json(["volunteer"=>$volunteer]);
+        return response()->json(["volunteer" => $volunteer]);
 
     }
 
@@ -172,21 +169,28 @@ class VolunteersController extends Controller
         //
     }
 
+    /**
+     * Return a listing of the resource Volunteer.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
 
-    public function search(Request $request){
+        $query = $request->get('name');
+        $type = $request->get('type');
 
-        $query=$request->name;
-        $type=$request->type;
-
-        $volunters=Volunteer::where("name","like","%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use($type){
-            return $q->where("type",$type);
+        $volunters = Volunteer::where("name", "like", "%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use ($type) {
+            return $q->where("type", $type);
         })->get();
 
-        return response()->json(["volunteers"=>$volunters]);
+        return response()->json(["volunteers" => $volunters]);
     }
 
-    public function volunteerMap(){
+    public function volunteerMap()
+    {
 
-        return response()->json(["volunteers"=>Volunteer::whereNotNull("geojson")->select("name","phone","geojson")->get()]);
+        return response()->json(["volunteers" => Volunteer::whereNotNull("geojson")->select("name", "phone", "geojson")->get()]);
     }
 }

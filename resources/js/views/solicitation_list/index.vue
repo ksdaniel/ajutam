@@ -117,11 +117,14 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Voluntar" width="180">
+        <el-table-column align="center" label="Voluntari" width="180">
           <template slot-scope="scope">
 
-            <span v-if="scope.row.volunteer"> {{ scope.row.volunteer.name }}</span>
-            <span v-else>Nealocat</span>
+            <span v-if="scope.row.coordinator">Coordonator:<br> <span style="font-weight: bold">{{ scope.row.coordinator.name }}</span></span>
+            <span v-if="!scope.row.coordinator">Coordonator Nealocat</span>
+            <br>
+            <span v-if="scope.row.volunteer">Voluntar:<br> <span style="font-weight: bold">{{ scope.row.volunteer.name }} </span> </span><br>
+            <el-tag v-if="!scope.row.volunteer" type="danger">Voluntar Nealocat</el-tag>
             <br>
             <span v-if="scope.row.volunteer"> {{ scope.row.volunteer.phone }}</span>
 
@@ -472,6 +475,13 @@ export default {
 
     padding: 10px;
 
+  }
+
+  br{
+    content: "";
+    margin: 1em;
+    display: block;
+    font-size: 14%;
   }
 
 </style>

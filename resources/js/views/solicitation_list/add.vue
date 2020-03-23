@@ -377,6 +377,37 @@
             </el-col>
           </div>
 
+          <div>
+            <el-form-item
+              label="Aloca unui coordonator"
+              prop="solicitation.coordonator_id"
+            >
+
+              <el-select
+                v-model="formData.solicitation.coordonator_id"
+                v-role="['admin', 'coordonator']"
+                placeholder="Scrie Nume coordonator"
+                clearable
+                filterable
+                remote
+                style="width: 100%"
+                class="filter-item"
+                :remote-method="searchCoordonator"
+                :loading="searchLoading"
+              >
+
+                <el-option
+                  v-for="item in coordinators"
+                  :key="'vol'+item.id"
+                  :label="item.name + ' ( '+item.phone+' )'"
+                  :value="item.id"
+                />
+
+              </el-select>
+
+            </el-form-item>
+          </div>
+
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
             <el-button :loading="loading" type="primary" class="pull-right" @click="add">Adauga Solicitare</el-button>
           </el-col>
@@ -398,12 +429,18 @@ import intrebari from './data/intrebari';
 import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale } from './data/pachete-alimente';
 import { mapGetters } from 'vuex';
 import Resource from '@/api/resource';
-import { searchBeneficiaries } from '@/api/search';
+
+import { searchVolunteers, searchBeneficiaries } from '@/api/search';
+import role from '@/directive/role/index.js';
+
 const solicitationsResource = new Resource('solicitations');
 export default {
   name: 'AddSolicitatin',
+  directives: { role },
   data: () => {
     return {
+      searchLoading: false,
+      coordinators: [],
       judete: [],
       orase: [],
       lastOrder: '',
@@ -434,6 +471,7 @@ export default {
           emergency: 'normal',
           categories: '',
           volunteer_id: '',
+          coordonator_id: '',
         },
       },
       intrebari,
@@ -539,6 +577,16 @@ export default {
       this.formData.beneficiar = option;
 
       this.lastOrder = option.solicitation.length > 0 ? option.solicitation[0] : '';
+    },
+
+    searchCoordonator(query){
+      this.seaarchLoading = true;
+      searchVolunteers(query, 'coordonator').then(resp => {
+        this.seaarchLoading = false;
+        this.coordinators = resp.volunteers;
+      }).then(res => {
+        this.seaarchLoading = false;
+      });
     },
 
   },

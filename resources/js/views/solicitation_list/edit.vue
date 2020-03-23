@@ -411,7 +411,7 @@
                   style="width: 100%"
                   class="filter-item"
                   :remote-method="searchVoluntar"
-                  :loading="seaarchLoading"
+                  :loading="searchLoading"
                 >
 
                   <el-option
@@ -425,6 +425,37 @@
 
               </el-form-item>
             </el-col>
+          </div>
+
+          <div>
+            <el-form-item
+              label="Aloca unui coordonator"
+              prop="solicitation.coordonator_id"
+            >
+
+              <el-select
+                v-model="formData.solicitation.coordonator_id"
+                v-role="['admin', 'coordonator']"
+                placeholder="Scrie Nume coordonator"
+                clearable
+                filterable
+                remote
+                style="width: 100%"
+                class="filter-item"
+                :remote-method="searchCoordonator"
+                :loading="searchLoading"
+              >
+
+                <el-option
+                  v-for="item in coordinators"
+                  :key="'vol'+item.id"
+                  :label="item.name + ' ( '+item.phone+' )'"
+                  :value="item.id"
+                />
+
+              </el-select>
+
+            </el-form-item>
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
@@ -457,7 +488,8 @@ export default {
 
   data: () => {
     return {
-      seaarchLoading: false,
+      searchLoading: false,
+      coordinators: [],
       volunteers: [],
       judete: [],
       orase: [],
@@ -488,6 +520,7 @@ export default {
           status: 'necesita_voluntar',
           emergency: 'normal',
           categories: '',
+          coordonator_id: '',
         },
 
       },
@@ -601,12 +634,22 @@ export default {
     },
 
     searchVoluntar(query){
-      this.seaarchLoading = true;
+      this.searchLoading = true;
       searchVolunteers(query, this.formData.solicitation.categories === 'alimente' ? 'livrator_alimente' : 'livrator_medicamente').then(resp => {
-        this.seaarchLoading = false;
+        this.searchLoading = false;
         this.volunteers = resp.volunteers;
       }).then(res => {
-        this.seaarchLoading = false;
+        this.searchLoading = false;
+      });
+    },
+
+    searchCoordonator(query){
+      this.searchLoading = true;
+      searchVolunteers(query, 'coordonator').then(resp => {
+        this.searchLoading = false;
+        this.coordinators = resp.volunteers;
+      }).then(res => {
+        this.searchLoading = false;
       });
     },
 
