@@ -42,7 +42,7 @@
             <strong>{{ scope.row.name }}</strong><br>
             <span>{{ scope.row.phone }}</span><br>
             <span>{{ scope.row.email }}</span><br>
-            <el-tag v-if="scope.row.ip" type="success">Acord Semnat</el-tag>
+            <el-tag v-if="scope.row.ip_acord" type="success">Acord Semnat</el-tag>
             <el-tag v-else type="warning">Acord Nesemnat</el-tag>
 
           </template>
