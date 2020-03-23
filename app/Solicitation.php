@@ -45,4 +45,10 @@ class Solicitation extends Model
 
         return $this->belongsTo(User::class,"created_by");
     }
+
+    public function coordinator()
+    {
+
+        return $this->belongsTo(Volunteer::class,"coordonator_id", "id");
+    }
 }

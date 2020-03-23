@@ -21,13 +21,16 @@ $factory->define(App\Volunteer::class, function (Faker $faker) {
         'availability' => $faker->randomElement(['Zilnica', 'Saptamanala']),
         'availability_details' => $faker->sentence,
         'observations' => $faker->sentence,
-        'ci' => '',
-        'cnp' => '',
+        'ci' => null,
+        'cnp' => null,
         'loc_domiciliu' => $faker->randomElement(['Cluj-Napoca', 'Turda', 'Dej', 'Gherla', 'Huedin']),
         'str_domiciliu' => $faker->streetName,
         'nr_domiciliu' => $faker->numberBetween(1, 100),
         'ap_domiciliu' => $faker->numberBetween(1, 100),
         'ip_acord' => $faker->ipv4,
-        'data_acord' => $faker->date('Y-m-d')
+        'data_acord' => $faker->date('Y-m-d'),
+        'has_car' => 'nu',
+        'car_plates' => null,
+        'type' => $faker->randomElement(['viewer', 'coordonator', 'dispecer'])
     ];
 });

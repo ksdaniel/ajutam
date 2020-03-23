@@ -14,6 +14,7 @@ class SolicitationsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return SolicitationCollection
      */
     public function index(Request $request)
@@ -52,6 +53,7 @@ class SolicitationsController extends Controller
         $userQuery->with("beneficiary");
         $userQuery->with("volunteer");
         $userQuery->with("creator");
+        $userQuery->with("coordinator");
 
         if (!empty($keyword)) {
             $userQuery->leftJoin('beneficiaries', 'solicitations.beneficiary_id', '=', 'beneficiaries.id');
@@ -105,7 +107,7 @@ class SolicitationsController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
     {
