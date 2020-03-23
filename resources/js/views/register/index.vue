@@ -99,12 +99,12 @@
 
               <el-form-item label="Detineti autoturism?" prop="has_car">
                 <el-select v-model="form.has_car" placeholder="Detineti autoturism?">
-                  <el-option label="Da" value="Da" />
-                  <el-option label="Nu" value="Nu" />
+                  <el-option label="Da" value="da" />
+                  <el-option label="Nu" value="nu" />
                 </el-select>
               </el-form-item>
 
-              <el-form-item v-if="form.has_car==='Da'" label="Numar Masina" prop="car_plates">
+              <el-form-item v-if="form.has_car==='da'" label="Numar Masina" prop="car_plates">
                 <el-input v-model="form.car_plates" type="text" />
               </el-form-item>
 
@@ -291,7 +291,7 @@ export default {
         str_domiciliu: '',
         nr_domiciliu: '',
         ap_domiciliu: '',
-        has_car: 'Nu',
+        has_car: 'nu',
         car_plates: '',
       },
     };

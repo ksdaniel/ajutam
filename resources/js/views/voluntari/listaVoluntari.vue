@@ -19,8 +19,8 @@
       </el-select>
 
       <el-select v-model="query.has_car" clearable placeholder="Detine masina" class="filter-item" @change="handleFilter">
-        <el-option label="Da" value="Da" />
-        <el-option label="Nu" value="Nu" />
+        <el-option label="Da" value="da" />
+        <el-option label="Nu" value="nu" />
       </el-select>
 
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -72,9 +72,9 @@
 
         <el-table-column align="center" label="Detine Autoturism">
           <template slot-scope="scope">
-            <strong v-if="scope.row.has_car"> Da</strong><br>
-            <span v-if="scope.row.has_car"> {{ scope.row.car_plates }}</span>
-            <span v-if="!scope.row.has_car"> Nu</span>
+            <strong v-if="scope.row.has_car==='da'"> Da</strong><br>
+            <span v-if="scope.row.has_car==='da'"> {{ scope.row.car_plates }}</span>
+            <span v-if="scope.row.has_car==='nu'"> Nu</span>
           </template>
         </el-table-column>
 
@@ -197,8 +197,8 @@
 
         <el-form-item label="Detineti autoturism?" prop="has_car">
           <el-select v-model="volunteerModel.has_car" placeholder="Detineti autoturism?">
-            <el-option label="Da" value="Da" />
-            <el-option label="Nu" value="Nu" />
+            <el-option label="Da" value="da" />
+            <el-option label="Nu" value="nu" />
           </el-select>
         </el-form-item>
 
