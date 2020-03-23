@@ -358,6 +358,16 @@
                 <el-input v-model="formData.solicitation.observations" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
               </el-form-item>
             </el-col>
+
+            <el-col :span="16" :xs="24" style="margin-bottom: 5px;float: right" v-role="['admin', 'coordonator']">
+              <el-form-item
+                      label="Observatii livrare"
+                      prop="solicitation.delivery_observation"
+              >
+
+                <el-input v-model="formData.solicitation.delivery_observation" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+              </el-form-item>
+            </el-col>
           </div>
 
           <div>
@@ -462,6 +472,7 @@ export default {
           neighborhood: '',
           phone: '',
           observations: '',
+          delivery_observation: '',
         },
         solicitation: {
           additional_responses: {

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Beneficiary;
 use App\Http\Resources\SolicitationCollection;
 use App\Solicitation;
+use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SolicitationsController extends Controller
 {
@@ -96,6 +98,7 @@ class SolicitationsController extends Controller
 
         } while (Solicitation::where('code', '=', $newHash)->count() > 0);
         $data["solicitation"]["code"]=$newHash;
+
         Solicitation::create($data["solicitation"]);
 
         return response()->json(["success" => true]);
@@ -127,12 +130,33 @@ class SolicitationsController extends Controller
 
         $solicitation = Solicitation::find($id);
 
-
         $beneficiary = Beneficiary::where('id', $data['solicitation']["beneficiary_id"])->first();
+
+        $volunteer = Volunteer::where('id', $data['solicitation']["volunteer_id"])->first();
+
 
         if($beneficiary){
 
             $beneficiary->update($data['beneficiar']);
+        }
+
+        if(!$solicitation->volunteer_id && $solicitation->volunteer_id != $data['solicitation']['volunteer_id'] || $data['solicitation']['volunteer_id'] && $solicitation->volunteer_id != $data['solicitation']['volunteer_id']){
+            Mail::send('emails.volunteerNotification', [
+                "volunteer_name"=>$volunteer->name,
+                "code"=>$solicitation->code,
+                "beneficiary"=>$beneficiary,
+                "delivery_observation"=>$solicitation->delivery_observation,
+                "delivery_period"=>"",
+                "package_weight"=>"",
+                "link"=>"",
+                "nr_coordonator"=>"",
+                "nr_call_center"=>""
+
+            ], function ($message) use ($volunteer) {
+                $message->from( "test@ajutam.com",'Va ajutam de la Cluj!');
+                $message->subject("Ai o comanda!");
+                $message->to($volunteer->email);
+            });
         }
 
         $solicitation->update($data['solicitation']);
