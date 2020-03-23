@@ -64,7 +64,7 @@
         <el-table-column align="center" label="Optiuni Implicare">
           <template slot-scope="scope">
             <span>{{ scope.row.involvement_type }}</span><br>
-            <span>Directie Implicare: {{ scope.row.involvement_direction }}</span><br>
+            <span>Directie Implicare: <br>{{ scope.row.involvement_direction }}</span><br>
             <span>Disponibilitate: {{ scope.row.availability }}</span><br>
             <span>Cand: {{ scope.row.availability_details }}</span>
           </template>

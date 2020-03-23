@@ -119,6 +119,7 @@ class VolunteersController extends Controller
             $data["data_acord"] = Carbon::now()->toDateTimeString();
         }
 
+        if(isset($data["type"])){
         $volunteerUser=User::find($data["user_id"]);
         if($data["type"]=="dispecer"){
 
@@ -143,7 +144,7 @@ class VolunteersController extends Controller
             }
 
         }
-
+        }
 
 
 

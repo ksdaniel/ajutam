@@ -296,7 +296,7 @@
 
                 <el-select v-model="formData.solicitation.payment_type" placeholder="Metoda plata" clearable style="width: 100%" class="filter-item">
                   <el-option label="Plata Cash" value="plata_cash" />
-                  <el-option label="Plata Card" value="plata_card" />
+                  <el-option label="Plata Online" value="plata_card" />
                 </el-select>
 
               </el-form-item>
