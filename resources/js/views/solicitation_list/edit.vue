@@ -235,7 +235,7 @@
             >
               <el-select v-model="formData.solicitation.additional_responses.tip_cos" placeholder="Cos alimente" clearable style="width: 100%" class="filter-item" @change="calculPret">
                 <el-option v-for="pachet in pacheteAlimente" :key="pachet.key" :label="pachet.label" :value="pachet.key" />
-                <el-option label="Pachet personalizat" value="personalizat" />
+                <el-option label="Pachet personalizat - max 8 produse" value="personalizat" />
                 <el-option label="Nu este nevoie de pachet" value="nada" />
               </el-select>
 

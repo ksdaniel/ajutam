@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="dashboard-editor-container" v-cloak>
     <div class=" clearfix">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="24" :md="10" :lg="10" :xl="8">
@@ -431,6 +431,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
+  [v-cloak] { display:none; }
 
   .special-form-input-text {
 

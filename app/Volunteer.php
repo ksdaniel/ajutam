@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Volunteer extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         "user_id",
         "name",
         "email",
         "phone",
         "city",
-        "address",
+        "county",
         "address",
         "neighborhood",
         "activation_area",
@@ -32,8 +32,14 @@ class Volunteer extends Model
         "involvement_direction",
     ];
 
-    protected $casts=[
+    protected $casts = [
 
-        "geojson"=>"json"
+        "geojson" => "json"
     ];
+
+    public function user()
+    {
+
+        return $this->belongsTo(User::class);
+    }
 }
