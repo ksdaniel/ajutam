@@ -9,9 +9,8 @@
 
 <script>
 
-import Resource from '@/api/resource';
+import { getMapVolunteers } from '@/api/search';
 
-const volunteersResource = new Resource('volunteers');
 export default {
   name: 'VoluntariMap',
   data(){
@@ -47,7 +46,7 @@ export default {
   },
   methods: {
     get(){
-      volunteersResource.list().then(res => {
+      getMapVolunteers("").then(res => {
         console.log(res);
 
         res.volunteers.forEach(item => {

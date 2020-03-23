@@ -123,9 +123,12 @@ export default {
               activation_area: 'Zona activare',
               involvement_type: 'Tip implicare',
               availability: 'Disponibilitate',
-              involvement_direction: 'Disponibilitate',
+              involvement_direction: 'Directie implicare',
               availability_details: 'Detalii disponibilitate',
+              has_car: 'Detin masina',
+              car_plates: 'Numar masina',
               observations: 'Observatii',
+
             };
 
             this.volunteerList = [];

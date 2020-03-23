@@ -174,8 +174,12 @@ class AuthController extends Controller
 
         if($user){
 
-            if(!$user->isAdmin()){
+
+
+            if(empty($user->roles->toArray())){
+
                 $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
+
                 $user->syncRoles($userRole);
             }
 

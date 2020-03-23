@@ -15,3 +15,11 @@ export function searchVolunteers(name) {
     params: { name },
   });
 }
+
+export function getMapVolunteers(name) {
+  return request({
+    url: '/volunteers-map',
+    method: 'get',
+    params: { name },
+  });
+}

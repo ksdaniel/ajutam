@@ -335,13 +335,13 @@ export default {
 </style>
 
 <style rel="stylesheet/scss" lang="scss" >
-    body{
-        background: #2d3a4b;
-    }
+    /*body{*/
+        /*background: #2d3a4b;*/
+    /*}*/
 
-    .app-main{
-        background: white;
-    }
+    /*.app-main{*/
+        /*background: white;*/
+    /*}*/
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

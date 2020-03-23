@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('solicitation/{id}', 'SolicitationsController@update');
 
     Route::get('/search/volunteers', 'VolunteersController@search');
+    Route::get('/volunteers-map', 'VolunteersController@volunteerMap');
 
 
 

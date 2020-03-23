@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-editor-container" v-cloak>
+  <div v-cloak class="dashboard-editor-container">
     <div class=" clearfix">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="24" :md="10" :lg="10" :xl="8">
@@ -95,6 +95,17 @@
 
               <el-form-item :label="form.availability ==='Zilnica' ? 'In ce interval orar puteti ?' : 'Cate ore pe saptamana?'" prop="availability_details">
                 <el-input v-model="form.availability_details" />
+              </el-form-item>
+
+              <el-form-item label="Detineti autoturism?" prop="has_car">
+                <el-select v-model="form.has_car" placeholder="Detineti autoturism?">
+                  <el-option label="Da" value="Da" />
+                  <el-option label="Nu" value="Nu" />
+                </el-select>
+              </el-form-item>
+
+              <el-form-item v-if="form.has_car==='Da'" label="Numar Masina" prop="car_plates">
+                <el-input v-model="form.car_plates" type="text" />
               </el-form-item>
 
               <el-form-item label="Observatii">
@@ -255,6 +266,7 @@ export default {
         involvement_direction: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         availability: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         availability_details: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
+        car_plates: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
 
       },
       form: {
@@ -279,6 +291,8 @@ export default {
         str_domiciliu: '',
         nr_domiciliu: '',
         ap_domiciliu: '',
+        has_car: 'Nu',
+        car_plates: '',
       },
     };
   },

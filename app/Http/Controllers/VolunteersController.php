@@ -25,6 +25,8 @@ class VolunteersController extends Controller
 
         $keyword = Arr::get($searchParams, 'keyword', '');
         $involvement_direction = Arr::get($searchParams, 'involvement_direction', '');
+        $type = Arr::get($searchParams, 'type', '');
+        $has_car = Arr::get($searchParams, 'has_car', '');
         $county = Arr::get($searchParams, 'county', '');
 
         if (!empty($keyword)) {
@@ -33,7 +35,17 @@ class VolunteersController extends Controller
                 $query->orWhere('email', 'LIKE', '%' . $keyword . '%');
                 $query->orWhere('phone', 'LIKE', '%' . $keyword . '%');
                 $query->orWhere('address', 'LIKE', '%' . $keyword . '%');
+                $query->orWhere('car_plates', 'LIKE', '%' . $keyword . '%');
+                $query->orWhere('neighborhood', 'LIKE', '%' . $keyword . '%');
             });
+        }
+
+        if (!empty($type)) {
+            $userQuery->where('type', '=', $type);
+        }
+
+        if (!empty($has_car)) {
+            $userQuery->where('has_car', '=', $has_car);
         }
 
         if (!empty($involvement_direction)) {
@@ -128,5 +140,10 @@ class VolunteersController extends Controller
         $volunters=Volunteer::where("name","like","%$query%")->get();
 
         return response()->json(["volunteers"=>$volunters]);
+    }
+
+    public function volunteerMap(){
+
+        return response()->json(["volunteers"=>Volunteer::whereNotNull("geojson")->select("name","phone","geojson")->get()]);
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="filter-container">
-      <el-input v-model="query.keyword" placeholder="Nume, email, telefon, adresa" style="width: 250px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="query.keyword" placeholder="Nume, email, telefon, adresa.." style="width: 250px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
       <el-select v-model="query.involvement_direction" clearable placeholder="Directie Implicare" class="filter-item" @change="handleFilter">
         <el-option label="Call Center" value="Call Center" />
@@ -9,12 +9,22 @@
         <el-option label="Alimente" value="Alimente" />
       </el-select>
 
-      <el-select v-model="query.county" filterable clearable placeholder="Judet" class="filter-item" @change="handleFilter">
-        <el-option v-for="judet in judete" :key="judet.auto" :label="judet.nume" :value="judet.auto" />
+      <el-select v-model="query.type" placeholder="Tip voluntar" class="filter-item" clearable  @change="handleFilter">
+
+        <el-option label="Livrator Medicamente" value="livrator_medicamente" />
+        <el-option label="Livrator Alimente" value="livrator_alimente" />
+        <el-option label="Dispecer" value="dispecer" />
+        <el-option label="Coordonator voluntari" value="coordonator" />
+        <el-option label="Vizitator" value="viewer" />
+      </el-select>
+
+      <el-select v-model="query.has_car" clearable placeholder="Detine masina" class="filter-item" @change="handleFilter">
+        <el-option label="Da" value="Da" />
+        <el-option label="Nu" value="Nu" />
       </el-select>
 
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        {{ $t('table.search') }}
+        Cauta
       </el-button>
     </div>
 
@@ -22,79 +32,59 @@
       <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
         <el-table-column align="center" label="ID" width="80">
           <template slot-scope="scope">
-            <span>{{ scope.row.index }}</span>
+            <span>{{ scope.row.id }}</span>
+
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Nume">
+        <el-table-column align="center" label="Voluntar" width="220">
           <template slot-scope="scope">
-            <span>{{ scope.row.name }}</span>
+            <strong>{{ scope.row.name }}</strong><br>
+            <span>{{ scope.row.phone }}</span><br>
+            <span>{{ scope.row.email }}</span><br>
+            <el-tag v-if="scope.row.ip" type="success">Acord Semnat</el-tag>
+            <el-tag v-else type="warning">Acord Nesemnat</el-tag>
+
           </template>
+
         </el-table-column>
 
-        <el-table-column align="center" label="Email">
+        <el-table-column align="center" label="Adresa" width="220">
           <template slot-scope="scope">
-            <span>{{ scope.row.email }}</span>
+            <span>{{ scope.row.address }}, {{ scope.row.neighborhood }}, {{ scope.row.city }},{{ scope.row.county }}  </span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Telefon">
-          <template slot-scope="scope">
-            <span>{{ scope.row.phone }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Judet">
-          <template slot-scope="scope">
-            <span>{{ scope.row.county }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Localitate">
-          <template slot-scope="scope">
-            <span>{{ scope.row.city }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Adresa">
-          <template slot-scope="scope">
-            <span>{{ scope.row.address }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Cartier">
-          <template slot-scope="scope">
-            <span>{{ scope.row.neighborhood }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Zona unde doresti sa devii activ">
+        <el-table-column align="center" label="Zona activare">
           <template slot-scope="scope">
             <span>{{ scope.row.activation_area }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Tip Implicare">
+        <el-table-column align="center" label="Optiuni Implicare">
           <template slot-scope="scope">
-            <span>{{ scope.row.involvement_type }}</span>
+            <span>{{ scope.row.involvement_type }}</span><br>
+            <span>Directie Implicare: {{ scope.row.involvement_direction }}</span><br>
+            <span>Disponibilitate: {{ scope.row.availability }}</span><br>
+            <span>Cand: {{ scope.row.availability_details }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Directie Implicare">
+        <el-table-column align="center" label="Detine Autoturism">
           <template slot-scope="scope">
-            <span>{{ scope.row.involvement_direction }}</span>
+            <strong v-if="scope.row.has_car"> Da</strong><br>
+            <span v-if="scope.row.has_car"> {{ scope.row.car_plates }}</span>
+            <span v-if="!scope.row.has_car"> Nu</span>
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Disponibilitate">
+        <el-table-column align="center" label="Tip">
           <template slot-scope="scope">
-            <span>{{ scope.row.availability }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column align="center" label="Observertii">
-          <template slot-scope="scope">
-            <span>{{ scope.row.observations }}</span>
+            <el-tag v-if="scope.row.type==='viewer'" type="success">Simplu</el-tag>
+            <el-tag v-if="scope.row.type==='livrator_medicamente'" type="success">Livrator Medicamente</el-tag>
+            <el-tag v-if="scope.row.type==='livrator_alimente'" type="success">Livrator Alimente</el-tag>
+            <el-tag v-if="scope.row.type==='dispecer'" type="success">Dispecer</el-tag>
+            <el-tag v-if="scope.row.type==='coordonator'" type="success">Coordonator voluntari</el-tag>
           </template>
         </el-table-column>
 
@@ -205,8 +195,30 @@
           <el-input v-model="volunteerModel.availability_details" />
         </el-form-item>
 
+        <el-form-item label="Detineti autoturism?" prop="has_car">
+          <el-select v-model="volunteerModel.has_car" placeholder="Detineti autoturism?">
+            <el-option label="Da" value="Da" />
+            <el-option label="Nu" value="Nu" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item v-if="volunteerModel.has_car==='Da'" label="Numar Masina" prop="car_plates">
+          <el-input v-model="volunteerModel.car_plates" type="text" />
+        </el-form-item>
+
         <el-form-item label="Observatii">
           <el-input v-model="volunteerModel.observations" type="textarea" />
+        </el-form-item>
+
+        <el-form-item label="Tip Voluntar" prop="type">
+          <el-select v-model="volunteerModel.type" placeholder="Detineti autoturism?">
+
+            <el-option label="Livrator Medicamente" value="livrator_medicamente" />
+            <el-option label="Livrator Alimente" value="livrator_alimente" />
+            <el-option label="Dispecer" value="dispecer" />
+            <el-option label="Coordonator voluntari" value="coordonator" />
+            <el-option label="Vizitator" value="viewer" />
+          </el-select>
         </el-form-item>
 
       </el-form>
@@ -254,6 +266,8 @@ export default {
         keyword: '',
         categories: '',
         status: '',
+        type: '',
+        has_car: '',
       },
       volunteerModel: '',
       loadingButton: false,
@@ -336,8 +350,8 @@ export default {
           this.loading = false;
         });
     },
-    getOraseJudet(){
-      axios.get('https://roloca.coldfuse.io/orase/' + this.volunteerModel.county).then(resp => {
+    getOraseJudet(judet){
+      axios.get('https://roloca.coldfuse.io/orase/' + judet ? judet : this.volunteerModel.county).then(resp => {
         this.orase = resp.data;
       });
     },
