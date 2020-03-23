@@ -16,7 +16,7 @@
         <el-option label="Dispecer" value="dispecer" />
         <el-option label="Coordonator voluntari" value="coordonator" />
         <el-option label="Vizitator" value="viewer" />
-        <el-option label="administrator" value="admin" />
+        <el-option label="Administrator" value="admin" />
       </el-select>
 
       <el-select v-model="query.has_car" clearable placeholder="Detine masina" class="filter-item" @change="handleFilter">

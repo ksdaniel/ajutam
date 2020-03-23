@@ -8,11 +8,11 @@ export function userSearch(name) {
   });
 }
 
-export function searchVolunteers(name) {
+export function searchVolunteers(name, type) {
   return request({
     url: '/search/volunteers',
     method: 'get',
-    params: { name },
+    params: { name, type },
   });
 }
 

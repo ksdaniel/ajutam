@@ -590,7 +590,7 @@ export default {
 
     searchVoluntar(query){
       this.seaarchLoading = true;
-      searchVolunteers(query).then(resp => {
+      searchVolunteers(query, this.formData.solicitation.categories === 'alimente' ? 'livrator_alimente' : 'livrator_medicamente').then(resp => {
         this.seaarchLoading = false;
         this.volunteers = resp.volunteers;
       }).then(res => {

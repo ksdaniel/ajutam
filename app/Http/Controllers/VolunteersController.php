@@ -176,8 +176,11 @@ class VolunteersController extends Controller
     public function search(Request $request){
 
         $query=$request->name;
+        $type=$request->type;
 
-        $volunters=Volunteer::where("name","like","%$query%")->get();
+        $volunters=Volunteer::where("name","like","%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use($type){
+            return $q->where("type",$type);
+        })->get();
 
         return response()->json(["volunteers"=>$volunters]);
     }
