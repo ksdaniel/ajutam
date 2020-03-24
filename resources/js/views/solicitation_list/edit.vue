@@ -397,6 +397,7 @@
                   v-model="formData.solicitation.coordonator_id"
                   v-role="['admin', 'coordonator']"
                   placeholder="Scrie Nume coordonator"
+
                   clearable
                   filterable
                   remote
@@ -408,7 +409,7 @@
 
                   <el-option
                     v-for="item in coordinators"
-                    :key="'vol'+item.id"
+                    :key="'coor'+item.id"
                     :label="item.name + ' ( '+item.phone+' )'"
                     :value="item.id"
                   />
