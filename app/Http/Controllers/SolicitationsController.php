@@ -168,7 +168,7 @@ class SolicitationsController extends Controller
 
             Mail::send('emails.coordonatorNotification', [
                 "solicitation"=>$solicitation,
-                "volunteer_name"=>$volunteer->name,
+                "volunteer_name"=>$volunteer ? $volunteer->name : '-',
                 "code"=>$solicitation->code,
                 "beneficiary"=>$beneficiary,
                 "delivery_observation"=>$solicitation->delivery_observation,
@@ -176,12 +176,13 @@ class SolicitationsController extends Controller
                 "package_weight"=>"",
                 "volunteer"=>$volunteer,
                 "nr_coordonator"=>$coordonator->phone,
+                "coordonator"=>$coordonator,
                 "nr_call_center"=>"0364406517"
 
-            ], function ($message) use ($volunteer) {
+            ], function ($message) use ($coordonator) {
                 $message->from( "ajutam@civicsuport.ro",'Va ajutam de la Cluj!');
                 $message->subject("Va ajutam din Cluj - Task de coordonat nou!");
-                $message->to($volunteer->email);
+                $message->to($coordonator->email);
             });
         }
 
