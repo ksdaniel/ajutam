@@ -397,7 +397,6 @@
                   v-model="formData.solicitation.coordonator_id"
                   v-role="['admin', 'coordonator']"
                   placeholder="Scrie Nume coordonator"
-
                   clearable
                   filterable
                   remote
@@ -430,6 +429,8 @@
               >
 
                 <el-select
+
+                  v-if="formData.solicitation"
                   v-model="formData.solicitation.volunteer_id"
                   v-role="['admin', 'coordonator']"
                   placeholder="Scrie Nume voluntar"
@@ -606,6 +607,7 @@ export default {
           if (res.solicitation.volunteer){
             this.volunteers.push(res.solicitation.volunteer);
           }
+
           if (res.solicitation.coordinator){
             this.coordinators.push(res.solicitation.coordinator);
           }
