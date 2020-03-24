@@ -136,6 +136,8 @@ class SolicitationsController extends Controller
 
         $volunteer = Volunteer::where('id', $data['solicitation']["volunteer_id"])->first();
 
+        $coordonator = Volunteer::where('id', $data['solicitation']["coordonator_id"])->first();
+
 
         if($beneficiary){
 
@@ -150,15 +152,35 @@ class SolicitationsController extends Controller
                 "code"=>$solicitation->code,
                 "beneficiary"=>$beneficiary,
                 "delivery_observation"=>$solicitation->delivery_observation,
-                "delivery_period"=>"",
+                "delivery_period"=>$solicitation->delivery_period,
                 "package_weight"=>"",
-                "link"=>"",
-                "nr_coordonator"=>"",
-                "nr_call_center"=>""
+                "nr_coordonator"=>$solicitation->coordinator->phone,
+                "nr_call_center"=>"0364406517"
 
             ], function ($message) use ($volunteer) {
                 $message->from( "ajutam@civicsuport.ro",'Va ajutam de la Cluj!');
                 $message->subject("Va ajutam din Cluj - Task de livrare nou!");
+                $message->to($volunteer->email);
+            });
+        }
+
+        if(!$solicitation->coordonator_id && $solicitation->coordonator_id != (int) $data['solicitation']['coordonator_id'] ){
+
+            Mail::send('emails.coordonatorNotification', [
+                "solicitation"=>$solicitation,
+                "volunteer_name"=>$volunteer->name,
+                "code"=>$solicitation->code,
+                "beneficiary"=>$beneficiary,
+                "delivery_observation"=>$solicitation->delivery_observation,
+                "delivery_period"=>$solicitation->delivery_period,
+                "package_weight"=>"",
+                "volunteer"=>$volunteer,
+                "nr_coordonator"=>$coordonator->phone,
+                "nr_call_center"=>"0364406517"
+
+            ], function ($message) use ($volunteer) {
+                $message->from( "ajutam@civicsuport.ro",'Va ajutam de la Cluj!');
+                $message->subject("Va ajutam din Cluj - Task de coordonat nou!");
                 $message->to($volunteer->email);
             });
         }
