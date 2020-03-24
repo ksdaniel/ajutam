@@ -281,7 +281,6 @@ export default {
         phone: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         city: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         address: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
-        neighborhood: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         activation_area: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         involvement_type: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
         involvement_direction: [{ required: true, trigger: 'change', message: 'Campul este obligatoriu' }],
