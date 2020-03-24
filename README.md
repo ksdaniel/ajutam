@@ -24,7 +24,7 @@ sudo apt install php7.2-simplexml
 
 ```
 
-###### Install nodejs (if not yet installed)
+##### Install nodejs (if not yet installed)
 
 ```bash
 
@@ -33,7 +33,7 @@ sudo apt install npm
 
 ```
 
-###### Create the MYSQL database and user 
+##### Create the MYSQL database and user 
 
 Connect to the MYSQL server with your favorite tool and run: 
 
@@ -45,14 +45,14 @@ GRANT ALL PRIVILEGES ON *.* TO 'Some username here'@'localhost' IDENTIFIED BY 'Y
 
 ```
 
-###### Install and configure NGROK (only necesarry if you wanna skip using a self signed cert)
+##### Install and configure NGROK (only necesarry if you wanna skip using a self signed cert)
 
 https://dashboard.ngrok.com/get-started and follow the steps listed here. 
 
 ##### Register a Facebook application for testing 
 - make a note of the appid and appsecret 
 
-###### Clone the gibhub repo with the solution to your machine
+##### Clone the gibhub repo with the solution to your machine
 
 ```bash
 
@@ -61,14 +61,13 @@ git clone https://github.com/gabibora/ajutam.git
 cd ajutam
 
 ```
-
-###### Provision dependencies
+##### Provision dependencies
 
 ```bash
 composer install
 ```
 
-###### Create the .env file 
+##### Create the .env file 
 
 Create a copy of the .env.sample file and call it .env 
 Update the following entries to match your env: 
@@ -103,11 +102,11 @@ sudo npm install --global cross-env
 ```bash
 npm install
 ```
-###### Build the app 
+##### Build the app 
 ```
 npm run dev 
 ```
-###### Test that everything is running 
+##### Test that everything is running 
 ```
 php artisan serve 
 ```
@@ -119,7 +118,7 @@ Browse to https://localhost:8000 and you should see the application
 
 Browse to the URL indicated by ngrok and you should see the application and be able to login. 
 
-###### Set the admin role for your test user 
+##### Set the admin role for your test user 
 
 Connect to the MYSQL server with your favorite tool and run: 
 ```sql
