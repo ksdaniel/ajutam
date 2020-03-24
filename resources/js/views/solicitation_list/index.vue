@@ -123,7 +123,7 @@
             <span v-if="scope.row.coordinator">Coordonator:<br> <span style="font-weight: bold">{{ scope.row.coordinator.name }}</span></span>
             <span v-if="!scope.row.coordinator">Coordonator Nealocat</span>
             <br>
-            <span v-if="scope.row.volunteer">Voluntar:<br> <span style="font-weight: bold">{{ scope.row.volunteer.name }} ({{ scope.row.volunteer_confirmation ? "Confirmat" : "Neconfirmat" }}) </span> </span><br>
+            <span v-if="scope.row.volunteer">Voluntar:<br> <span style="font-weight: bold">{{ scope.row.volunteer.name }} <br>({{ scope.row.volunteer_confirmation ? "Confirmat" : "Neconfirmat" }}) </span> </span><br>
             <el-tag v-if="!scope.row.volunteer" type="danger">Voluntar Nealocat</el-tag>
             <br>
             <span v-if="scope.row.volunteer"> {{ scope.row.volunteer.phone }}</span>
