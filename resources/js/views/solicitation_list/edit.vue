@@ -359,15 +359,6 @@
               </el-form-item>
             </el-col>
 
-            <el-col v-role="['admin', 'coordonator']" :span="16" :xs="24" style="margin-bottom: 5px;float: right">
-              <el-form-item
-                label="Observatii livrare"
-                prop="solicitation.delivery_observation"
-              >
-
-                <el-input v-model="formData.solicitation.delivery_observation" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
-              </el-form-item>
-            </el-col>
           </div>
 
           <div>
@@ -429,9 +420,10 @@
             </el-col>
           </div>
 
-          <div>
+          <div class="clearfix">
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
               <el-form-item
+
                 label="Voluntari"
                 prop="solicitation.volunteer_id"
               >
@@ -440,11 +432,13 @@
                   v-model="formData.solicitation.volunteer_id"
                   v-role="['admin', 'coordonator']"
                   placeholder="Scrie Nume voluntar"
+
                   clearable
                   filterable
                   remote
                   style="width: 100%"
                   class="filter-item"
+
                   :remote-method="searchVoluntar"
                   :loading="searchLoading"
                 >
@@ -460,6 +454,48 @@
 
               </el-form-item>
             </el-col>
+
+            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+              <el-form-item
+                label="Confirmare voluntar"
+                prop="solicitation.volunteer_confirmation"
+                style="  margin-top: 35px;"
+              >
+                <el-switch
+                  v-model="formData.solicitation.volunteer_confirmation"
+                /> <span>{{ formData.solicitation.volunteer_confirmation ? "Voluntar confirmat" : "Voluntar neconfirmat" }}</span>
+
+              </el-form-item>
+            </el-col>
+
+          </div>
+
+          <div>
+            <el-col :span="8" :xs="24" style="margin-bottom: 5px">
+              <el-form-item
+                label="Perioada de livrare"
+                prop="solicitation.delivery_period"
+              >
+
+                <el-select v-model="formData.solicitation.delivery_period" placeholder="Alege perioada de livrare" clearable filterable style="width: 100%" class="filter-item">
+                  <el-option label="Cat de repade posibil" value="asap" />
+                  <el-option label="24 de ore" value="24h" />
+                  <el-option label="48 de ore" value="48h" />
+                </el-select>
+
+              </el-form-item>
+            </el-col>
+
+            <el-col v-role="['admin', 'coordonator']" :span="16" :xs="24" style="margin-bottom: 5px;">
+              <el-form-item
+                label="Observatii livrare"
+                prop="solicitation.delivery_observation"
+              >
+
+                <el-input v-model="formData.solicitation.delivery_observation" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+              </el-form-item>
+            </el-col>
+
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">
@@ -525,6 +561,7 @@ export default {
           emergency: 'normal',
           categories: '',
           coordonator_id: '',
+          delivery_period: '',
         },
 
       },
@@ -561,8 +598,15 @@ export default {
             solicitation: res.solicitation,
           };
 
+          if (res.solicitation.volunteer_confirmation){
+            this.formData.solicitation.volunteer_confirmation = true;
+          }
+
           if (res.solicitation.volunteer){
             this.volunteers.push(res.solicitation.volunteer);
+          }
+          if (res.solicitation.coordinator){
+            this.coordinators.push(res.solicitation.coordinator);
           }
         } else {
           this.$router.push('/voluntari/lista');

@@ -34,7 +34,7 @@ class Volunteer extends Model
         "car_plates",
         "type",
         "ip_acord_voluntariat",
-        "data_acord_voluntariat",
+        "data_acord_voluntariat"
     ];
 
     protected $casts = [

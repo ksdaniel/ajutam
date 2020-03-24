@@ -182,7 +182,24 @@ class VolunteersController extends Controller
         $type = $request->get('type');
 
         $volunters = Volunteer::where("name", "like", "%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use ($type) {
-            return $q->where("type", $type);
+
+            if($type=="livrator_medicamente"){
+                $q->where("involvement_direction", "Medicamente");
+
+            }
+            elseif ($type=="livrator_alimente"){
+
+                $q->where("involvement_direction", "Alimente");
+            }
+
+            else{
+
+                $q->where("type", $type);
+
+            }
+
+
+
         })->get();
 
         return response()->json(["volunteers" => $volunters]);

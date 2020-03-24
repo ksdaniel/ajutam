@@ -114,7 +114,7 @@ class SolicitationsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $solicitation=Solicitation::where("id",$id)->with(["beneficiary","volunteer"])->first();
+        $solicitation=Solicitation::where("id",$id)->with(["beneficiary","volunteer","coordinator"])->first();
 
         return response()->json(["solicitation"=>$solicitation]);
     }
@@ -143,7 +143,7 @@ class SolicitationsController extends Controller
             $beneficiary->update($data['beneficiar']);
         }
 
-        if(!$solicitation->volunteer_id && $solicitation->volunteer_id != (int) $data['solicitation']['volunteer_id'] ){
+        if(!$solicitation->volunteer_id && $solicitation->volunteer_confirmation && $solicitation->volunteer_id != (int) $data['solicitation']['volunteer_id'] ){
 
             Mail::send('emails.volunteerNotification', [
                 "volunteer_name"=>$volunteer->name,
