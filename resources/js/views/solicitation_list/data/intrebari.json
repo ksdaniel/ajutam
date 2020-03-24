@@ -15,7 +15,7 @@
     {
       "key":"prezentare_simtome_covid_19",
       "type":"text",
-      "label":"Prezentați simptome asociate Covid-19? Dacă da, care?",
+      "label":"Este ceva ce ar trebui să știm despre starea Dvs de sănătate?",
       "validationRules": {
         "required": "true",
         "message": "Este nesara completarea",
