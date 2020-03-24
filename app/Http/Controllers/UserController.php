@@ -15,6 +15,8 @@ use App\Laravue\JsonResponse;
 use App\Laravue\Models\Permission;
 use App\Laravue\Models\Role;
 use App\Laravue\Models\User;
+use App\Volunteer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Arr;
@@ -290,5 +292,40 @@ class UserController extends Controller
 
         }
 
+    }
+
+    public function addOrUpdateAcord(Request $request){
+
+        $user=$request->user();
+        $data=$request->toArray();
+        $data["user_id"]=$user->id;
+        $acord=$request->acord;
+
+        if ($acord ==="acord-voluntariat") {
+
+            $data["ip_acord_voluntariat"] = $request->ip();
+            $data["data_acord_voluntariat"] = Carbon::now()->toDateTimeString();
+        }
+
+        if ($acord ==="acord-isu") {
+
+            $data["ip_acord"] = $request->ip();
+            $data["data_acord"] = Carbon::now()->toDateTimeString();
+        }
+
+        if(!isset($data["city"])){
+
+            $data["city"]=$data["loc_domiciliu"];
+        }
+
+        if(!isset($data["address"])){
+
+            $data["address"]=$data["str_domiciliu"].", ".$data["nr_domiciliu"].", ".$data["ap_domiciliu"];
+        }
+
+
+        $volunteer=Volunteer::updateOrCreate(["user_id"=>$user->id],$data);
+
+        return response()->json(["volunteer" => $volunteer]);
     }
 }

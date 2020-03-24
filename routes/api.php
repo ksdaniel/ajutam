@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/volunteers-map', 'VolunteersController@volunteerMap');
     Route::get('/search/beneficiaries', 'SolicitationsController@search');
 
-
+    Route::post('/users/acord', 'UserController@addOrUpdateAcord');
 
     Route::post('upload-avatar-image', 'UserController@uploadImage');
 });

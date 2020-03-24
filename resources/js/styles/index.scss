@@ -192,3 +192,87 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+
+[v-cloak] { display:none!important; }
+
+
+[v-cloak] .v-cloak--block {
+  display: block!important;
+}
+
+[v-cloak] .v-cloak--inline {
+  display: inline!important;
+}
+
+[v-cloak] .v-cloak--inlineBlock {
+  display: inline-block!important;
+}
+
+[v-cloak] .v-cloak--hidden {
+  display: none!important;
+}
+
+[v-cloak] .v-cloak--invisible {
+  visibility: hidden!important;
+}
+
+.v-cloak--block,
+.v-cloak--inline,
+.v-cloak--inlineBlock {
+  display: none!important;
+}
+
+.special-form-input-text {
+
+  input {
+
+    border-top: 0!important;
+    border-left: 0!important;
+    border-right: 0!important;
+    border-radius: 0!important;
+    border-color: black!important;
+    border-bottom-style: dashed!important;
+    font-weight: bold;
+    color: #000;
+  }
+
+  border-radius: 0!important;
+  margin-bottom: 10px;
+
+}
+
+@media screen and (max-width: 767px) {
+
+  .special-form-input-text {
+
+    width: 100%!important;
+  }
+
+}
+
+@media screen and (min-width: 768px) {
+  .special-form-input-text {
+
+    width: 160px!important;
+  }
+}
+
+.special-form-input-text-no-width {
+
+  input {
+
+    border-top: 0!important;
+    border-left: 0!important;
+    border-right: 0!important;
+    border-radius: 0!important;
+    border-color: black!important;
+    border-bottom-style: dashed!important;
+    font-weight: bold;
+    color: #000;
+  }
+
+  border-radius: 0!important;
+  margin-bottom: 10px;
+
+}

@@ -396,6 +396,41 @@
             </el-col>
 
             <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+
+              <el-form-item
+                label="Aloca unui coordonator"
+                prop="solicitation.coordonator_id"
+              >
+
+                <el-select
+                  v-model="formData.solicitation.coordonator_id"
+                  v-role="['admin', 'coordonator']"
+                  placeholder="Scrie Nume coordonator"
+                  clearable
+                  filterable
+                  remote
+                  style="width: 100%"
+                  class="filter-item"
+                  :remote-method="searchCoordonator"
+                  :loading="searchLoading"
+                >
+
+                  <el-option
+                    v-for="item in coordinators"
+                    :key="'vol'+item.id"
+                    :label="item.name + ' ( '+item.phone+' )'"
+                    :value="item.id"
+                  />
+
+                </el-select>
+
+              </el-form-item>
+
+            </el-col>
+          </div>
+
+          <div>
+            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Voluntari"
                 prop="solicitation.volunteer_id"
@@ -425,37 +460,6 @@
 
               </el-form-item>
             </el-col>
-          </div>
-
-          <div>
-            <el-form-item
-              label="Aloca unui coordonator"
-              prop="solicitation.coordonator_id"
-            >
-
-              <el-select
-                v-model="formData.solicitation.coordonator_id"
-                v-role="['admin', 'coordonator']"
-                placeholder="Scrie Nume coordonator"
-                clearable
-                filterable
-                remote
-                style="width: 100%"
-                class="filter-item"
-                :remote-method="searchCoordonator"
-                :loading="searchLoading"
-              >
-
-                <el-option
-                  v-for="item in coordinators"
-                  :key="'vol'+item.id"
-                  :label="item.name + ' ( '+item.phone+' )'"
-                  :value="item.id"
-                />
-
-              </el-select>
-
-            </el-form-item>
           </div>
 
           <el-col :span="24" :xs="24" style="margin-bottom: 5px">

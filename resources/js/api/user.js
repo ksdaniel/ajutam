@@ -13,6 +13,14 @@ class UserResource extends Resource {
     });
   }
 
+  addOrUpdateAcord(data) {
+    return request({
+      url: '/users/acord',
+      method: 'post',
+      data: data,
+    });
+  }
+
   updatePermission(id, permissions) {
     return request({
       url: '/' + this.uri + '/' + id + '/permissions',
