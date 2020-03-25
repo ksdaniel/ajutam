@@ -125,32 +125,32 @@ class VolunteersController extends Controller
             $data["data_acord"] = Carbon::now()->toDateTimeString();
         }
 
-        if (isset($data["type"])) {
-            $volunteerUser = User::find($data["user_id"]);
-
-            if ($data["type"] == "dispecer") {
-
-
-                $userRole = Role::findByName("dispecer");
-                $volunteerUser->syncRoles($userRole);
-
-            } elseif ($data["type"] == "coordonator") {
-
-                $volunteerUser = User::find($data["user_id"]);
-                $userRole = Role::findByName("coordonator");
-                $volunteerUser->syncRoles($userRole);
-
-            } else {
-
-                if (!$volunteerUser->isAdmin()) {
-
-                    $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
-                    $volunteerUser->syncRoles($userRole);
-
-                }
-
-            }
-        }
+//        if (isset($data["type"])) {
+//            $volunteerUser = User::find($data["user_id"]);
+//
+//            if ($data["type"] == "dispecer") {
+//
+//
+//                $userRole = Role::findByName("dispecer");
+//                $volunteerUser->syncRoles($userRole);
+//
+//            } elseif ($data["type"] == "coordonator") {
+//
+//                $volunteerUser = User::find($data["user_id"]);
+//                $userRole = Role::findByName("coordonator");
+//                $volunteerUser->syncRoles($userRole);
+//
+//            } else {
+//
+//                if (!$volunteerUser->isAdmin()) {
+//
+//                    $userRole = Role::findByName(\App\Laravue\Acl::ROLE_USER);
+//                    $volunteerUser->syncRoles($userRole);
+//
+//                }
+//
+//            }
+//        }
 
 
         $volunteer->update($data);
