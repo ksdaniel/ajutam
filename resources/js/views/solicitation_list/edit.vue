@@ -395,7 +395,7 @@
 
                 <el-select
                   v-model="formData.solicitation.coordonator_id"
-                  v-role="['admin', 'coordonator']"
+                  v-role="['admin', 'coordonator', 'dispecer']"
                   placeholder="Scrie Nume coordonator"
                   clearable
                   filterable
