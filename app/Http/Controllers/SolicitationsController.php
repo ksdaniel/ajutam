@@ -145,7 +145,7 @@ class SolicitationsController extends Controller
             $beneficiary->update($data['beneficiar']);
         }
 
-        if(!$solicitation->volunteer_id && $solicitation->volunteer_confirmation && $solicitation->volunteer_id != (int) $data['solicitation']['volunteer_id'] ){
+        if($solicitation->volunteer_id && $solicitation->volunteer_confirmation && $solicitation->volunteer_id != (int) $data['solicitation']['volunteer_id'] ){
 
             Mail::send('emails.volunteerNotification', [
                 "volunteer_name"=>$volunteer->name,
@@ -164,7 +164,7 @@ class SolicitationsController extends Controller
             });
         }
 
-        if(!$solicitation->coordonator_id && $solicitation->coordonator_id != (int) $data['solicitation']['coordonator_id'] ){
+        if($solicitation->coordonator_id && $solicitation->coordonator_id != (int) $data['solicitation']['coordonator_id'] ){
 
             Mail::send('emails.coordonatorNotification', [
                 "solicitation"=>$solicitation,
