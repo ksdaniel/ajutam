@@ -145,7 +145,7 @@ class SolicitationsController extends Controller
             $beneficiary->update($data['beneficiar']);
         }
 
-        if(!$solicitation->volunteer_id && $solicitation->volunteer_confirmation && $solicitation->volunteer_id !== (int)$data['solicitation']['volunteer_id'] ){
+        if(!$solicitation->volunteer_id && $volunteer && $solicitation->volunteer_confirmation && $solicitation->volunteer_id !== (int)$data['solicitation']['volunteer_id'] ){
 
             Mail::send('emails.volunteerNotification', [
                 "volunteer_name"=>$volunteer->name,
@@ -164,7 +164,7 @@ class SolicitationsController extends Controller
             });
         }
 
-        if(!$solicitation->coordonator_id && $solicitation->coordonator_id !== (int)$data['solicitation']['coordonator_id'] ){
+        if(!$solicitation->coordonator_id && $coordonator && $solicitation->coordonator_id !== (int)$data['solicitation']['coordonator_id'] ){
 
             Mail::send('emails.coordonatorNotification', [
                 "solicitation"=>$solicitation,
@@ -175,7 +175,7 @@ class SolicitationsController extends Controller
                 "delivery_period"=>$solicitation->delivery_period,
                 "package_weight"=>"",
                 "volunteer"=>$volunteer,
-                "nr_coordonator"=>$coordonator->phone,
+                "nr_coordonator"=>$coordonator ? $coordonator->phone: "",
                 "coordonator"=>$coordonator,
                 "nr_call_center"=>"0364406517"
 

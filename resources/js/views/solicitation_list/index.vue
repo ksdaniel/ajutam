@@ -17,6 +17,7 @@
       <el-select v-model="query.categories" placeholder="Categorie" clearable style="width: 150px" class="filter-item" @change="handleFilter">
         <el-option label="Alimente" value="alimente" />
         <el-option label="Medicamente" value="medicamente" />
+        <el-option label="Altele" value="Altele" />
       </el-select>
 
       <el-select v-model="query.status" placeholder="Status" clearable style="width: 150px" class="filter-item" @change="handleFilter">
@@ -25,6 +26,7 @@
         <el-option label="In lucru" value="in_lucru" />
         <el-option label="In proces de livrare" value="proces_livrare" />
         <el-option label="Livrat" value="livrat" />
+        <el-option label="Solutionat" value="solutionat" />
 
       </el-select>
 
@@ -102,6 +104,7 @@
         <el-table-column align="center" label="Status" width="140">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.status==='livrat'" type="success">Livrat</el-tag>
+            <el-tag v-if="scope.row.status==='solutionat'" type="success">Solutionat</el-tag>
             <el-tag v-if="scope.row.status==='planificat'">Planificat</el-tag>
             <el-tag v-if="scope.row.status==='in_lucru'" type="info">In lucru</el-tag>
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
@@ -111,9 +114,12 @@
 
         <el-table-column align="center" label="Status Plata" width="180">
           <template slot-scope="scope">
+            <div v-if="scope.row.categories !== 'altele'">
             <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
             <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
             <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
+
+            </div>
           </template>
         </el-table-column>
 

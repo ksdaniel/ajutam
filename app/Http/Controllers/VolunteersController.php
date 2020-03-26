@@ -183,13 +183,18 @@ class VolunteersController extends Controller
 
         $volunters = Volunteer::where("name", "like", "%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use ($type) {
 
-            if($type=="livrator_medicamente"){
+            if($type=="medicamente"){
                 $q->where("involvement_direction", "Medicamente");
 
             }
-            elseif ($type=="livrator_alimente"){
+            elseif ($type=="alimente"){
 
                 $q->where("involvement_direction", "Alimente");
+            }
+
+            elseif ($type=="altele"){
+
+//                $q->where("involvement_direction", "Alimente");
             }
 
             else{

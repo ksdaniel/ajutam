@@ -202,11 +202,50 @@
             <el-select v-model="formData.solicitation.categories" placeholder="Categorie" clearable style="width: 250px" class="filter-item">
               <el-option label="Are Nevoie de Alimente" value="alimente" />
               <el-option label="Are Nevoie de Medicamente" value="medicamente" />
+              <el-option label="Altele" value="altele" />
 
             </el-select>
 
           </el-form-item>
 
+          <div v-if="formData.solicitation.categories==='altele'">
+
+            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+              <el-form-item
+                      label="Descriere nevoie"
+                      prop="solicitation.additional_responses.altele_descriere_nevoie"
+              >
+
+                <el-input v-model="formData.solicitation.additional_responses.altele_descriere_nevoie" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+              <el-form-item
+                      label="Recomandare dispecer"
+                      prop="solicitation.additional_responses.altele_recomandare_dispecer"
+              >
+
+                <el-input v-model="formData.solicitation.additional_responses.altele_recomandare_dispecer" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+              <el-form-item
+                      label="Solutie agreată"
+                      prop="solicitation.additional_responses.altele_solutie_agreata"
+              >
+
+                <el-input v-model="formData.solicitation.additional_responses.altele_solutie_agreeata" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" />
+              </el-form-item>
+            </el-col>
+
+          </div>
+          <div
+                  class="clearfix"
+                  style="display: block;
+    width: 5px;"
+          ><br></div>
           <div v-if="formData.solicitation.categories==='medicamente'">
 
             <el-form-item
@@ -282,7 +321,7 @@
 
           </div>
 
-          <div>
+          <div v-if="formData.solicitation.categories !== 'altele'">
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Metoda Plata"
@@ -328,7 +367,7 @@
             </el-col>
           </div>
 
-          <div>
+          <div v-if="formData.solicitation.categories !== 'altele'">
 
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
@@ -379,8 +418,9 @@
                   <el-option label="Necesita Voluntar" value="necesita_voluntar" />
                   <el-option label="Planificat" value="planificat" />
                   <el-option label="In lucru" value="in_lucru" />
-                  <el-option label="In proces de livrare" value="proces_livrare" />
-                  <el-option label="Livrat" value="livrat" />
+                  <el-option label="Solutionat" v-if="formData.solicitation.categories === 'altele'" value="solutionat" />
+                  <el-option label="In proces de livrare" value="proces_livrare" v-if="formData.solicitation.categories !== 'altele'" />
+                  <el-option label="Livrat" value="livrat" v-if="formData.solicitation.categories !== 'altele'" />
                 </el-select>
 
               </el-form-item>
@@ -472,7 +512,7 @@
 
           </div>
 
-          <div>
+          <div  v-if="formData.solicitation.categories !== 'altele'">
             <el-col :span="8" :xs="24" style="margin-bottom: 5px">
               <el-form-item
                 label="Perioada de livrare"
@@ -686,7 +726,7 @@ export default {
 
     searchVoluntar(query){
       this.searchLoading = true;
-      searchVolunteers(query, this.formData.solicitation.categories === 'alimente' ? 'livrator_alimente' : 'livrator_medicamente').then(resp => {
+      searchVolunteers(query, this.formData.solicitation.categories).then(resp => {
         this.searchLoading = false;
         this.volunteers = resp.volunteers;
       }).then(res => {
