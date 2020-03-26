@@ -14,10 +14,10 @@ class AddNullableToSolicitationsTable extends Migration
     public function up()
     {
         Schema::table('solicitations', function (Blueprint $table) {
-            $table->string("payment_type")->nullable()->change();
-            $table->string("payment_status")->nullable()->change();
-            $table->string("payment_value")->nullable()->change();
-            $table->integer("coordonator_id")->change();
+            $table->string("payment_type")->nullable()->charset(null)->change();
+            $table->string("payment_status")->nullable()->charset(null)->change();
+            $table->string("payment_value")->nullable()->charset(null)->change();
+            $table->integer("coordonator_id")->charset(null)->change();
 
         });
     }
