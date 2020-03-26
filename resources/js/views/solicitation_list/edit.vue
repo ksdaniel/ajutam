@@ -401,9 +401,9 @@
           </div>
 
           <div>
-            <el-col :span="12" :xs="24" style="margin-bottom: 5px">
+            <el-col v-role="['admin', 'coordonator']" :span="12" :xs="24" style="margin-bottom: 5px">
               <el-form-item
-                v-role="['admin', 'coordonator']"
+
                 label="Status solicitare"
                 prop="solicitation.status"
 
@@ -520,7 +520,7 @@
               >
 
                 <el-select v-model="formData.solicitation.delivery_period" placeholder="Alege perioada de livrare" clearable filterable style="width: 100%" class="filter-item">
-                  <el-option label="Cat de repade posibil" value="asap" />
+                  <el-option label="Cat de repede posibil" value="asap" />
                   <el-option label="24 de ore" value="24h" />
                   <el-option label="48 de ore" value="48h" />
                 </el-select>
