@@ -67,7 +67,7 @@ class SolicitationsController extends Controller
             $userQuery->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
             $userQuery->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
         }
-
+        $userQuery->orderBy("created_at","DESC");
 
         return new SolicitationCollection($userQuery->paginate($limit));
     }
