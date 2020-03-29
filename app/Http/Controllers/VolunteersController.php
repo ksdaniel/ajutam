@@ -203,8 +203,6 @@ class VolunteersController extends Controller
 
             }
 
-
-
         })->get();
 
         return response()->json(["volunteers" => $volunters]);
@@ -213,6 +211,6 @@ class VolunteersController extends Controller
     public function volunteerMap()
     {
 
-        return response()->json(["volunteers" => Volunteer::whereNotNull("geojson")->select("name", "phone", "geojson")->get()]);
+        return response()->json(["volunteers" => Volunteer::whereNotNull("geojson")->select("name", "geojson")->get()]);
     }
 }

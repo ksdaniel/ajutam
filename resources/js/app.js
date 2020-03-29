@@ -33,6 +33,7 @@ Vue.use(VeeValidate);
 Vue.use(VueAxios, axios);
 Vue.use(VueSocialauth, {
 
+
   providers: {
     facebook: {
       clientId: '553013741975593',

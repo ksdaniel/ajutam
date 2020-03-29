@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     get(){
-      getMapVolunteers("").then(res => {
+      getMapVolunteers('').then(res => {
         console.log(res);
 
         res.volunteers.forEach(item => {
@@ -62,8 +62,7 @@ export default {
               });
 
               var geojson = L.geoJSON(item.geojson).bindPopup(function(layer) {
-                const popup = '<span>Voluntar: </span><strong>' + layer.feature.properties.name + '</strong><br>' +
-                            '<span>Telefon: </span><strong>' + layer.feature.properties.phone + '</strong><br>'
+                const popup = '<span>Voluntar: </span><strong>' + layer.feature.properties.name + '</strong><br>'
 
                  ;
 
