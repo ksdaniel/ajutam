@@ -31,9 +31,13 @@
 </head>
 <body>
 <script>
+{{--    var fbAppID = {{ App::environment("FACEBOOK_KEY") }};--}}
+    var fbAppID = '204964864099919';
+
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : '553013741975593',
+            // appId      : '553013741975593',
+            appId      : fbAppID,
             cookie     : true,
             status     : true,
             xfbml      : true,

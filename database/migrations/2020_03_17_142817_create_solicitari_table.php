@@ -28,8 +28,12 @@ class CreateSolicitariTable extends Migration
             $table->string('status');
             $table->text('additional_responses');
             $table->text("observations")->nullable();
+            $table->string("payment_type")->nullable();
+            $table->string("payment_status")->nullable();
+            $table->string("payment_value")->nullable();
             $table->dateTime('finish_date');
             $table->integer("volunteer_id")->index()->unsigned();
+            $table->integer("beneficiary_id");
 
             $table->timestamps();
         });

@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
         $adminRole = Role::findByName(\App\Laravue\Acl::ROLE_ADMIN);
         $admin->syncRoles($adminRole);
 
+        $volunteer = User::create([
+            'name' => 'Volunteer',
+            'email' => 'volunteer@gmail.com',
+            'password' => Hash::make('aatuin'),
+        ]);
+
+        $volunteerRole = Role::findByName(\App\Laravue\Acl::ROLE_VOLUNTAR);
+        $volunteer->syncRoles($volunteerRole);
+
         factory(App\Solicitation::class, 50)->create();
     }
 }

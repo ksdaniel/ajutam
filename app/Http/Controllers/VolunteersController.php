@@ -34,6 +34,7 @@ class VolunteersController extends Controller
 
         if (!empty($keyword)) {
             $userQuery->where(function ($query) use ($keyword) {
+                // hello my name is; DROP TABLE CLIENTS
                 $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
                 $query->orWhere('email', 'LIKE', '%' . $keyword . '%');
                 $query->orWhere('phone', 'LIKE', '%' . $keyword . '%');

@@ -1,41 +1,72 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+      <!--      <h3 class="title">-->
+      <!--        Va ajutam din Cluj - Inscriere Voluntari-->
+      <!--      </h3>-->
+      <!--      <el-card>-->
+      <!--        <p>&Icirc;n vremuri de criză e nevoie de implicare și solidaritate! Odată cu trecerea țării la scenariul 3 al crizei Corona Virus, s-a format &icirc;n mun. Cluj-Napoca grupul de solidaritate comunitară &ldquo;VĂ AJUTĂM DIN CLUJ!&rdquo;. Grupul are &icirc;n prezent 450 de membri și reunește mai mulți cetățeni activi, sub coordonarea a trei organizații implicate civic din Cluj: Vedem Just, Civic Suport și Clujul Sustenabil. Astfel, Clujul se alătură orașelor București, Sibiu, Arad și Constanța care au pornit inițiative similare pentru a sprijini cetățenii și autoritățile &icirc;n gestionarea situației generate de Corona Virus.</p>-->
+      <!--        <p><strong>Unde găsiți acest grup?</strong><br>Pentru a evita propagarea virusului, grupul se organizează pe rețelele de socializare și exclusiv online.</p>-->
+      <!--        <p><strong>Ce &icirc;și propune?</strong><br>Loc civic de &icirc;nt&acirc;lnire pentru clujeni pe tema Coronavirus, dar mai ales grup de sprijin pentru cei aflați &icirc;n imposibilitatea de a se aproviziona &icirc;n perioada următoare. De asemenea este un apel la responsabilitate și organizare civică.</p>-->
+      <!--        <p>Principalul obiectiv al lor este să organizeze eficient voluntari care să poată ajuta &icirc;n perioada critică oameni &icirc;n v&acirc;rstă, persoane cu afecțiuni specifice ori familii cu copii care nu trebuie sau nu pot să iasă din locuințe pentru cumpărături sau medicamente. Va fi organizat un program de livrări la domiciliu, care să respecte aceste nevoi speciale și care să mențină siguranța at&acirc;t a voluntarilor implicați, c&acirc;t și a beneficiarilor.</p>-->
+      <!--        <p>&ldquo;Cumparaturile vor fi plătite de solicitanți și se vor face &icirc;n mare parte prin colaborarea cu c&acirc;țiva furnizori din lanțul retail.&rdquo;- spune Cami Gui, voluntar care asigură contactul cu retailerii din partea organizației Clujul Sustenabil.</p>-->
+      <!--        <p>&ldquo;Pe l&acirc;ngă activitatea de aprovizionare, ne așteptăm să apară &icirc;n timp și alte tipuri de nevoi, pentru care ne pregătim deja: procurarea și distribuția de echipamente de protectie, monitorizarea datelor persoanelor &icirc;n carantină, discuții specifice cu autoritățile și ajutor oferit lor la cerere, chiar și o linie de consultații pe partea de anxietate și gestionarea stresului pentru medici. Știm de c&acirc;teva planuri de sprijin existente ale altor organizații, cum ar fi CERT și Beard Brothers și intenționăm să comunicăm constant și să ne ajutăm reciproc &icirc;n trecerea cu bine a acestei crize&rdquo;. Ligia Măhălean, una din persoanele care au avut inițiativa constituirii acestui grup.</p>-->
+      <!--        <p><strong>Cum &icirc;și propun să ajungă la v&acirc;rstnici și alte persoane imobilizate sau izolate la domiciliu?</strong><br>Voluntarii din grup vor discuta cu asociațiile de proprietari și vor distribui informații despre ajutorul pe care ei &icirc;l pot oferi persoanelor din categoriile menționate mai sus. Vor fi responsabili pe zone și vor să comunica cu cei aflați &icirc;n nevoie, din zona lor.</p>-->
+      <!--        <p>Asigurarea unei activități fără riscuri și cu respectarea tuturor normelor de siguranță indicate de autorități se va face cu ajutorul Crucii Roșii și fiecare voluntar va trece printr-un instructaj specific.</p>-->
+      <!--        <p><strong>Cum &icirc;și propun să gestioneze relația cu autoritățile?</strong><br>Grupul civic VĂ AJUTĂM DIN CLUJ face un apel de comunicare și colaborare către Direcția de Sănătate Publică, Prefectură, Primărie, Consiliul Județean, Inspectoratul pentru Situații de Urgență. Ei &icirc;și vor pune la dispoziție resursele de timp, implicare, cunoștințe, mașinile și disponibilitatea de a le folosi &icirc;n sprijinul comunității.<br>&ldquo;Vrem să ajutăm instituțiile statului &icirc;n această perioadă de criză. O rețea de voluntari precum cea a noastră poate fi un suport pentru măsurile luate de Guvern dacă e nevoie. Dar extrem de importantă este solidaritatea &icirc;n comunitate pe care o vom construi pentru a combate infecția.&rdquo; declară Cristi Danileț, reprezentant al asociației VeDem Just.</p>-->
+      <!--        <p><br>Oricine este dispus să se implice și să ajute, o poate face pe Facebook &icirc;n grupul &rdquo;Vă ajutăm din Cluj!&rdquo;:&nbsp;-->
+      <!--          <br>-->
+      <!--          <a-->
+      <!--            style="    word-break: break-all;-->
+      <!--    margin-top: 10px;-->
+      <!--    color: blue;"-->
+      <!--            href="https://www.facebook.com/groups/2550667518542414/"-->
+      <!--          >https://www.facebook.com/groups/2550667518542414/</a>&nbsp;</p>-->
+
+      <!--        <div class="links">-->
+      <!--          <el-button :loading="loading" type="button" class="loginBtn loginBtn&#45;&#45;facebook" @click="loginWithFacebook">-->
+      <!--            Login or Register cu Facebook-->
+      <!--          </el-button>-->
+
+      <!--          <el-button :loading="loading" type="button" class="loginBtn loginBtn&#45;&#45;google" @click="loginWithGoogle">-->
+      <!--            Login or Register cu Google-->
+      <!--          </el-button>-->
+
+      <!--&lt;!&ndash;          <el-button @click="handleLogin()">Login</el-button>&ndash;&gt;-->
+      <!--        </div>-->
+      <!--      </el-card>-->
       <h3 class="title">
-        Va ajutam din Cluj - Inscriere Voluntari
+        {{ $t('login.title') }}
       </h3>
-      <el-card>
-        <p>&Icirc;n vremuri de criză e nevoie de implicare și solidaritate! Odată cu trecerea țării la scenariul 3 al crizei Corona Virus, s-a format &icirc;n mun. Cluj-Napoca grupul de solidaritate comunitară &ldquo;VĂ AJUTĂM DIN CLUJ!&rdquo;. Grupul are &icirc;n prezent 450 de membri și reunește mai mulți cetățeni activi, sub coordonarea a trei organizații implicate civic din Cluj: Vedem Just, Civic Suport și Clujul Sustenabil. Astfel, Clujul se alătură orașelor București, Sibiu, Arad și Constanța care au pornit inițiative similare pentru a sprijini cetățenii și autoritățile &icirc;n gestionarea situației generate de Corona Virus.</p>
-        <p><strong>Unde găsiți acest grup?</strong><br>Pentru a evita propagarea virusului, grupul se organizează pe rețelele de socializare și exclusiv online.</p>
-        <p><strong>Ce &icirc;și propune?</strong><br>Loc civic de &icirc;nt&acirc;lnire pentru clujeni pe tema Coronavirus, dar mai ales grup de sprijin pentru cei aflați &icirc;n imposibilitatea de a se aproviziona &icirc;n perioada următoare. De asemenea este un apel la responsabilitate și organizare civică.</p>
-        <p>Principalul obiectiv al lor este să organizeze eficient voluntari care să poată ajuta &icirc;n perioada critică oameni &icirc;n v&acirc;rstă, persoane cu afecțiuni specifice ori familii cu copii care nu trebuie sau nu pot să iasă din locuințe pentru cumpărături sau medicamente. Va fi organizat un program de livrări la domiciliu, care să respecte aceste nevoi speciale și care să mențină siguranța at&acirc;t a voluntarilor implicați, c&acirc;t și a beneficiarilor.</p>
-        <p>&ldquo;Cumparaturile vor fi plătite de solicitanți și se vor face &icirc;n mare parte prin colaborarea cu c&acirc;țiva furnizori din lanțul retail.&rdquo;- spune Cami Gui, voluntar care asigură contactul cu retailerii din partea organizației Clujul Sustenabil.</p>
-        <p>&ldquo;Pe l&acirc;ngă activitatea de aprovizionare, ne așteptăm să apară &icirc;n timp și alte tipuri de nevoi, pentru care ne pregătim deja: procurarea și distribuția de echipamente de protectie, monitorizarea datelor persoanelor &icirc;n carantină, discuții specifice cu autoritățile și ajutor oferit lor la cerere, chiar și o linie de consultații pe partea de anxietate și gestionarea stresului pentru medici. Știm de c&acirc;teva planuri de sprijin existente ale altor organizații, cum ar fi CERT și Beard Brothers și intenționăm să comunicăm constant și să ne ajutăm reciproc &icirc;n trecerea cu bine a acestei crize&rdquo;. Ligia Măhălean, una din persoanele care au avut inițiativa constituirii acestui grup.</p>
-        <p><strong>Cum &icirc;și propun să ajungă la v&acirc;rstnici și alte persoane imobilizate sau izolate la domiciliu?</strong><br>Voluntarii din grup vor discuta cu asociațiile de proprietari și vor distribui informații despre ajutorul pe care ei &icirc;l pot oferi persoanelor din categoriile menționate mai sus. Vor fi responsabili pe zone și vor să comunica cu cei aflați &icirc;n nevoie, din zona lor.</p>
-        <p>Asigurarea unei activități fără riscuri și cu respectarea tuturor normelor de siguranță indicate de autorități se va face cu ajutorul Crucii Roșii și fiecare voluntar va trece printr-un instructaj specific.</p>
-        <p><strong>Cum &icirc;și propun să gestioneze relația cu autoritățile?</strong><br>Grupul civic VĂ AJUTĂM DIN CLUJ face un apel de comunicare și colaborare către Direcția de Sănătate Publică, Prefectură, Primărie, Consiliul Județean, Inspectoratul pentru Situații de Urgență. Ei &icirc;și vor pune la dispoziție resursele de timp, implicare, cunoștințe, mașinile și disponibilitatea de a le folosi &icirc;n sprijinul comunității.<br>&ldquo;Vrem să ajutăm instituțiile statului &icirc;n această perioadă de criză. O rețea de voluntari precum cea a noastră poate fi un suport pentru măsurile luate de Guvern dacă e nevoie. Dar extrem de importantă este solidaritatea &icirc;n comunitate pe care o vom construi pentru a combate infecția.&rdquo; declară Cristi Danileț, reprezentant al asociației VeDem Just.</p>
-        <p><br>Oricine este dispus să se implice și să ajute, o poate face pe Facebook &icirc;n grupul &rdquo;Vă ajutăm din Cluj!&rdquo;:&nbsp;
-          <br>
-          <a
-            style="    word-break: break-all;
-    margin-top: 10px;
-    color: blue;"
-            href="https://www.facebook.com/groups/2550667518542414/"
-          >https://www.facebook.com/groups/2550667518542414/</a>&nbsp;</p>
-
-        <div class="links">
-          <el-button :loading="loading" type="button" class="loginBtn loginBtn--facebook" @click="loginWithFacebook">
-            Login or Register cu Facebook
-          </el-button>
-
-          <el-button :loading="loading" type="button" class="loginBtn loginBtn--google" @click="loginWithGoogle">
-            Login or Register cu Google
-          </el-button>
-
-          <!--<el-button @click="handleLogin()">Login</el-button>-->
-        </div>
-      </el-card>
-
+      <lang-select class="set-language" />
+      <el-form-item prop="email">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input v-model="loginForm.email" name="email" type="text" auto-complete="on" :placeholder="$t('login.email')" />
+      </el-form-item>
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input
+          v-model="loginForm.password"
+          :type="pwdType"
+          name="password"
+          auto-complete="on"
+          placeholder="password"
+          @keyup.enter.native="handleLogin"
+        />
+        <span class="show-pwd" @click="showPwd">
+          <svg-icon icon-class="eye" />
+        </span>
+      </el-form-item>
+      <el-form-item>
+        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+          Autentificare
+        </el-button>
+      </el-form-item>
+      <div class="tips" />
     </el-form>
 
   </div>
@@ -93,23 +124,41 @@ export default {
         this.pwdType = 'password';
       }
     },
+    // handleLogin() {
+    //   // this.$refs.loginForm.validate(valid => {
+    //   //   if (valid) {
+    //   this.loading = true;
+    //   this.$store.dispatch('user/login', this.loginForm)
+    //     .then(() => {
+    //       this.$router.push({ path: this.redirect || '/' });
+    //       this.loading = false;
+    //     })
+    //     .catch(() => {
+    //       this.loading = false;
+    //     });
+    //   //   } else {
+    //   //     console.log('error submit!!');
+    //   //     return false;
+    //   //   }
+    //   // });
+    // },
     handleLogin() {
-      // this.$refs.loginForm.validate(valid => {
-      //   if (valid) {
-      this.loading = true;
-      this.$store.dispatch('user/login', this.loginForm)
-        .then(() => {
-          this.$router.push({ path: this.redirect || '/' });
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
-      //   } else {
-      //     console.log('error submit!!');
-      //     return false;
-      //   }
-      // });
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true;
+          this.$store.dispatch('user/login', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/' });
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     },
     AuthProvider(provider) {
       var self = this;
