@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Volunteer extends Model
 {
+
     protected $fillable = [
         "user_id",
         "name",
@@ -34,7 +35,8 @@ class Volunteer extends Model
         "car_plates",
         "type",
         "ip_acord_voluntariat",
-        "data_acord_voluntariat"
+        "data_acord_voluntariat",
+        "status"
     ];
 
     protected $casts = [

@@ -52,6 +52,9 @@
             {{ volunteer ? "Actualizare date" : "Inregistrare voluntar" }}
           </el-button>
         </router-link>
+        <template>
+          <el-button style="margin-top: 10px; width: 100%;" :icon="'el-icon-warning'" :type="'danger'" @click="deleteProfile">Sterge profilul</el-button>
+        </template>
       </div>
     </div>
 
@@ -405,6 +408,37 @@ export default {
         this.centerDialogVisible = false;
         this.centerDialogVisibleVoluntariat = false;
       });
+    },
+    deleteProfile(){
+      this.$confirm('Profilul și toate datele introduse vor fi șterse.', 'Atentie!!!', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            volunteersResource.destroy(this.volunteer.id).then(response => {
+              this.logout();
+            });
+            done();
+          } else {
+            done();
+          }
+        },
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: 'Delete completed',
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Delete canceled',
+        });
+      });
+    },
+    async logout() {
+      await this.$store.dispatch('user/logout');
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
   },
 };

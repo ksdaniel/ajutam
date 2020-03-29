@@ -162,11 +162,40 @@ class VolunteersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $volunteer = Volunteer::find($id);
+
+        $volunteer->email = '-';
+        $volunteer->phone = '-';
+        $volunteer->city = '-';
+        $volunteer->county = '-';
+        $volunteer->address = '-';
+        $volunteer->neighborhood = null;
+        $volunteer->activation_area = null;
+        $volunteer->involvement_type = null;
+        $volunteer->availability = null;
+        $volunteer->availability_details = null;
+        $volunteer->observations = null;
+        $volunteer->geojson = null;
+        $volunteer->ci = null;
+        $volunteer->cnp = null;
+        $volunteer->loc_domiciliu = null;
+        $volunteer->str_domiciliu = null;
+        $volunteer->nr_domiciliu = null;
+        $volunteer->ap_domiciliu = null;
+        $volunteer->ip_acord = null;
+        $volunteer->data_acord = null;
+        $volunteer->involvement_direction = null;
+        $volunteer->car_plates = null;
+        $volunteer->ip_acord_voluntariat = null;
+        $volunteer->data_acord_voluntariat = null;
+        $volunteer->status = 'inactive';
+
+        $volunteer->update();
+        return response()->json($volunteer);
     }
 
     /**
@@ -183,25 +212,21 @@ class VolunteersController extends Controller
 
         $volunters = Volunteer::where("name", "like", "%$query%")->when(isset($request->type) && !empty($request->type), function ($q) use ($type) {
 
-            if($type=="medicamente"){
+            if ($type == "medicamente") {
                 $q->where("involvement_direction", "Medicamente");
 
-            }
-            elseif ($type=="alimente"){
+            } elseif ($type == "alimente") {
 
                 $q->where("involvement_direction", "Alimente");
-            }
-
-            elseif ($type=="altele"){
+            } elseif ($type == "altele") {
 
 //                $q->where("involvement_direction", "Alimente");
-            }
-
-            else{
+            } else {
 
                 $q->where("type", $type);
 
             }
+
 
         })->get();
 
