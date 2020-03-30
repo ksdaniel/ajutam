@@ -2,34 +2,34 @@
   "pachete":[
     {
       "key":"cos1",
-      "label":"COS1 - neperisabile de baza, aprox.20RON",
-      "price":"20",
+      "label":"COS1 - neperisabile de baza,",
+      "price":"24.18",
       "image":""
     },
     {
       "key":"cos2",
-      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, aprox.60RON ",
-      "price":"60",
+      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne,",
+      "price":"67.58",
       "image":""
     },
     {
       "key":"cos3",
-      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris), aprox.60RON",
-      "price":"60",
+      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
+      "price":"67.37",
       "image":""
     },
     {
       "key":"cos4",
-      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui), aprox.75RON",
-      "price":"75",
+      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
+      "price":"82.03",
       "image":""
     }
   ],
 
   "produsePachetPersonalizat":[
     {
-      "key":"1. Făină [1kg | Winny] - 2,59RON",
-      "label":"Făină 1 KG",
+      "key":"produs-1",
+      "label":"1. Făină [1kg | Winny] - 2,59RON",
       "price":"2.59"
 
     },
@@ -176,10 +176,22 @@
       "label":"25. Saci menajeri 60 L [1buc | Global Plast] - 1,79RON",
       "price":"1.79"
 
+
+    },
+    {
+      "key":"produs-27",
+      "label":"27. Unicarm Salam Banatean [400g | Unicarm] - 11,50RON",
+      "price":"11.50"
+
     }
   ],
 
   "produseAditionale":[
+    {
+      "key":"produs-add-8",
+      "label":"Sacosa [1buc | Cora] - 5,00RON",
+      "price":"5.00"
+    },
     {
       "key":"produs-add-1",
       "label":"Sapun [90g | Safeguard sapun miere] - 1,89RON",
@@ -203,7 +215,25 @@
       "label":"Cafea [300g | Doncafe Selected cafea macinata] - 10,81RON",
       "price":"10.81"
 
+    },
+    {
+      "key":"produs-add-5",
+      "label":"Extra paine [2 buc X 400g | Paine feliata, bob intreg] - 5,78RON",
+      "price":"5.78"
+
+    },
+    {
+      "key":"produs-add-6",
+      "label":"Apa - max 2 sticle [6l | Apa Calipso] - 3,77RON",
+      "price":"3.77"
+
+    },
+    {
+      "key":"produs-add-7",
+      "label":"Apa - max 2 baxuri [2l X 6 sticle | Bax Borsec] - 16,14RON",
+      "price":"16.14"
+
     }
+
   ]
 }
-

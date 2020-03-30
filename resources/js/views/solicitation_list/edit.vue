@@ -273,7 +273,7 @@
               }"
             >
               <el-select v-model="formData.solicitation.additional_responses.tip_cos" placeholder="Cos alimente" clearable style="width: 100%" class="filter-item" @change="calculPret">
-                <el-option v-for="pachet in pacheteAlimente" :key="pachet.key" :label="pachet.label" :value="pachet.key" />
+                <el-option v-for="pachet in pacheteAlimente" :key="pachet.key" :label="pachet.label+' aprox. '+pachet.price+' RON - '+ calculatePercent(pachet.price)+' RON'" :value="pachet.key" />
                 <el-option label="Pachet personalizat - max 8 produse" value="personalizat" />
                 <el-option label="Nu este nevoie de pachet" value="nada" />
               </el-select>
@@ -319,6 +319,11 @@
 
             </div>
 
+          </div>
+
+          <div v-if="formData.solicitation.categories === 'alimente'" class="price-estimation">
+
+            <p>Pret final estimativ intre <strong>{{ formData.solicitation.payment_value }} RON</strong> si <strong>{{ calculatePercent(formData.solicitation.payment_value) }} RON</strong></p>
           </div>
 
           <div v-if="formData.solicitation.categories !== 'altele'">
@@ -622,6 +627,20 @@ export default {
 
   },
 
+  watch: {
+    'formData.solicitation.additional_responses.tip_cos'(val){
+      if (val === 'personalizat' || val === 'nada') {
+        if (!this.formData.solicitation.additional_responses.produse_aditionale.find(r => r === 'Sacosa [1buc | Cora] - 5,00RON')){
+          this.formData.solicitation.additional_responses.produse_aditionale.push('Sacosa [1buc | Cora] - 5,00RON');
+        }
+      } else {
+        this.formData.solicitation.additional_responses.produse_aditionale = this.formData.solicitation.additional_responses.produse_aditionale.filter(item => item !== 'Sacosa [1buc | Cora] - 5,00RON');
+      }
+
+      this.calculPret();
+    },
+  },
+
   mounted(){
     axios.get('https://roloca.coldfuse.io/judete').then(resp => {
       this.judete = resp.data;
@@ -744,6 +763,10 @@ export default {
       });
     },
 
+    calculatePercent(amount, percent = 1.3){
+      return parseFloat(amount * percent).toFixed(2);
+    },
+
   },
 };
 </script>
@@ -797,6 +820,15 @@ export default {
         line-height: 20px;
       }
     }
+  }
+
+  .price-estimation {
+    text-align: center;
+    border: 1px solid;
+    padding: 5px;
+    width: 450px;
+    margin: 10px auto;
+    background: #00ff4e;
   }
 
 </style>

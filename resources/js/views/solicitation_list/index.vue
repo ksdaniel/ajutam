@@ -107,6 +107,7 @@
             <el-tag v-if="scope.row.status==='solutionat'" type="success">Solutionat</el-tag>
             <el-tag v-if="scope.row.status==='planificat'">Planificat</el-tag>
             <el-tag v-if="scope.row.status==='in_lucru'" type="info">In lucru</el-tag>
+            <el-tag v-if="scope.row.status==='proces_livrare'" type="info">In proces de livrare</el-tag>
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
 
           </template>
