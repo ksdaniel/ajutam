@@ -81,10 +81,16 @@ class VolunteersController extends Controller
         $data = $request->toArray();
         $data["user_id"] = $user->id;
 
-        if (isset($data["acord_semnat"]) && $data["acord_semnat"]) {
+        if (isset($data["acord"]["acordIsu"]) && $data["acord"]["acordIsu"]) {
 
             $data["ip_acord"] = $request->ip();
             $data["data_acord"] = Carbon::now()->toDateTimeString();
+        }
+
+        if (isset($data["acord"]["acordVoluntariat"]) && $data["acord"]["acordVoluntariat"]) {
+
+            $data["ip_acord_voluntariat"] = $request->ip();
+            $data["data_acord_voluntariat"] = Carbon::now()->toDateTimeString();
         }
 
         $volunteer = Volunteer::updateOrCreate(["user_id" => $user->id], $data);
@@ -119,10 +125,16 @@ class VolunteersController extends Controller
 
         $data = $request->toArray();
 
-        if (isset($data["acord_semnat"]) && $data["acord_semnat"]) {
+        if (isset($data["acord"]["acordIsu"]) && $data["acord"]["acordIsu"]) {
 
             $data["ip_acord"] = $request->ip();
             $data["data_acord"] = Carbon::now()->toDateTimeString();
+        }
+
+        if (isset($data["acord"]["acordVoluntariat"]) && $data["acord"]["acordVoluntariat"]) {
+
+            $data["ip_acord_voluntariat"] = $request->ip();
+            $data["data_acord_voluntariat"] = Carbon::now()->toDateTimeString();
         }
 
 //        if (isset($data["type"])) {

@@ -36,12 +36,21 @@ class Volunteer extends Model
         "type",
         "ip_acord_voluntariat",
         "data_acord_voluntariat",
-        "status"
+        "status",
+        "screening_questions",
+        "transportation_options",
+        "age_range",
+        "address_no",
+        "address_bl",
+        "address_sc",
+        "address_ap",
+        "acord_termeni",
     ];
 
     protected $casts = [
 
-        "geojson" => "json"
+        "geojson" => "json",
+        "screening_questions" => "json"
     ];
 
     public function user()

@@ -10,28 +10,16 @@
           <el-card>
 
             <h4><strong>Bine ai venit {{ name }}!</strong></h4>
-            <p><span style="font-weight: 400;">Urmatoarele cateva saptamani, se anunta a fi grele pentru comunitatea noastra. Stim ca vom fi afectati de COVID 19, dar acesta nu este motiv de panica.&nbsp;</span></p>
-            <p><span style="font-weight: 400;">Este in schimb un motiv de mobilizare si organizare. Impreuna incercam sa formam grupuri de voluntari care sa ajute comunitatea noastra sa treaca peste aceasta criza.&nbsp;</span></p>
-            <p><span style="font-weight: 400;"><strong>Am identificat pana acum mai multe feluri in care putem face asta:</strong>&nbsp;</span></p>
-            <p>&nbsp;</p>
-            <ul>
-              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa organizam o retea de distribuire cat mai rapida a informatiilor relevante, verificate si urgente pe retelele de socializare si direct de la om la om.</span></li>
-            </ul>
-            <p>&nbsp;</p>
-            <ul>
-              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa contribuim responsabil la educarea populatie pe teme care tin de epidemia de COVID 19.&nbsp;</span></li>
-            </ul>
-            <p>&nbsp;</p>
-            <ul>
-              <li style="font-weight: 400;"><span style="font-weight: 400;">Sa distribuim produse alimentare intr-un mod sigur, celor care sunt izolati la domiciliu.&nbsp;</span></li>
-            </ul>
-            <p><br><span style="font-weight: 400;">Daca vrei sa te alaturi acestei initiative, te rugam sa completezi formularul de pe site.&nbsp;</span></p>
-            <p>&nbsp;</p>
-            <p><strong>Nota:&nbsp;</strong></p>
-            <p><span style="font-weight: 400;">Ne confruntam cu o criza reala, oameni ca noi sunt afectati direct si au de suferit in fiecare zi. Suntem inca la inceputul acestei epidemii, si vor urma vremuri dificile.&nbsp;</span></p>
-            <p><span style="font-weight: 400;">Maturitatea si seriozitatea voluntarilor este esentiala pentru a avea o contributie pozitiva. Te rugam sa te gandesti foarte bine si sa-ti asumi sarcinile care sti ca le poti face.&nbsp;</span></p>
-            <p>&nbsp;</p>
-            <p><strong>Nu este un joc!</strong></p>
+            <div v-if="!volunteer">
+
+              <p>&Icirc;ți mulțumim pentru deschiderea ta &icirc;n sprijinirea demersului &ldquo;<strong>Vă ajutăm din Cluj</strong>&rdquo;!</p>
+              <p>De aici poți să explorezi tot conținutul platformei.&nbsp;</p>
+              <p>Vei observa că apar două declarații pe partea st&acirc;ngă a ecranului. Ele trebuie completate doar de cei care se &icirc;nscriu voluntari &icirc;n programul nostru.</p>
+              <p>Deocamdată, tu poți să le vezi și poți vedea și informațiile despre activitatea voluntarilor pe <a href="info.civicsuport.ro"><strong>info.civicsuport.ro</strong>.&nbsp;</a></p>
+              <p>Dacă ai decis să te &icirc;nscrii voluntar apasă pe butonul <strong>&Icirc;nregistrează-te ca voluntar</strong> și te vom ruga să completezi cu atenție formularul de &icirc;nscriere și cele 2 declarații.</p>
+              <p>C&acirc;nd cele 2 declarații apar &icirc;n cadrane verzi, ești oficial Voluntar Vă ajutăm din Cluj.</p>
+              <p>Putem &icirc;ncepe etapele următoare!</p>
+            </div>
           </el-card>
 
         </el-col>

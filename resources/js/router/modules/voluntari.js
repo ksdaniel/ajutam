@@ -14,15 +14,8 @@ const adminRoutes = {
     /** Voluntari managements */
     {
       path: 'inregistrare',
-      component: () => import('@/views/register/index'),
-      name: 'Inregistrare Voluntari',
-      meta: { title: 'Inregistrare voluntari', noCache: true },
-      hidden: true,
-    },
-    {
-      path: 'inregistrare-new',
       component: () => import('@/views/register/new-register-form'),
-      name: 'Inregistrare Voluntari New From',
+      name: 'Inregistrare Voluntari',
       meta: { title: 'Inregistrare voluntari', icon: 'form', noCache: true },
 
     },
