@@ -4,9 +4,9 @@
       <el-input v-model="query.keyword" placeholder="Nume, email, telefon, adresa.." style="width: 250px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
       <el-select v-model="query.involvement_direction" clearable placeholder="Directie Implicare" class="filter-item" @change="handleFilter">
-        <el-option label="Call Center" value="Call Center" />
-        <el-option label="Medicamente" value="Medicamente" />
-        <el-option label="Alimente" value="Alimente" />
+        <el-option label="Call Center" value="Dispecer" />
+        <el-option label="Medicamente" value="Livrare Medicamente" />
+        <el-option label="Alimente" value="Livrare Alimente" />
       </el-select>
 
       <el-select v-model="query.type" placeholder="Rol voluntar" class="filter-item" clearable @change="handleFilter">
@@ -68,9 +68,11 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Implicare">
+        <el-table-column align="center" label="Doreste implicare in Dep:">
           <template slot-scope="scope">
-            <span v-if="scope.row.involvement_direction" class="directie-implicare">{{ scope.row.involvement_direction }}</span><br>
+            <span v-if="scope.row.involvement_direction==='Call Center'" class="directie-implicare">Call Center</span><br>
+            <span v-if="scope.row.involvement_direction==='Alimente'" class="directie-implicare">Livrare Alimente</span><br>
+            <span v-if="scope.row.involvement_direction==='Medicamente'" class="directie-implicare">Livrare Medicamente</span><br>
 
           </template>
         </el-table-column>
@@ -395,6 +397,7 @@ export default {
     color:white;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 12px;
 
   }
 
@@ -407,6 +410,7 @@ export default {
     color:white;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 12px;
 
   }
 
