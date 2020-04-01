@@ -38,7 +38,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Voluntar" width="270">
+        <el-table-column align="center" label="Voluntar" width="285">
           <template slot-scope="scope">
             <div class="volunteer-name">
               <div class="image">
