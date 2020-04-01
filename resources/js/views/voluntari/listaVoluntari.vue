@@ -100,7 +100,7 @@
             <el-tag v-else type="warning">Acord ISU Nesemnat</el-tag>
             <p />
             <el-tag v-if="scope.row.ip_acord_voluntariat" type="success">Acord Voluntariat Semnat</el-tag>
-            <el-tag v-else type="warning">Acord ISU Voluntariat</el-tag>
+            <el-tag v-else type="warning">Acord Voluntariat Nesemnat</el-tag>
 
           </template>
         </el-table-column>
