@@ -148,7 +148,7 @@
 
       <span slot="footer" class="dialog-footer">
 
-        <el-button style="margin-top: 8px" type="primary" @click="validateAcord('acord-isu')">Sunt de acord si semnez</el-button>
+        <el-button v-if="volunteer" style="margin-top: 8px" type="primary" @click="validateAcord('acord-isu')">Sunt de acord si semnez</el-button>
         <el-button style="margin-top: 8px" @click="centerDialogVisible = false">Cancel</el-button>
       </span>
     </el-dialog>
@@ -245,7 +245,7 @@
 
       <span slot="footer" class="dialog-footer">
 
-        <el-button style="margin-top: 8px" type="primary" @click="validateAcord('acord-voluntariat')">Sunt de acord si semnez</el-button>
+        <el-button v-if="volunteer" style="margin-top: 8px" type="primary" @click="validateAcord('acord-voluntariat')">Sunt de acord si semnez</el-button>
         <el-button style="margin-top: 8px" @click="centerDialogVisibleVoluntariat = false">Cancel</el-button>
       </span>
     </el-dialog>
