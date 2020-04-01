@@ -1,0 +1,239 @@
+{"pachete":[
+    {
+      "key":"cos1",
+      "label":"COS1 - neperisabile de baza,",
+      "price":"32",
+      "image":""
+    },
+    {
+      "key":"cos2",
+      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, ",
+      "price":"88",
+      "image":""
+    },
+    {
+      "key":"cos3",
+      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
+      "price":"88",
+      "image":""
+    },
+    {
+      "key":"cos4",
+      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
+      "price":"107.00",
+      "image":""
+    }
+  ],
+
+  "produsePachetPersonalizat":[
+    {
+      "key":"produs-1",
+      "label":"1. Făină [1kg | Winny] - 2,59RON",
+      "price":"2.59"
+
+    },
+    {
+      "key":"produs-2",
+      "label":"2. Zahăr [1kg | Winny] - 2,49RON",
+      "price":"2.49"
+
+    },
+    {
+      "key":"produs-3",
+      "label":"3. Orez [1kg | Winny] - 3,99RON",
+      "price":"3.99"
+
+    },
+    {
+      "key":"produs-4",
+      "label":"4. Mălai [1kg | Pambac] - 2,65RON",
+      "price":"2.65"
+
+    },
+    {
+      "key":"produs-5",
+      "label":"5. Griș [500gr | Arpis] - 2,77RON",
+      "price":"2.77"
+
+    },
+    {
+      "key":"produs-6",
+      "label":"6. Unt - 65% grăsime [200 g | Napolact] - 8,89RON",
+      "price":"8.89"
+
+    },
+    {
+      "key":"produs-7",
+      "label":"7. Ulei de floarea soarelui [1l | Winny] - 4,69RON",
+      "price":"4.69"
+
+    },
+    {
+      "key":"produs-8",
+      "label":"8. Ouă mărimea M [10bucati | Winny] - 5,89RON",
+      "price":"5.89"
+
+    },
+    {
+      "key":"produs-9",
+      "label":"9. Brânză telemea [400g | Winny] - 7,56RON",
+      "price":"7.56"
+
+    },
+    {
+      "key":"produs-10",
+      "label":"10. Cașcaval [400g | Rucar] - 11,59RON",
+      "price":"11.59"
+
+    },
+    {
+      "key":"produs-11",
+      "label":"11. Miere poliflora [500g | Apidava] - 12,19RON",
+      "price":"12.19"
+
+    },
+    {
+      "key":"produs-12",
+      "label":"12. Lapte 3.5%  [2l | Albalact] - 9,32RON",
+      "price":"9.32"
+
+    },
+    {
+      "key":"produs-13",
+      "label":"13. Suc de roșii [750g | Traditia gustului Cora] - 3,8RON",
+      "price":"3.8"
+
+    },
+    {
+      "key":"produs-14",
+      "label":"14. Masline verzi fara samburi [185g | Jolca] - 4,09RON",
+      "price":"4.09"
+
+    },
+    {
+      "key":"produs-15",
+      "label":"15. Legume mix pentru supă - 2 cepe mici, 2 morcovi mici, 1/2 telina mica - [500 g] - 3,49RON",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-16",
+      "label":"16. Mere Red [2kg | Agrolex] - 7,99RON",
+      "price":"7.99"
+
+    },
+    {
+      "key":"produs-17",
+      "label":"17. Portocale plasa [1Kg] - 3,99RON",
+      "price":"3.99"
+
+    },
+    {
+      "key":"produs-18",
+      "label":"18. Lămâi plasă [500g] - 3,49RON",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-19",
+      "label":"19. Iaurt - 3% [900g | Cora] - 3,98RON",
+      "price":"3.98"
+
+    },
+    {
+      "key":"produs-20",
+      "label":"20. Cartofi albi [2kg] - 5,58RON",
+      "price":"5.58"
+
+    },
+    {
+      "key":"produs-21",
+      "label":"21. Paste fainoase cu ou - Scoici  [400g | Baneasa] - 4,08RON",
+      "price":"4.08"
+
+    },
+    {
+      "key":"produs-22",
+      "label":"22. Pâine feliată, bob intreg [2x400g | Cora] - 5,78RON",
+      "price":"5.78"
+
+    },
+    {
+      "key":"produs-23",
+      "label":"23. Ceapa galbenă plasă [1kg] - 3,49RON",
+      "price":"3.49"
+
+    },
+    {
+      "key":"produs-24",
+      "label":"24. Pui grill la kg [1,5kg | Ferma Vranceana] - 15,74RON",
+      "price":"15.74"
+
+    },
+    {
+      "key":"produs-25",
+      "label":"25. Saci menajeri 60 L [1buc | Global Plast] - 1,79RON",
+      "price":"1.79"
+
+
+    },
+    {
+      "key":"produs-27",
+      "label":"27. Unicarm Salam Banatean [400g | Unicarm] - 11,5RON",
+      "price":"11.5"
+
+    }
+  ],
+
+  "produseAditionale":[
+    {
+      "key":"produs-add-8",
+      "label":"Sacosa [1buc | Cora] - 5,00RON",
+      "price":"5.00"
+    },
+    {
+      "key":"produs-add-1",
+      "label":"Sapun [90g | Safeguard sapun miere] - 1,89RON",
+      "price":"1.89"
+
+    },
+    {
+      "key":"produs-add-2",
+      "label":"Absorbante [20buc | Always Ultra Normal] - 10,43RON",
+      "price":"10.43"
+
+    },
+    {
+      "key":"produs-add-3",
+      "label":"Hartie igienica 1 strat  [8 role | Winny] - 3,29RON",
+      "price":"3.29"
+
+    },
+    {
+      "key":"produs-add-4",
+      "label":"Cafea [300g | Doncafe Selected cafea macinata] - 10,81RON",
+      "price":"10.81"
+
+    },
+    {
+      "key":"produs-add-5",
+      "label":"Extra paine [2 buc X 400g | Paine feliata, bob intreg] - 5,78RON",
+      "price":"5.78"
+
+    },
+    {
+      "key":"produs-add-6",
+      "label":"Apa -[6l | Apa Calipso] - 3,77RON",
+      "price":"3.77"
+
+    },
+    {
+      "key":"produs-add-7",
+      "label":"Apa -  [2l X 6 sticle | Bax Borsec] - 16,14RON",
+      "price":"16.14"
+
+    }
+  ]
+}
+
+

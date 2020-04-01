@@ -565,7 +565,6 @@
           </div>
 
         </div>
-
         <div v-if="(active===10 && voluteerForm.involvement_direction === 'Call Center') || (active===11 && voluteerForm.involvement_direction !== 'Call Center' )" class="container-form">
 
           <div style="text-align: center">

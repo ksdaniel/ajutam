@@ -9,7 +9,7 @@
         <el-option label="Alimente" value="Alimente" />
       </el-select>
 
-      <el-select v-model="query.type" placeholder="Tip voluntar" class="filter-item" clearable @change="handleFilter">
+      <el-select v-model="query.type" placeholder="Rol voluntar" class="filter-item" clearable @change="handleFilter">
 
         <el-option label="Livrator Medicamente" value="livrator_medicamente" />
         <el-option label="Livrator Alimente" value="livrator_alimente" />
@@ -29,7 +29,7 @@
       </el-button>
     </div>
 
-    <div class="table-container">
+    <div class="table-container table-mobile-responsive">
       <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
         <el-table-column align="center" label="ID" width="80">
           <template slot-scope="scope">
@@ -38,54 +38,68 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Voluntar" width="220">
+        <el-table-column align="center" label="Voluntar" width="270">
           <template slot-scope="scope">
-            <strong>{{ scope.row.name }}</strong><br>
-            <span>{{ scope.row.phone }}</span><br>
-            <span>{{ scope.row.email }}</span><br>
-            <el-tag v-if="scope.row.ip_acord" type="success">Acord Semnat</el-tag>
-            <el-tag v-else type="warning">Acord Nesemnat</el-tag>
-
+            <div class="volunteer-name">
+              <div class="image">
+                <img data-v-152d8d58="" :src="scope.row.user.avatar ? scope.row.user.avatar : 'http://placekitten.com/g/200/300'" alt="user image" class="img-circle">
+              </div>
+              <div class="name-text">
+                <strong>{{ scope.row.name }}</strong><br>
+                <span>{{ scope.row.phone }}</span><br>
+                <span>{{ scope.row.email }}</span><br>
+                <span v-if="scope.row.has_car==='da'"> {{ scope.row.car_plates }}</span>
+              </div>
+            </div>
           </template>
 
         </el-table-column>
 
-        <el-table-column align="center" label="Adresa" width="220">
+        <el-table-column align="center" label="Adresa" width="230">
           <template slot-scope="scope">
-            <span>{{ scope.row.address }}, {{ scope.row.neighborhood }}, {{ scope.row.city }},{{ scope.row.county }}  </span>
+            <span>{{ scope.row.address }}, </span>
+            <span v-if="scope.row.address_no ">{{ scope.row.address_no }},</span>
+            <span v-if="scope.row.address_bl ">{{ scope.row.address_bl }},</span>
+            <span v-if="scope.row.address_sc ">{{ scope.row.address_sc }},</span>
+            <span v-if="scope.row.address_ap ">{{ scope.row.address_ap }},</span>
+            <span v-if="scope.row.city ">{{ scope.row.city }},</span>
+            <span v-if="scope.row.county ">{{ scope.row.county }},</span>
+
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Zona activare">
+        <el-table-column align="center" label="Implicare">
           <template slot-scope="scope">
-            <span>{{ scope.row.activation_area }}</span>
+            <span v-if="scope.row.involvement_direction" class="directie-implicare">{{ scope.row.involvement_direction }}</span><br>
+
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Optiuni Implicare">
+        <el-table-column align="center" label="Rol in Organizatie">
           <template slot-scope="scope">
-            <span>{{ scope.row.involvement_type }}</span><br>
-            <span>Directie Implicare: <br>{{ scope.row.involvement_direction }}</span><br>
-            <span>Disponibilitate: {{ scope.row.availability }}</span><br>
-            <span>Cand: {{ scope.row.availability_details }}</span>
+            <span v-if="scope.row.type==='viewer'" class="rol-organziatie" type="success">Voluntar Simplu</span>
+            <span v-if="scope.row.type==='livrator_medicamente'" class="rol-organziatie" type="success">Livrator Medicamente</span>
+            <span v-if="scope.row.type==='livrator_alimente'" class="rol-organziatie" type="success">Livrator Alimente</span>
+            <span v-if="scope.row.type==='dispecer'" class="rol-organziatie" type="success">Dispecer</span>
+            <span v-if="scope.row.type==='coordonator'" class="rol-organziatie" type="success">Coordonator voluntari</span>
+
+            <p v-if="scope.row.verified" style="color:green;margin: 3px"><i class="el-icon-success" /> Voluntar verificat</p>
+            <p v-else style="color: red;margin: 3px"><i class="el-icon-warning" /> Necesita verificare </p>
+
+            <p v-if="scope.row.has_traning" style="color:green;margin: 3px"><i class="el-icon-success" /> Trainig efectuat</p>
+            <p v-else style="color: red;margin: 3px"><i class="el-icon-warning" /> Necesita training </p>
+
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="Detine Autoturism">
+        <el-table-column align="center" label="Acorduri legale">
           <template slot-scope="scope">
-            <strong v-if="scope.row.has_car==='da'"> Da</strong><br>
-            <span v-if="scope.row.has_car==='da'"> {{ scope.row.car_plates }}</span>
-            <span v-if="scope.row.has_car==='nu'"> Nu</span>
-          </template>
-        </el-table-column>
+            <el-tag v-if="scope.row.ip_acord" type="success">Acord ISU Semnat</el-tag>
+            <el-tag v-else type="warning">Acord ISU Nesemnat</el-tag>
+            <p />
+            <el-tag v-if="scope.row.ip_acord_voluntariat" type="success">Acord Voluntariat Semnat</el-tag>
+            <el-tag v-else type="warning">Acord ISU Voluntariat</el-tag>
 
-        <el-table-column align="center" label="Tip">
-          <template slot-scope="scope">
-            <el-tag v-if="scope.row.type==='viewer'" type="success">Simplu</el-tag>
-            <el-tag v-if="scope.row.type==='livrator_medicamente'" type="success">Livrator Medicamente</el-tag>
-            <el-tag v-if="scope.row.type==='livrator_alimente'" type="success">Livrator Alimente</el-tag>
-            <el-tag v-if="scope.row.type==='dispecer'" type="success">Dispecer</el-tag>
-            <el-tag v-if="scope.row.type==='coordonator'" type="success">Coordonator voluntari</el-tag>
           </template>
         </el-table-column>
 
@@ -360,7 +374,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .el-form-item__label{
     margin-bottom: -20px;
   }
@@ -371,4 +385,100 @@ export default {
   .el-table .cell{
     word-break: break-word;
   }
+
+  .directie-implicare {
+
+    padding: 5px;
+    display: block;
+    border: 1px solid #ddd;
+    background: #F0475A;
+    color:white;
+    text-transform: uppercase;
+    font-weight: bold;
+
+  }
+
+  .rol-organziatie {
+
+    padding: 5px;
+    display: block;
+    border: 1px solid #ddd;
+    background: #1990ff;
+    color:white;
+    text-transform: uppercase;
+    font-weight: bold;
+
+  }
+
+  .volunteer-name {
+
+    .image {
+
+      display: block;
+      float: left;
+      margin-top: 10px;
+    }
+      img {
+
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+      }
+
+    .name-text{
+
+      text-align: left;
+      margin-left: 10px;
+      display: block;
+      float: left;
+    }
+
+    }
+
+    @media(max-width: 800px) {
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      table{
+        width: 310px!important;
+      }
+
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr { border: 1px solid #ccc; }
+
+      td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+      }
+
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+
+    }
+
+    @media(max-width: 1700px) {
+      .mobile-resp{
+        margin: 10px;
+      }
+    }
+
 </style>

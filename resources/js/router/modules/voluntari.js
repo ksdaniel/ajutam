@@ -32,7 +32,7 @@ const adminRoutes = {
     {
       path: 'harta-voluntari',
       component: () => import('@/views/voluntari/index'),
-      name: 'Inregistrare Voluntari',
+      name: 'Harta Voluntari',
       meta: { title: 'Harta voluntari', noCache: true, icon: 'peoples' },
     },
   ],

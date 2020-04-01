@@ -1,30 +1,29 @@
-{
-  "pachete":[
-    {
-      "key":"cos1",
-      "label":"COS1 - neperisabile de baza,",
-      "price":"24.18",
-      "image":""
-    },
-    {
-      "key":"cos2",
-      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne,",
-      "price":"67.58",
-      "image":""
-    },
-    {
-      "key":"cos3",
-      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
-      "price":"67.37",
-      "image":""
-    },
-    {
-      "key":"cos4",
-      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
-      "price":"82.03",
-      "image":""
-    }
-  ],
+{ "pachete":[
+  {
+    "key":"cos1",
+    "label":"COS1 - neperisabile de baza,",
+    "price":"32",
+    "image":""
+  },
+  {
+    "key":"cos2",
+    "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, ",
+    "price":"88",
+    "image":""
+  },
+  {
+    "key":"cos3",
+    "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
+    "price":"88",
+    "image":""
+  },
+  {
+    "key":"cos4",
+    "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
+    "price":"107.00",
+    "image":""
+  }
+],
 
   "produsePachetPersonalizat":[
     {
@@ -48,7 +47,7 @@
     {
       "key":"produs-4",
       "label":"4. Mălai [1kg | Pambac] - 2,65RON",
-      "price":"3.65"
+      "price":"2.65"
 
     },
     {
@@ -180,8 +179,8 @@
     },
     {
       "key":"produs-27",
-      "label":"27. Unicarm Salam Banatean [400g | Unicarm] - 11,50RON",
-      "price":"11.50"
+      "label":"27. Unicarm Salam Banatean [400g | Unicarm] - 11,5RON",
+      "price":"11.5"
 
     }
   ],
@@ -224,16 +223,15 @@
     },
     {
       "key":"produs-add-6",
-      "label":"Apa - max 2 sticle [6l | Apa Calipso] - 3,77RON",
+      "label":"Apa -[6l | Apa Calipso] - 3,77RON",
       "price":"3.77"
 
     },
     {
       "key":"produs-add-7",
-      "label":"Apa - max 2 baxuri [2l X 6 sticle | Bax Borsec] - 16,14RON",
+      "label":"Apa -  [2l X 6 sticle | Bax Borsec] - 16,14RON",
       "price":"16.14"
 
     }
-
   ]
 }
