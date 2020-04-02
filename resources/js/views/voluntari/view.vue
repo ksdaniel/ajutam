@@ -565,6 +565,9 @@ export default {
   },
 
   mounted(){
+    axios.get('https://roloca.coldfuse.io/judete').then(resp => {
+      this.judete = resp.data;
+    });
     this.getOraseJudet();
     this.getVolunteer();
   },

@@ -67,11 +67,11 @@
 
         <el-table-column align="center" label="Adresa" width="230">
           <template slot-scope="scope">
-            <span>{{ scope.row.address }}, </span>
-            <span v-if="scope.row.address_no ">{{ scope.row.address_no }},</span>
-            <span v-if="scope.row.address_bl ">{{ scope.row.address_bl }},</span>
-            <span v-if="scope.row.address_sc ">{{ scope.row.address_sc }},</span>
-            <span v-if="scope.row.address_ap ">{{ scope.row.address_ap }},</span>
+            <span>Str. {{ scope.row.address }}, </span>
+            <span v-if="scope.row.address_no ">Nr. {{ scope.row.address_no }},</span>
+            <span v-if="scope.row.address_bl ">Bl. {{ scope.row.address_bl }},</span>
+            <span v-if="scope.row.address_sc "> Sc. {{ scope.row.address_sc }},</span>
+            <span v-if="scope.row.address_ap ">Ap. {{ scope.row.address_ap }},</span>
             <span v-if="scope.row.city ">{{ scope.row.city }},</span>
             <span v-if="scope.row.county ">{{ scope.row.county }},</span>
 
