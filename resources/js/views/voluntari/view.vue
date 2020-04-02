@@ -109,28 +109,28 @@
                   </el-form-item>
                 </el-col>
 
-                <el-col :xs="24" :md="12" :lg="12">
+                <el-col :xs="24" :md="24" :lg="24">
 
                   <el-form-item label="Strada pe care locuiesti" prop="address" :rules="{ required: true, trigger: 'blur', message: 'Campul trebuie completat' }">
                     <el-input v-model="voluteerForm.address" />
                   </el-form-item>
 
                 </el-col>
-                <el-col :xs="12" :md="3" :lg="3">
+                <el-col :xs="12" :md="6" :lg="6">
 
                   <el-form-item label="Numar" prop="address_no" :rules="{ required: true, trigger: 'blur', message: 'Campul trebuie completat' }">
                     <el-input v-model="voluteerForm.address_no" />
                   </el-form-item>
 
                 </el-col>
-                <el-col :xs="12" :md="3" :lg="3">
+                <el-col :xs="12" :md="6" :lg="6">
 
                   <el-form-item label="Bloc" prop="address_bl">
                     <el-input v-model="voluteerForm.address_bl" />
                   </el-form-item>
 
                 </el-col>
-                <el-col :xs="12" :md="3" :lg="3">
+                <el-col :xs="12" :md="6" :lg="6">
 
                   <el-form-item label="Scara" prop="address_sc">
                     <el-input v-model="voluteerForm.address_sc" />
@@ -138,7 +138,7 @@
 
                 </el-col>
 
-                <el-col :xs="12" :md="3" :lg="3">
+                <el-col :xs="12" :md="6" :lg="6">
 
                   <el-form-item label="Ap." prop="address_ap">
                     <el-input v-model="voluteerForm.address_ap" />
