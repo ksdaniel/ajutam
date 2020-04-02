@@ -19,6 +19,16 @@
         <el-option label="Administrator" value="admin" />
       </el-select>
 
+      <el-select v-model="query.verified" clearable placeholder="Status Verificare" class="filter-item" @change="handleFilter">
+        <el-option label="Verificat" value="da" />
+        <el-option label="Neverificat" value="nu" />
+      </el-select>
+
+      <el-select v-model="query.has_traning" clearable placeholder="Status Traning" class="filter-item" @change="handleFilter">
+        <el-option label="Training efectuat" value="da" />
+        <el-option label="Training nefectuat" value="nu" />
+      </el-select>
+
       <el-select v-model="query.has_car" clearable placeholder="Detine masina" class="filter-item" @change="handleFilter">
         <el-option label="Da" value="da" />
         <el-option label="Nu" value="nu" />
@@ -96,6 +106,7 @@
 
         <el-table-column align="center" label="Acorduri legale">
           <template slot-scope="scope">
+
             <el-tag v-if="scope.row.ip_acord" type="success">Acord ISU Semnat</el-tag>
             <el-tag v-else type="warning">Acord ISU Nesemnat</el-tag>
             <p />
@@ -107,9 +118,11 @@
 
         <el-table-column align="center" label="Actions" width="150">
           <template slot-scope="scope">
-            <el-button v-role="['admin', 'coordonator']" type="primary" size="small" icon="el-icon-edit" @click="editVolunteerDialog(scope.row)">
-              Edit
-            </el-button>
+            <router-link :to="'/voluntari/edit/'+scope.row.user_id">
+              <el-button v-role="['admin', 'coordonator']" type="primary" size="small" icon="el-icon-edit">
+                Vezi Detalii
+              </el-button>
+            </router-link>
             <div v-if="scope.row.user.roles[0].name==='admin'">Administrator</div>
           </template>
         </el-table-column>
@@ -118,134 +131,6 @@
       <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
     </div>
 
-    <el-dialog
-      title="Date Voluntar"
-      :visible.sync="dialogVisible"
-      width="60%"
-    >
-
-      <el-form ref="update" :model="volunteerModel" label-width="120px" label-position="top" :rules="loginRules" auto-complete="on">
-        <el-form-item label="Nume Complet" prop="name">
-          <el-input v-model="volunteerModel.name" />
-        </el-form-item>
-
-        <el-form-item label="Email" prop="email">
-          <el-input v-model="volunteerModel.email" />
-        </el-form-item>
-
-        <el-form-item label="Phone" prop="phone">
-          <el-input v-model="volunteerModel.phone" />
-        </el-form-item>
-
-        <el-form-item label="Judet" prop="county">
-          <el-select v-model="volunteerModel.county" filterable placeholder="Selecteaza judetul" @change="getOraseJudet">
-            <el-option v-for="judet in judete" :key="judet.auto" :label="judet.nume" :value="judet.auto" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Oras" prop="city">
-          <el-select v-model="volunteerModel.city" filterable placeholder="Selecteaza orasul">
-            <el-option v-for="(oras,index) in orase" :key="oras.nume+'-oras'+index" :label="oras.nume" :value="oras.nume" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Adresa Completa" prop="address">
-          <el-input v-model="volunteerModel.address" />
-        </el-form-item>
-
-        <el-form-item label="Cartier" prop="neighborhood">
-          <el-select v-model="volunteerModel.neighborhood" placeholder="Selecteaza cartierul">
-            <el-option label="Andrei Mureșanu" value="Andrei Mureșanu" />
-            <el-option label="Bulgaria" value="Bulgaria" />
-            <el-option label="Bună Ziua" value="Bună Ziua" />
-            <el-option label="Centru" value="Centru" />
-            <el-option label="Dâmbul Rotund" value="Dâmbul Rotund" />
-            <el-option label="Gara" value="Gara" />
-            <el-option label="Gheorgheni" value="Gheorgheni" />
-            <el-option label="Grădini Mănăștur" value="Grădini Mănăștur" />
-            <el-option label="Plopilor" value="Plopilor" />
-            <el-option label="Grigorescu" value="Grigorescu" />
-            <el-option label="Gruia" value="Gruia" />
-            <el-option label="Iris" value="Iris" />
-            <el-option label="Între Lacuri" value="Între Lacuri" />
-            <el-option label="Mănăștur" value="Mănăștur" />
-            <el-option label="Mărăști" value="Mărăști" />
-            <el-option label="Someșeni" value="Someșeni" />
-            <el-option label="Zorilor" value="Zorilor" />
-            <el-option label="Sopor" value="Sopor" />
-            <el-option label="Borhanci" value="Borhanci" />
-            <el-option label="Becaș" value="Becaș" />
-            <el-option label="Făget" value="Făget" />
-            <el-option label="Lomb" value="Lomb" />
-            <el-option label="Tineretului" value="Tineretului" />
-            <el-option label="Pata-Rât" value="Pata-Rât" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Zona unde doresti sa devii activ" prop="activation_area">
-          <el-input v-model="volunteerModel.activation_area" />
-        </el-form-item>
-
-        <el-form-item label="Tip Implicare" prop="involvement_type">
-          <el-select v-model="volunteerModel.involvement_type" placeholder="Tipul de Implicare">
-            <el-option label="Promoter - va promova informațiile și campania, dar nu este implicat direct in activitatea noastra" value="Promoter" />
-            <el-option label="Susținător - ajuta cu sarcini care nu implica posibilitatea contactului cu persoane bolnave" value="Susținător" />
-            <el-option label="Voluntar - ajuta la distribuirea de pachete cu alimente către persoanele bolnave" value="Voluntar" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Directie Implicare" prop="involvement_direction">
-          <el-select v-model="volunteerModel.involvement_direction" placeholder="Directie Implicare">
-            <el-option label="Call Center" value="Call Center" />
-            <el-option label="Medicamente" value="Medicamente" />
-            <el-option label="Alimente" value="Alimente" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Disponibilitate" prop="availability">
-          <el-select v-model="volunteerModel.availability" placeholder="Selecteaza disponibilitatea">
-            <el-option label="Zilnica" value="Zilnica" />
-            <el-option label="Saptamanala" value="Saptamanala" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item :label="volunteerModel.availability ==='Zilnica' ? 'In ce interval orar puteti ?' : 'Cate ore pe saptamana?'" prop="availability_details">
-          <el-input v-model="volunteerModel.availability_details" />
-        </el-form-item>
-
-        <el-form-item label="Detineti autoturism?" prop="has_car">
-          <el-select v-model="volunteerModel.has_car" placeholder="Detineti autoturism?">
-            <el-option label="Da" value="da" />
-            <el-option label="Nu" value="nu" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item v-if="volunteerModel.has_car==='Da'" label="Numar Masina" prop="car_plates">
-          <el-input v-model="volunteerModel.car_plates" type="text" />
-        </el-form-item>
-
-        <el-form-item label="Observatii">
-          <el-input v-model="volunteerModel.observations" type="textarea" />
-        </el-form-item>
-
-        <el-form-item label="Tip Voluntar" prop="type">
-          <el-select v-model="volunteerModel.type" placeholder="Detineti autoturism?">
-
-            <el-option label="Livrator Medicamente" value="livrator_medicamente" />
-            <el-option label="Livrator Alimente" value="livrator_alimente" />
-            <el-option label="Dispecer" value="dispecer" />
-            <el-option label="Coordonator voluntari" value="coordonator" />
-            <el-option label="Vizitator" value="viewer" />
-          </el-select>
-        </el-form-item>
-
-      </el-form>
-
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" :loading="loadingButton" @click="updateVolunteer(volunteerModel)">Save</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -286,6 +171,8 @@ export default {
         status: '',
         type: '',
         has_car: '',
+        verified: '',
+        has_traning: '',
       },
       volunteerModel: '',
       loadingButton: false,
