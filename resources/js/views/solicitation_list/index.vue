@@ -66,6 +66,12 @@
           Adauga solicitare
         </el-button>
       </router-link>
+
+      <a v-role="['admin']" :href="'/api/export/solicitations?access_token='+token">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Solicitari Alimente
+        </el-button>
+      </a>
     </div>
 
     <div class="table-container">
@@ -116,9 +122,9 @@
         <el-table-column align="center" label="Status Plata" width="180">
           <template slot-scope="scope">
             <div v-if="scope.row.categories !== 'altele'">
-            <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
-            <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
-            <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
+              <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
+              <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
+              <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
 
             </div>
           </template>
@@ -317,6 +323,7 @@ export default {
     ...mapGetters([
       'volunteer',
       'roles',
+      'token',
 
     ]),
 

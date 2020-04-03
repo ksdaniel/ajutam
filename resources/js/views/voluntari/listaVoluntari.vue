@@ -24,7 +24,7 @@
         <el-option label="Neverificat" value="nu" />
       </el-select>
 
-      <el-select v-model="query.has_traning" clearable placeholder="Status Traning" class="filter-item" @change="handleFilter">
+      <el-select v-model="query.has_traning" clearable placeholder="Status Training" class="filter-item" @change="handleFilter">
         <el-option label="Training efectuat" value="da" />
         <el-option label="Training nefectuat" value="nu" />
       </el-select>

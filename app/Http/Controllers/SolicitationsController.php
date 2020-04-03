@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Exports\SolicitationExport;
 use App\Http\Resources\SolicitationCollection;
 use App\Solicitation;
 use App\Volunteer;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SolicitationsController extends Controller
 {
@@ -225,5 +227,15 @@ class SolicitationsController extends Controller
 
 
         return response()->json($beneficiari);
+    }
+
+    public function export(Request $request){
+
+        $params=$request->toArray();
+
+        $params["type"]="alimente";
+
+        return Excel::download(new SolicitationExport($params), 'solicitari-alimente'.date("Y-m-d").'.xlsx');
+
     }
 }
