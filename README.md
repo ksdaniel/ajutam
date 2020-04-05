@@ -128,24 +128,43 @@ make a not of the ID of the user you want to set as admin
 ```sql
 UPDATE laravel.model_has_roles set role_id = 1 where model_id = [substitute with your user id];
 ```
+
 #### Docker
 ```sh
 docker-compose up -d
+```
+
+It might take a few minutes until it installs all dependencies and boots up the development servers (laravel and webpack).
+You can check the output using
+```sh
+docker-compose logs laravel
 ```
 Run database migration and seed within Docker container
 ```sh
 # Get laravel docker container ID from containers list
 docker ps
 
-docker exec -it <container ID> php artisan migrate --seed 
-# Where <container ID> is the "laravel" container name, ex: docker_laravel_1
+docker exec -it <container ID> bash
+# Where <container ID> is the "laravel" container ID (first 4 characters should be enough)
+
+php artisan migrate --seed
+php artisan passport:install
+# exit
 ```
 
 `npm` commands are also supported:
 ```sh
 docker exec -it <container ID> npm run watch 
-# Where <container ID> is the "laravel" container name, ex: docker_laravel_1
+# Where <container ID> is the "laravel" container ID
 ...
+```
+You can stop the containers with:
+```sh
+docker-compose stop
+```
+or
+```sh
+docker-compose down # destroys the containers, but keeps the db and node_modules
 ```
 
 ## Running the tests
