@@ -31,20 +31,19 @@
       <!--</div>-->
       <!--<div v-if="checkRole(['admin'])" class="user-follow">-->
 
-        <!--<button type="button" class="loginBtn loginBtn&#45;&#45;facebook" @click="facebook()">-->
-          <!--{{ $t('account.connectWithFacebook') }}-->
-        <!--</button>-->
+      <!--<button type="button" class="loginBtn loginBtn&#45;&#45;facebook" @click="facebook()">-->
+      <!--{{ $t('account.connectWithFacebook') }}-->
+      <!--</button>-->
 
-        <!--<div v-if="user.facebook_token" class="text-left text-muted" style="margin-top: 10px">-->
-          <!--<i class="el-icon-check" style="color: green" /><span>{{ $t('account.connectedToFacebook') }}</span>-->
-        <!--</div>-->
+      <!--<div v-if="user.facebook_token" class="text-left text-muted" style="margin-top: 10px">-->
+      <!--<i class="el-icon-check" style="color: green" /><span>{{ $t('account.connectedToFacebook') }}</span>-->
+      <!--</div>-->
       <!--</div>-->
     </div>
   </el-card>
 </template>
 
 <script>
-import PanThumb from '@/components/PanThumb';
 import axios from 'axios';
 import Resource from '@/api/resource';
 import checkRole from '@/utils/role';
@@ -52,7 +51,6 @@ import checkRole from '@/utils/role';
 const userResource = new Resource('users');
 
 export default {
-  components: { PanThumb },
   props: {
     user: {
       type: Object,

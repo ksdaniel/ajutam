@@ -226,13 +226,12 @@
       <el-form ref="form" :model="solicitareModel" label-width="120px" label-position="top">
 
         <template v-for="item in solicitareModel.additional_responses">
-          <div class="text item" style="font-weight: bold">
+          <div :key="item.label" class="text item" style="font-weight: bold">
             {{ item.label }}
           </div>
 
-          <div class="text item" style="margin-bottom: 20px">
+          <div :key="item.answer" class="text item" style="margin-bottom: 20px">
             <span>{{ item.answer }}</span>
-
           </div>
         </template>
 
@@ -253,13 +252,12 @@
         <el-col :span="15">
 
           <template v-for="item in solicitareModel.additional_responses">
-            <div class="text item" style="font-weight: bold">
+            <div :key="item.label" class="text item" style="font-weight: bold">
               {{ item.label }}
             </div>
 
-            <div class="text item" style="margin-bottom: 20px">
+            <div :key="item.answer" class="text item" style="margin-bottom: 20px">
               <span>{{ item.answer }}</span>
-
             </div>
           </template>
 

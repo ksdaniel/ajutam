@@ -186,7 +186,7 @@
           <div class="clearfix">
 
             <el-form-item
-              v-for="(intrebare, index) in intrebari.intrebariStabilireUrgenta"
+              v-for="(intrebare) in intrebari.intrebariStabilireUrgenta"
               :key="intrebare.key"
               :label="intrebare.label"
               :prop="'beneficiar.additional_responses.' + intrebare.key"
