@@ -237,5 +237,7 @@ class SolicitationsController extends Controller
 
         return Excel::download(new SolicitationExport($params), 'solicitari-alimente'.date("Y-m-d").'.xlsx');
 
+
+
     }
 }

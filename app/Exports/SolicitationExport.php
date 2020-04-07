@@ -7,7 +7,11 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-class SolicitationExport implements FromCollection, WithHeadings, WithMapping
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+
+class SolicitationExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize,WithEvents
 {
 
     public $params;
@@ -17,6 +21,17 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping
 
         $this->params = $params;
 
+    }
+
+    // freeze the first row with headings
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $event->sheet->getStyle('P1:P1000')->getAlignment()->setWrapText(true);
+                $event->sheet->getStyle('O1:O1000')->getAlignment()->setWrapText(true);
+            },
+        ];
     }
 
     /**
@@ -60,8 +75,8 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping
             $solicitation->observations,
             $solicitation->delivery_observation,
             $solicitation->additional_responses["tip_cos"],
-            $solicitation->additional_responses["tip_cos"]=="personalizat" ? implode(",", $solicitation->additional_responses["cos_personalizat"] ) :"",
-            implode(",",$solicitation->additional_responses["produse_aditionale"] )
+            $solicitation->additional_responses["tip_cos"]=="personalizat" ? implode("\n", $solicitation->additional_responses["cos_personalizat"] ) :"",
+            implode("\n",$solicitation->additional_responses["produse_aditionale"] )
 
         ];
     }
