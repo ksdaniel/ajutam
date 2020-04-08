@@ -245,7 +245,7 @@ class SolicitationsController extends Controller
 
         $params=$request->toArray();
 
-        $params["type"]="alimente";
+        $params["type"]=isset($request->type) ? $request->type : "alimente";
 
         return Excel::download(new SolicitationExport($params), 'solicitari-alimente'.date("Y-m-d").'.xlsx');
 

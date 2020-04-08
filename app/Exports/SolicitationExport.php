@@ -59,8 +59,7 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
     {
 
 
-
-        return [
+        $map=[
             $solicitation->code,
             Carbon::parse( $solicitation->created_at)->toDateString(),
             $solicitation->beneficiary->first_name. " ".$solicitation->beneficiary->last_name,
@@ -70,21 +69,41 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
             $solicitation->coordonator_id && $solicitation->coordinator ?  $solicitation->coordinator->name ." (".$solicitation->coordinator->phone.")"  : "Nealocat" ,
             $solicitation->volunteer_id && $solicitation->volunteer ?  $solicitation->volunteer->name." (".$solicitation->volunteer->phone.")"  : "Nealocat" ,
             $solicitation->status,
-            $solicitation->payment_status,
-            $solicitation->payment_value,
             $solicitation->observations,
-            $solicitation->delivery_observation,
-            $solicitation->additional_responses["tip_cos"],
-            $solicitation->additional_responses["tip_cos"]=="personalizat" ? implode("\n", $solicitation->additional_responses["cos_personalizat"] ) :"",
-            implode("\n",$solicitation->additional_responses["produse_aditionale"] )
 
         ];
+
+        if($this->params["type"]==="alimente"){
+
+            $map= array_merge($map,[
+                $solicitation->payment_status,
+                $solicitation->payment_value,
+                $solicitation->delivery_observation,
+                $solicitation->additional_responses["tip_cos"],
+                $solicitation->additional_responses["tip_cos"]=="personalizat" ? implode("\n", $solicitation->additional_responses["cos_personalizat"] ) :"",
+                implode("\n",$solicitation->additional_responses["produse_aditionale"] )
+            ]);
+
+        } else if ($this->params["type"]==="altele") {
+
+            $map= array_merge($map,[
+               isset( $solicitation->additional_responses["altele_descriere_nevoie"] ) ? $solicitation->additional_responses["altele_descriere_nevoie"]: "",
+               isset( $solicitation->additional_responses["altele_recomandare_dispecer"] ) ? $solicitation->additional_responses["altele_recomandare_dispecer"]: "",
+               isset( $solicitation->additional_responses["altele_solutie_agreata"] ) ? $solicitation->additional_responses["altele_solutie_agreata"]: ""
+
+            ]);
+
+        }
+
+
+        return $map;
     }
 
 
     public function headings(): array
     {
-        return [
+
+        $headings=[
             'Cod Comanda',
             'Data',
             'Nume Beneficiar',
@@ -94,13 +113,32 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
             'Coordonar alocat',
             'Voluntar alocat',
             'Status',
-            'Status Plata',
-            'Valoare plata',
-            'Observatii',
-            'Observatii Livrare',
-            'Tip Cos',
-            'Continut cos personalizat',
-            'Produse aditionale'
+
         ];
+
+        if($this->params["type"]==="alimente"){
+
+            $headings= array_merge($headings,[
+                'Status Plata',
+                'Valoare plata',
+                'Observatii',
+                'Observatii Livrare',
+                'Tip Cos',
+                'Continut cos personalizat',
+                'Produse aditionale'
+                ]);
+        }
+        else if ($this->params["type"]==="altele") {
+
+            $headings= array_merge($headings,[
+                'Descriere nevoie',
+                'Recomandare dispecer',
+                'Solutie agreata',
+
+            ]);
+
+        }
+
+        return  $headings;
     }
 }

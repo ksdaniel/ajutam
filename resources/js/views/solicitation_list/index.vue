@@ -67,9 +67,15 @@
         </el-button>
       </router-link>
 
-      <a v-role="['admin']" :href="'/api/export/solicitations?access_token='+token">
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token">
         <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
-          Export Solicitari Alimente
+          Export Alimente
+        </el-button>
+      </a>
+
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token+'&type=altele'">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Altele
         </el-button>
       </a>
 
