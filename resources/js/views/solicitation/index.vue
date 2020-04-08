@@ -136,22 +136,20 @@
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect';
-import { validEmail } from '@/utils/validate';
+// import { validEmail } from '@/utils/validate';
 import Resource from '@/api/resource';
 const solicitationsResource = new Resource('solicitations');
 
 export default {
   name: 'Solicitation',
-  components: { LangSelect },
   data() {
-    const validateEmail = (rule, value, callback) => {
-      if (!validEmail(value)) {
-        callback(new Error('Please enter the correct email'));
-      } else {
-        callback();
-      }
-    };
+    // const validateEmail = (rule, value, callback) => {
+    //   if (!validEmail(value)) {
+    //     callback(new Error('Please enter the correct email'));
+    //   } else {
+    //     callback();
+    //   }
+    // };
     const validatePass = (rule, value, callback) => {
       if (this.ruleForm.additional_responses.question_1.answer === '') {
         callback(new Error('Camp obligatoriu'));
