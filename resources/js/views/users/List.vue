@@ -15,15 +15,18 @@
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-plus" @click="handleCreate">
         {{ $t('table.add') }}
       </el-button>
-      <el-button v-waves :loading="downloading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
-        {{ $t('table.export') }}
-      </el-button>
+      <a v-if="[1,3,6,7].includes(userId)" :href="'/api/export/volunteers?access_token='+token">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Voluntari
+        </el-button>
+      </a>
+
     </div>
 
     <el-table v-loading="loading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
-          <span>{{ scope.row.index }}</span>
+          <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
@@ -173,6 +176,7 @@ import checkPermission from '@/utils/permission'; // Permission checking
 import role from '@/directive/role/index.js';
 const userResource = new UserResource();
 const permissionResource = new Resource('permissions');
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'UserList',
@@ -233,6 +237,14 @@ export default {
     };
   },
   computed: {
+
+    ...mapGetters([
+      'userId',
+      'roles',
+      'token',
+
+    ]),
+
     normalizedMenuPermissions() {
       let tmp = [];
       this.currentUser.permissions.role.forEach(permission => {

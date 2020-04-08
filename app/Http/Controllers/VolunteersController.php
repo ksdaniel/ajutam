@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VolunteersExport;
 use App\Http\Resources\VolunteerCollection;
 use App\Laravue\Models\Role;
 use App\Laravue\Models\User;
@@ -11,6 +12,7 @@ use App\Volunteer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VolunteersController extends Controller
 {
@@ -267,5 +269,10 @@ class VolunteersController extends Controller
     {
 
         return response()->json(["volunteers" => Volunteer::whereNotNull("geojson")->select("name", "geojson")->get()]);
+    }
+
+    public function export(){
+
+        return Excel::download(new VolunteersExport(), 'export-voluntari'.date("Y-m-d").'.xlsx');
     }
 }

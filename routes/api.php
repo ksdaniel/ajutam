@@ -42,7 +42,9 @@ Route::group(['middleware' => ['addAccessToken','auth:api']], function () {
 
     Route::post('upload-avatar-image', 'UserController@uploadImage');
 
+    //exports
     Route::get('/export/solicitations', 'SolicitationsController@export')->middleware('role:admin');
+    Route::get('/export/volunteers', 'VolunteersController@export')->middleware('role:admin');
 });
 
 
