@@ -62,14 +62,26 @@ class SolicitationsController extends Controller
         if (!empty($keyword)) {
             $userQuery->leftJoin('beneficiaries', 'solicitations.beneficiary_id', '=', 'beneficiaries.id');
 
-            $userQuery->orWhere('beneficiaries.first_name', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.last_name', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.phone', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.address', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where(function ($q) use ($keyword){
+                $names = explode(" ", $keyword);
+
+                $q->where(function ($sq) use ($names){
+                    $sq->whereIn('beneficiaries.first_name', $names);
+                    $sq->orWhere(function($query) use ($names) {
+                       $query->whereIn('beneficiaries.last_name', $names);
+                     });
+                });
+
+                $q->orWhere('beneficiaries.phone', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.address', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
+
+            });
+
         }
-        $userQuery->orderBy("created_at","DESC");
+
+        $userQuery->orderBy("solicitations.created_at","DESC");
 
         return new SolicitationCollection($userQuery->paginate($limit));
     }
