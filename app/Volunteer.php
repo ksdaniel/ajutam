@@ -47,6 +47,7 @@ class Volunteer extends Model
         "acord_termeni",
         "verified",
         "has_traning",
+
     ];
 
     protected $casts = [

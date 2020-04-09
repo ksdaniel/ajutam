@@ -680,8 +680,11 @@ export default {
         this.orase = resp.data;
       });
     },
-
     calculPret(){
+      if (this.formData.solicitation.categories !== 'alimente') {
+        return;
+      }
+
       const priceArray = [];
       if (this.formData.solicitation.additional_responses.tip_cos){
         if (this.formData.solicitation.additional_responses.tip_cos !== 'personalizat'){

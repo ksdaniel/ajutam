@@ -123,6 +123,14 @@
             <el-tag v-if="scope.row.status==='proces_livrare'" type="info">In proces de livrare</el-tag>
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
 
+            <span v-if="(scope.row.status!=='solutionat' || scope.row.status!=='livrat') && scope.row.delivery_period"> Urgenta Livrare : <br>
+
+              <strong v-if="scope.row.delivery_period==='asap'">Cat de repede posibil</strong>
+              <strong v-if="scope.row.delivery_period==='24h'">24 de ore</strong>
+              <strong v-if="scope.row.delivery_period==='48h'">48 de ore</strong>
+
+            </span>
+
           </template>
         </el-table-column>
 
