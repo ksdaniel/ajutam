@@ -73,6 +73,12 @@
         </el-button>
       </a>
 
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token+'&type=medicamente'">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Medicamente
+        </el-button>
+      </a>
+
       <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token+'&type=altele'">
         <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
           Export Altele

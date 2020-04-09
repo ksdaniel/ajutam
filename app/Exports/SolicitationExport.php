@@ -93,7 +93,21 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
 
             ]);
 
-        }
+        }  else if($this->params["type"]==="medicamente"){
+
+        $map= array_merge($map,[
+            $solicitation->payment_status,
+            $solicitation->payment_value,
+            $solicitation->delivery_observation,
+            $solicitation->delivery_period,
+            $solicitation->additional_responses["denumire_medicamente"],
+            $solicitation->additional_responses["necesita_reteta"],
+            $solicitation->additional_responses["timp_livrare_medicament"],
+            $solicitation->additional_responses["ati_mai_folosit_medicamentul"],
+
+        ]);
+
+    }
 
 
         return $map;
@@ -113,6 +127,7 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
             'Coordonar alocat',
             'Voluntar alocat',
             'Status',
+            'Observatii',
 
         ];
 
@@ -121,7 +136,6 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
             $headings= array_merge($headings,[
                 'Status Plata',
                 'Valoare plata',
-                'Observatii',
                 'Observatii Livrare',
                 'Tip Cos',
                 'Continut cos personalizat',
@@ -137,7 +151,20 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
 
             ]);
 
-        }
+        } else if($this->params["type"]==="medicamente"){
+
+
+        $headings= array_merge($headings,[
+            'Status Plata',
+            'Valoare plata',
+            'Observatii Livrare',
+            'Urgenta Livrare',
+            'Denumire medicamente',
+            'Necesita reteta?',
+            'Ati mai folosit medicamentul?',
+            'Timp Livrare Medicament'
+        ]);
+    }
 
         return  $headings;
     }
