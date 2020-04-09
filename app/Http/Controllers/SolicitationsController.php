@@ -76,6 +76,7 @@ class SolicitationsController extends Controller
                 $q->orWhere('beneficiaries.address', 'LIKE', '%' . $keyword . '%');
                 $q->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
                 $q->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('solicitations.code', '=',  $keyword );
 
             });
 
