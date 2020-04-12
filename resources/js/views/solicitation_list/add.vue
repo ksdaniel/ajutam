@@ -54,7 +54,7 @@
                   trigger: 'blur'
                 }"
               >
-                <el-select v-model="formData.beneficiar.county" style="    width: 100%;" filterable placeholder="Selecteaza judetul" @change="getOraseJudet">
+                <el-select v-model="formData.beneficiar.county" style="width: 100%;" filterable placeholder="Selecteaza judetul" @change="getOraseJudet">
                   <el-option v-for="judet in judete" :key="judet.auto" :label="judet.nume" :value="judet.auto" />
                 </el-select>
 
@@ -66,11 +66,11 @@
                 prop="beneficiar.city"
                 :rules="{
                   required: true,
-                  message: 'Este necesar orasului',
+                  message: 'Este necesar orasul',
                   trigger: 'blur'
                 }"
               >
-                <el-select v-model="formData.beneficiar.city" style="    width: 100%;" filterable placeholder="Selecteaza orasul">
+                <el-select v-model="formData.beneficiar.city" style="width: 100%;" filterable placeholder="Selecteaza orasul">
                   <el-option v-for="(oras,index) in orase" :key="oras.nume+'-oras'+index" :label="oras.nume" :value="oras.nume" />
                 </el-select>
               </el-form-item>
@@ -89,31 +89,18 @@
                 }"
               >
                 <el-select v-model="formData.beneficiar.neighborhood" style="width: 100%" placeholder="Selecteaza cartierul">
-                  <el-option label="Andrei Mureșanu" value="Andrei Mureșanu" />
-                  <el-option label="Bulgaria" value="Bulgaria" />
-                  <el-option label="Bună Ziua" value="Bună Ziua" />
-                  <el-option label="Centru" value="Centru" />
-                  <el-option label="Dâmbul Rotund" value="Dâmbul Rotund" />
-                  <el-option label="Gara" value="Gara" />
-                  <el-option label="Gheorgheni" value="Gheorgheni" />
-                  <el-option label="Grădini Mănăștur" value="Grădini Mănăștur" />
-                  <el-option label="Plopilor" value="Plopilor" />
-                  <el-option label="Grigorescu" value="Grigorescu" />
-                  <el-option label="Gruia" value="Gruia" />
-                  <el-option label="Iris" value="Iris" />
-                  <el-option label="Între Lacuri" value="Între Lacuri" />
-                  <el-option label="Mănăștur" value="Mănăștur" />
-                  <el-option label="Mărăști" value="Mărăști" />
-                  <el-option label="Someșeni" value="Someșeni" />
-                  <el-option label="Zorilor" value="Zorilor" />
-                  <el-option label="Sopor" value="Sopor" />
-                  <el-option label="Borhanci" value="Borhanci" />
-                  <el-option label="Becaș" value="Becaș" />
-                  <el-option label="Făget" value="Făget" />
-                  <el-option label="Lomb" value="Lomb" />
-                  <el-option label="Tineretului" value="Tineretului" />
-                  <el-option label="Pata-Rât" value="Pata-Rât" />
-                  <el-option label="Alt cartier" value="altul" />
+                  <el-option label="14 Mai" value="14 Mai" />
+                  <el-option label="Carpati I" value="Carpati I" />
+                  <el-option label="Carpati II" value="Carpati II" />
+                  <el-option label="Centru Nou" value="Centru Nou" />
+                  <el-option label="Closca" value="Closca" />
+                  <el-option label="Crisan" value="Crisan" />
+                  <el-option label="Micro 17" value="Micro 17" />
+                  <el-option label="Horea" value="Horea" />
+                  <el-option label="Menumorut" value="Menumorut" />
+                  <el-option label="Satmarel" value="Satmarel" />
+                  <el-option label="Soarelui" value="Soarelui" />
+                  <el-option label="Solidaritatii" value="Solidaritatii" />
                 </el-select>
 
               </el-form-item>
@@ -497,8 +484,8 @@ export default {
           additional_responses: {},
           first_name: '',
           last_name: '',
-          city: '',
-          county: 'CJ',
+          city: 'Satu Mare',
+          county: 'SM',
           address: '',
           neighborhood: '',
           phone: '',

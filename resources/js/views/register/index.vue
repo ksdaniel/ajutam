@@ -39,30 +39,18 @@
 
               <el-form-item label="Cartier" prop="neighborhood">
                 <el-select v-model="form.neighborhood" placeholder="Selecteaza cartierul">
-                  <el-option label="Andrei Mureșanu" value="Andrei Mureșanu" />
-                  <el-option label="Bulgaria" value="Bulgaria" />
-                  <el-option label="Bună Ziua" value="Bună Ziua" />
-                  <el-option label="Centru" value="Centru" />
-                  <el-option label="Dâmbul Rotund" value="Dâmbul Rotund" />
-                  <el-option label="Gara" value="Gara" />
-                  <el-option label="Gheorgheni" value="Gheorgheni" />
-                  <el-option label="Grădini Mănăștur" value="Grădini Mănăștur" />
-                  <el-option label="Plopilor" value="Plopilor" />
-                  <el-option label="Grigorescu" value="Grigorescu" />
-                  <el-option label="Gruia" value="Gruia" />
-                  <el-option label="Iris" value="Iris" />
-                  <el-option label="Între Lacuri" value="Între Lacuri" />
-                  <el-option label="Mănăștur" value="Mănăștur" />
-                  <el-option label="Mărăști" value="Mărăști" />
-                  <el-option label="Someșeni" value="Someșeni" />
-                  <el-option label="Zorilor" value="Zorilor" />
-                  <el-option label="Sopor" value="Sopor" />
-                  <el-option label="Borhanci" value="Borhanci" />
-                  <el-option label="Becaș" value="Becaș" />
-                  <el-option label="Făget" value="Făget" />
-                  <el-option label="Lomb" value="Lomb" />
-                  <el-option label="Tineretului" value="Tineretului" />
-                  <el-option label="Pata-Rât" value="Pata-Rât" />
+                  <el-option label="14 Mai" value="14 Mai" />
+                  <el-option label="Carpati I" value="Carpati I" />
+                  <el-option label="Carpati II" value="Carpati II" />
+                  <el-option label="Centru Nou" value="Centru Nou" />
+                  <el-option label="Closca" value="Closca" />
+                  <el-option label="Crisan" value="Crisan" />
+                  <el-option label="Micro 17" value="Micro 17" />
+                  <el-option label="Horea" value="Horea" />
+                  <el-option label="Menumorut" value="Menumorut" />
+                  <el-option label="Satmarel" value="Satmarel" />
+                  <el-option label="Soarelui" value="Soarelui" />
+                  <el-option label="Solidaritatii" value="Solidaritatii" />
                 </el-select>
               </el-form-item>
 
@@ -167,7 +155,7 @@
               v-validate="'required'"
               name="form.loc_domiciliu"
               class="special-form-input-text "
-              placeholder="Ex: Cluj-Napoca, Cluj"
+              placeholder="Ex: Satu Mare, SM"
             />, str <el-input
               v-model="form.str_domiciliu"
               v-validate="'required'"
@@ -210,7 +198,7 @@
             <p><strong>Declar că am fost informat cu privire la procesarea datelor cu caracter personal de către autoritați şi prin semnarea acestei declarații imi exprim consimţăm&acirc;ntul &icirc;n vederea prelucrării acestora, in scopurile pe care autoritățile le consideră necesare &icirc;n vederea desfășurării activitații pentru care m-am oferit voluntar.&nbsp;</strong></p>
             <p>AM SEMNAT PREZENTUL DOCUMENT DUPĂ CE L-AM CITIT CU ATENȚIE ȘI AM &Icirc;NȚELES PE DEPLIN IMPLICAȚIILE REZULTATE DIN SEMNAREA LUI.</p>
             <p><strong>Denumirea organizatiei din care face parte voluntarul:</strong></p>
-            <p>Inițiativa Civică &ldquo;Vă ajutăm din Cluj&rdquo;, fondată pe baza protocolului de colaborare &icirc;ntre organizațiile Asociația Voci pentru Democrație și Justiție (VeDem Just), Asociația Civic Support, Asociația Clujul Sustenabil.</p>
+            <p>Inițiativa Civică &ldquo;Vă ajutăm din Satu Mare&rdquo;, fondată pe baza protocolului de colaborare &icirc;ntre organizațiile Asociația Voci pentru Democrație și Justiție (VeDem Just), Asociația Civic Support, Asociația Clujul Sustenabil.</p>
             <p>Data: </p>
             <p><strong>{{ new Date().toLocaleDateString() }}</strong></p>
             <p>Nume și prenume</p>
@@ -419,8 +407,8 @@ export default {
           if (response.volunteer){
             this.form = response.volunteer;
             if (!this.form.county){
-              this.form.county = 'CJ';
-              this.form.city = 'Cluj-Napoca';
+              this.form.county = 'SM';
+              this.form.city = 'Satu Mare';
             }
           } else {
             this.form.name = this.name;

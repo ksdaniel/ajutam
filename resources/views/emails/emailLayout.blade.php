@@ -307,7 +307,7 @@
                                                         <tr>
                                                             <td align="center" valign="top" class="logo" style="background-color: white">
                                                                 {{--<img width="50%" src="https://s3-eu-west-1.amazonaws.com/comocomunica-images/wp-content/uploads/2016/01/23122210/comocomunica-digital-creative-agency2.png" alt=""/>--}}
-                                                                <h2 style="text-align: center!important;font-style: oblique!important;font-weight: bold!important;">Va ajutam din Cluj !</h2>
+                                                                <h2 style="text-align: center!important;font-style: oblique!important;font-weight: bold!important;">Va ajutam din Satu Mare !</h2>
                                                             </td>
                                                         </tr>
                                                     </table>

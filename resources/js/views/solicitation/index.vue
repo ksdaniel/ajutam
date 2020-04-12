@@ -5,7 +5,7 @@
         Formular Solicitare
       </h3>
       <el-card>
-        <p>&Icirc;n vremuri de criză e nevoie de implicare și solidaritate! Odată cu trecerea țării la scenariul 3 al crizei Corona Virus, s-a format &icirc;n mun. Cluj-Napoca grupul de solidaritate comunitară &ldquo;VĂ AJUTĂM DIN CLUJ!&rdquo;. Grupul are &icirc;n prezent 450 de membri și reunește mai mulți cetățeni activi, sub coordonarea a trei organizații implicate civic din Cluj: Vedem Just, Civic Suport și Clujul Sustenabil. Astfel, Clujul se alătură orașelor București, Sibiu, Arad și Constanța care au pornit inițiative similare pentru a sprijini cetățenii și autoritățile &icirc;n gestionarea situației generate de Corona Virus.</p>
+        <p>&Icirc;n vremuri de criză e nevoie de implicare și solidaritate! Odată cu trecerea țării la scenariul 3 al crizei Corona Virus, s-a format &icirc;n mun. Satu Mare grupul de solidaritate comunitară &ldquo;VĂ AJUTĂM DIN SATU MARE!&rdquo;. Grupul are &icirc;n prezent 450 de membri și reunește mai mulți cetățeni activi, sub coordonarea a trei organizații implicate civic din Cluj: Vedem Just, Civic Suport și Clujul Sustenabil. Astfel, Clujul se alătură orașelor București, Sibiu, Arad și Constanța care au pornit inițiative similare pentru a sprijini cetățenii și autoritățile &icirc;n gestionarea situației generate de Corona Virus.</p>
 
         <el-form-item label="Nume" prop="name">
           <el-input v-model="ruleForm.name" />

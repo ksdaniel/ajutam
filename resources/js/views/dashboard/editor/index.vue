@@ -12,12 +12,12 @@
             <h4><strong>Bine ai venit {{ name }}!</strong></h4>
             <div v-if="!volunteer">
 
-              <p>&Icirc;ți mulțumim pentru deschiderea ta &icirc;n sprijinirea demersului &ldquo;<strong>Vă ajutăm din Cluj</strong>&rdquo;!</p>
+              <p>&Icirc;ți mulțumim pentru deschiderea ta &icirc;n sprijinirea demersului &ldquo;<strong>Vă ajutăm din Satu Mare</strong>&rdquo;!</p>
               <p>De aici poți să explorezi tot conținutul platformei.&nbsp;</p>
               <p>Vei observa că apar două declarații pe partea st&acirc;ngă a ecranului. Ele trebuie completate doar de cei care se &icirc;nscriu voluntari &icirc;n programul nostru.</p>
-              <p>Deocamdată, tu poți să le vezi și poți vedea și informațiile despre activitatea voluntarilor pe <a href="info.civicsuport.ro"><strong>info.civicsuport.ro</strong>.&nbsp;</a></p>
+              <p>Deocamdată, tu poți să le vezi și poți vedea și informațiile despre activitatea voluntarilor pe <a href="https://ajutamdinsm.ro"><strong>ajutamdinsm.ro</strong>.&nbsp;</a></p>
               <p>Dacă ai decis să te &icirc;nscrii voluntar apasă pe butonul <strong>&Icirc;nregistrează-te ca voluntar</strong> și te vom ruga să completezi cu atenție formularul de &icirc;nscriere și cele 2 declarații.</p>
-              <p>C&acirc;nd cele 2 declarații apar &icirc;n cadrane verzi, ești oficial Voluntar Vă ajutăm din Cluj.</p>
+              <p>C&acirc;nd cele 2 declarații apar &icirc;n cadrane verzi, ești oficial Voluntar Vă ajutăm din Satu Mare.</p>
               <p>Putem &icirc;ncepe etapele următoare!</p>
             </div>
           </el-card>

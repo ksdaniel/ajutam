@@ -17,7 +17,7 @@ class AddBeneficiaryIdToSolicitationsTable extends Migration
             $table->string('payment_type');
             $table->string('payment_status');
             $table->decimal('payment_value');
-            $table->integer('beneficiary_id')->index()->unsigned();
+            /*$table->integer('beneficiary_id')->index()->unsigned();*/
             $table->foreignId('beneficiary_id')->references('id')->on('beneficiaries');
         });
     }

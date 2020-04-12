@@ -11,7 +11,7 @@ $factory->define(App\Beneficiary::class, function (Faker $faker) {
         'phone' => '074' . $faker->randomNumber(7),
         'address' => $faker->address,
         'neighborhood' => 'Marasti',
-        'city' => 'Cluj-Napoca',
-        'county' => 'Cluj'
+        'city' => 'Satu Mare',
+        'county' => 'Satu Mare'
     ];
 });

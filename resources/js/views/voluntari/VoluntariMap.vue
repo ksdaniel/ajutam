@@ -23,7 +23,7 @@ export default {
     this.mapObj = L.map(
       'mapShow',
       {
-        center: [46.769564, 23.589459],
+        center: [47.791217, 22.875143],
         crs: L.CRS.EPSG3857,
         zoom: 12,
         zoomControl: true,

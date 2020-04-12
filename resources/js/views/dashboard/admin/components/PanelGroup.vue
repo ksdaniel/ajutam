@@ -20,7 +20,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Confirmati Cluj
+            Confirmati Satu-Mare
           </div>
           <count-to :start-val="0" :end-val="clujCount" :duration="3000" class="card-panel-num" />
         </div>

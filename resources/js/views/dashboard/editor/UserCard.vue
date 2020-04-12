@@ -16,7 +16,7 @@
           {{ name }}
         </div>
         <div class="user-role text-center text-muted" style="margin-bottom: 15px">
-          Zona Cluj
+          Zona Satu Mare
         </div>
         <div class="user-name text-center">
           <el-tag
@@ -93,7 +93,7 @@
               v-validate="'required'"
               name="form.loc_domiciliu"
               class="special-form-input-text "
-              placeholder="Ex: Cluj-Napoca, Cluj"
+              placeholder="Ex: Satu Mare, Satu Mare"
             />, str <el-input
               v-model="form.str_domiciliu"
               v-validate="'required'"
@@ -163,7 +163,7 @@
         <el-row>
 
           <el-col>
-            <p style="text-align: center;">în acțiunile mișcării civice <strong>„Vă ajutăm din Cluj” </strong> de susținere și ajutorare a locuitorilor din mun. Cluj-Napoca pentru a face față răspândirii și infectării cu virusul Covid-19
+            <p style="text-align: center;">în acțiunile mișcării civice <strong>„Vă ajutăm din Satu Mare” </strong> de susținere și ajutorare a locuitorilor din mun. Satu Mare pentru a face față răspândirii și infectării cu virusul Covid-19
             </p>
             <p style="text-align: center;">&nbsp;</p>
             <p>Subsemnatul  <el-input
@@ -189,7 +189,7 @@
               v-validate="'required'"
               name="form.loc_domiciliu"
               class="special-form-input-text "
-              placeholder="Ex: Cluj-Napoca, Cluj"
+              placeholder="Ex: Satu Mare, SM"
             />, str <el-input
               v-model="form.str_domiciliu"
               v-validate="'required'"

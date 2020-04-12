@@ -20,10 +20,11 @@ import axios from 'axios';
 
 import GAuth from 'vue-google-oauth2';
 const gauthOption = {
-  clientId: '459967688656-bbevqo566u4kqp7h52nre2mj7k3gvlmj.apps.googleusercontent.com',
+  clientId: '500313422056-575umb00c2plivvnv6vmgsatmve2n4o0.apps.googleusercontent.com',
   scope: 'profile email',
   prompt: 'select_account',
 };
+
 Vue.use(GAuth, gauthOption);
 
 Vue.use(VueUpload);
@@ -36,12 +37,12 @@ Vue.use(VueSocialauth, {
 
   providers: {
     facebook: {
-      clientId: '553013741975593',
-      redirectUri: 'https://ajutam.civicsuport.ro/auth/facebook/callback', // Your client app URL
+      clientId: '3270557046503228',
+      redirectUri: 'https://voluntari.ajutamsm.ro/auth/facebook/callback', // Your client app URL
     },
     google: {
-      clientId: '459967688656-bbevqo566u4kqp7h52nre2mj7k3gvlmj.apps.googleusercontent.com',
-      redirectUri: 'https://ajutam.civicsuport.ro/auth/google/callback', // Your client app URL
+      clientId: '500313422056-575umb00c2plivvnv6vmgsatmve2n4o0.apps.googleusercontent.com ',
+      redirectUri: 'https://voluntari.ajutamsm.ro/auth/google/callback', // Your client app URL
     },
   },
 });
