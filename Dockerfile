@@ -5,7 +5,7 @@ WORKDIR /var/www
 
 # Update packages
 
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs netcat libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev nodejs git \
     && apt-get clean
@@ -22,11 +22,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN npm install -g yarn
 
 COPY . .
-COPY .env.example .env
 
-RUN npm install && npm run production
-RUN composer install
-RUN php artisan passport:install
+RUN chmod +x ./laravue-entrypoint.sh
 
-ENTRYPOINT ["php", "artisan", "serve", "--host", "0.0.0.0"]
-
+ENTRYPOINT ["./laravue-entrypoint.sh"]

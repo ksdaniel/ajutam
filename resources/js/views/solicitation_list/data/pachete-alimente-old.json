@@ -1,29 +1,29 @@
-{"pachete":[
-    {
-      "key":"cos1",
-      "label":"COS1 - neperisabile de baza,",
-      "price":"32",
-      "image":""
-    },
-    {
-      "key":"cos2",
-      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, ",
-      "price":"88",
-      "image":""
-    },
-    {
-      "key":"cos3",
-      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
-      "price":"88",
-      "image":""
-    },
-    {
-      "key":"cos4",
-      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
-      "price":"107.00",
-      "image":""
-    }
-  ],
+{ "pachete":[
+  {
+    "key":"cos1",
+    "label":"COS1 - neperisabile de baza,",
+    "price":"25",
+    "image":""
+  },
+  {
+    "key":"cos2",
+    "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, ",
+    "price":"70",
+    "image":""
+  },
+  {
+    "key":"cos3",
+    "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
+    "price":"71",
+    "image":""
+  },
+  {
+    "key":"cos4",
+    "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
+    "price":"84",
+    "image":""
+  }
+],
 
   "produsePachetPersonalizat":[
     {
@@ -235,5 +235,3 @@
     }
   ]
 }
-
-

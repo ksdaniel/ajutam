@@ -20,7 +20,7 @@ Route::post('auth/login', 'AuthController@login');
 Route::post('solicitation', 'SolicitationsController@store');
 Route::post('sociallogin/{provider}', 'AuthController@SocialSignup');
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => ['addAccessToken','auth:api']], function () {
     Route::get('auth/user', 'AuthController@user');
     Route::post('auth/logout', 'AuthController@logout');
     Route::apiResource('users', 'UserController')->middleware('permission:' . \App\Laravue\Acl::PERMISSION_USER_MANAGE);
@@ -41,6 +41,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/users/acord', 'UserController@addOrUpdateAcord');
 
     Route::post('upload-avatar-image', 'UserController@uploadImage');
+
+    //exports
+    Route::get('/export/solicitations', 'SolicitationsController@export')->middleware('role:admin');
+    Route::get('/export/volunteers', 'VolunteersController@export')->middleware('role:admin');
 });
 
 

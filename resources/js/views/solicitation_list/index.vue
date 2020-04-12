@@ -66,6 +66,25 @@
           Adauga solicitare
         </el-button>
       </router-link>
+
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Alimente
+        </el-button>
+      </a>
+
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token+'&type=medicamente'">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Medicamente
+        </el-button>
+      </a>
+
+      <a v-role="['admin','coordonator']" :href="'/api/export/solicitations?access_token='+token+'&type=altele'">
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-download">
+          Export Altele
+        </el-button>
+      </a>
+
     </div>
 
     <div class="table-container">
@@ -110,15 +129,23 @@
             <el-tag v-if="scope.row.status==='proces_livrare'" type="info">In proces de livrare</el-tag>
             <el-tag v-if="scope.row.status==='necesita_voluntar'" type="warning">Necesita voluntar</el-tag>
 
+            <span v-if="(scope.row.status!=='solutionat' || scope.row.status!=='livrat') && scope.row.delivery_period"> Urgenta Livrare : <br>
+
+              <strong v-if="scope.row.delivery_period==='asap'">Cat de repede posibil</strong>
+              <strong v-if="scope.row.delivery_period==='24h'">24 de ore</strong>
+              <strong v-if="scope.row.delivery_period==='48h'">48 de ore</strong>
+
+            </span>
+
           </template>
         </el-table-column>
 
         <el-table-column align="center" label="Status Plata" width="180">
           <template slot-scope="scope">
             <div v-if="scope.row.categories !== 'altele'">
-            <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
-            <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
-            <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
+              <el-tag v-if="scope.row.payment_status==='Achitat'" type="success">Achitat</el-tag>
+              <el-tag v-if="scope.row.payment_status==='Neachitat'" type="danger">Neachitat</el-tag><br>
+              <span v-if="scope.row.payment_status==='Neachitat'"> De achitat: </span> <strong>{{ scope.row.payment_value }} RON</strong>
 
             </div>
           </template>
@@ -220,13 +247,12 @@
       <el-form ref="form" :model="solicitareModel" label-width="120px" label-position="top">
 
         <template v-for="item in solicitareModel.additional_responses">
-          <div class="text item" style="font-weight: bold">
+          <div :key="item.label" class="text item" style="font-weight: bold">
             {{ item.label }}
           </div>
 
-          <div class="text item" style="margin-bottom: 20px">
+          <div :key="item.answer" class="text item" style="margin-bottom: 20px">
             <span>{{ item.answer }}</span>
-
           </div>
         </template>
 
@@ -247,13 +273,12 @@
         <el-col :span="15">
 
           <template v-for="item in solicitareModel.additional_responses">
-            <div class="text item" style="font-weight: bold">
+            <div :key="item.label" class="text item" style="font-weight: bold">
               {{ item.label }}
             </div>
 
-            <div class="text item" style="margin-bottom: 20px">
+            <div :key="item.answer" class="text item" style="margin-bottom: 20px">
               <span>{{ item.answer }}</span>
-
             </div>
           </template>
 
@@ -317,6 +342,7 @@ export default {
     ...mapGetters([
       'volunteer',
       'roles',
+      'token',
 
     ]),
 

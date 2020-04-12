@@ -661,7 +661,7 @@
           class="container-form"
         >
           <el-form ref="healthScreeningForm" :model="voluteerForm">
-         
+
             <!--
             <el-form-item
               label="Suntem în stare de urgență, autoritățile (poliția, poate armata) sunt pe stradă, ce părere ai despre asta?"
@@ -809,10 +809,9 @@
           </div>
         </div>
 
-        <div
-          v-if="(active===10 && voluteerForm.involvement_direction === 'Call Center') || (active===11 && voluteerForm.involvement_direction !== 'Call Center' )"
-          class="container-form"
-        >
+        <div v-if="(active===10 && voluteerForm.involvement_direction === 'Call Center') || (active===11 && voluteerForm.involvement_direction !== 'Call Center' )" class="container-form">
+
+
           <div style="text-align: center">
             <h3>Iti multumim pentru completare</h3>
             <h4>Uite ce poti face de aici:</h4>

@@ -63,33 +63,32 @@ export default {
   components: {
     CountTo,
   },
+  data() {
+    return {
+      nationalCount: null,
+      allPacients: null,
+      clujCount: null,
+    };
+  },
+  mounted() {
+    axios
+      .get('https://coronaproxy.azurewebsites.net/getPersoane')
+      .then(response => {
+        console.log(response);
+        this.nationalCount = response.data.length;
+        this.allPacients = response.data;
+        this.clujCount = response.data.filter(filterJudet).length;
+      });
+  },
   methods: {
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type);
     },
   },
-    data () {
-    return {
-      nationalCount: null,
-      allPacients: null, 
-      clujCount: null
-    }
-  },
-  mounted () {
-    axios
-      .get('https://coronaproxy.azurewebsites.net/getPersoane')
-      .then(response => {
-          console.log(response);
-          this.nationalCount = response.data.length;
-          this.allPacients = response.data;
-          this.clujCount = response.data.filter(filterJudet).length;
-
-        })
-  },
 };
 
 function filterJudet(result){
-  return result.judet == "CLUJ"
+  return result.judet === 'CLUJ';
 }
 
 </script>

@@ -5,15 +5,20 @@
 </template>
 
 <script>
+/*global L*/
 export default {
   name: 'ClujMap',
-  props: ['geojson'],
+  props: {
+    geojson: {
+      type: null,
+      default: undefined,
+    },
+  },
 
   data(){
     return {
       drawnItems: false,
       mapObj: false,
-
     };
   },
 
@@ -21,7 +26,7 @@ export default {
 
     geojson(val){
       if (val){
-        var geojson = L.geoJSON(val, {
+        L.geoJSON(val, {
           onEachFeature: (f, l) => {
             // l.bindPopup('');
 
@@ -46,7 +51,7 @@ export default {
       }
     );
 
-    const tile_layer_4e047998d13d453aaae0b8f846dcfb38 = L.tileLayer(
+    L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       { 'attribution': 'Data by \u0026copy; \u003ca href="http://openstreetmap.org"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href="http://www.openstreetmap.org/copyright"\u003eODbL\u003c/a\u003e.', 'detectRetina': false, 'maxNativeZoom': 18, 'maxZoom': 18, 'minZoom': 0, 'noWrap': false, 'opacity': 1, 'subdomains': 'abc', 'tms': false }
     ).addTo(this.mapObj);
@@ -57,18 +62,17 @@ export default {
       edit: {},
     };
     // FeatureGroup is to store editable layers.
-    this.drawnItems = new L.featureGroup().addTo(
+    this.drawnItems = L.featureGroup().addTo(
       this.mapObj
     );
 
     options.edit.featureGroup = this.drawnItems;
-    const draw_control_fa0e8edf6dff4b2ab899e4c3c05e9b28 = new L.Control.Draw(
+    new L.Control.Draw(
       options
     ).addTo(this.mapObj);
 
     this.mapObj.on(L.Draw.Event.CREATED, (e) => {
-      const layer = e.layer,
-        type = e.layerType;
+      const layer = e.layer;
       const coords = JSON.stringify(layer.toGeoJSON());
       layer.on('click', function() {
         alert(coords);

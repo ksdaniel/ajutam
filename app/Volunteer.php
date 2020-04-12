@@ -45,6 +45,9 @@ class Volunteer extends Model
         "address_sc",
         "address_ap",
         "acord_termeni",
+        "verified",
+        "has_traning",
+
     ];
 
     protected $casts = [

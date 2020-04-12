@@ -173,7 +173,7 @@
           <div class="clearfix">
 
             <el-form-item
-              v-for="(intrebare, index) in intrebari.intrebariStabilireUrgenta"
+              v-for="(intrebare) in intrebari.intrebariStabilireUrgenta"
               :key="intrebare.key"
               :label="intrebare.label"
               :prop="'beneficiar.additional_responses.' + intrebare.key"
@@ -302,6 +302,17 @@
               <el-form-item label="Produse Aditionale" class="checkbox-list">
                 <el-checkbox-group v-model="formData.solicitation.additional_responses.produse_aditionale">
                   <el-checkbox v-for="produs in produseAditionale" :key="produs.key" :label="produs.label" name="cos_personalizat" :value="produs.key" @change="calculPret" />
+
+                </el-checkbox-group>
+              </el-form-item>
+
+            </div>
+
+            <div>
+
+              <el-form-item label="Condimente" class="checkbox-list">
+                <el-checkbox-group v-model="formData.solicitation.additional_responses.condimente" :max="2">
+                  <el-checkbox v-for="produs in Condimente" :key="produs.key" :label="produs.label" name="condimente" :value="produs.key" @change="calculPret" />
 
                 </el-checkbox-group>
               </el-form-item>
@@ -460,7 +471,7 @@
 <script>
 import axios from 'axios';
 import intrebari from './data/intrebari';
-import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale } from './data/pachete-alimente';
+import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale, Condimente } from './data/pachete-alimente';
 import { mapGetters } from 'vuex';
 import Resource from '@/api/resource';
 
@@ -496,6 +507,7 @@ export default {
             tip_cos: '',
             cos_personalizat: [],
             produse_aditionale: [],
+            condimente: [],
 
           },
           payment_value: 0,
@@ -512,6 +524,7 @@ export default {
       pacheteAlimente,
       produsePachetPersonalizat,
       produseAditionale,
+      Condimente,
     };
   },
 
@@ -576,6 +589,17 @@ export default {
           priceArray.push(parseFloat(produs.price));
         }
       });
+
+      if (this.formData.solicitation.additional_responses.condimente){
+        this.formData.solicitation.additional_responses.condimente.forEach(res => {
+          const produs = this.Condimente.find(r => r.label === res);
+          if (produs){
+            priceArray.push(parseFloat(produs.price));
+          }
+        });
+      } else {
+        this.formData.solicitation.additional_responses.condimente = [];
+      }
 
       this.formData.solicitation.payment_value = priceArray.reduce((a, b) => a + b, 0).toFixed(2);
     },

@@ -11,7 +11,7 @@
       <h3 class="title">Va ajutam din Satu Mare - Inscriere Voluntari</h3>
       <el-card>
         <div>
-          <p>Version 5.0</p>
+
           <p>Salut! Ne bucurăm că ești aici și vrei să ajuți și tu împreună cu noi și îți mulțumim! Pentru a începe colaborarea, să ne prezentăm.</p>
 
           <p>
@@ -73,7 +73,7 @@
             @click="loginWithGoogle"
           >Login or Register cu Google</el-button>
 
-          <!--<el-button @click="handleLogin()">Login</el-button>-->
+          <!-- <el-button @click="handleLogin()">Login</el-button> -->
         </div>
       </el-card>
     </el-form>
@@ -81,12 +81,11 @@
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect';
+/*global FB*/
 import { validEmail } from '@/utils/validate';
 
 export default {
   name: 'Login',
-  components: { LangSelect },
   data() {
     const validateEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -236,7 +235,7 @@ export default {
           // after ajax
         })
         .catch(error => {
-          // on fail do something
+          console.log(error);
         });
     },
   },
@@ -263,6 +262,7 @@ $light_gray: #eee;
       height: 47px;
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
+        box-shadow: 0 0 0px 1000px $bg inset !important;
         -webkit-text-fill-color: #fff !important;
       }
     }

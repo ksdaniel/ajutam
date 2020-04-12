@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VolunteersExport;
 use App\Http\Resources\VolunteerCollection;
 use App\Laravue\Models\Role;
 use App\Laravue\Models\User;
@@ -11,6 +12,7 @@ use App\Volunteer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VolunteersController extends Controller
 {
@@ -30,6 +32,8 @@ class VolunteersController extends Controller
         $involvement_direction = Arr::get($searchParams, 'involvement_direction', '');
         $type = Arr::get($searchParams, 'type', '');
         $has_car = Arr::get($searchParams, 'has_car', '');
+        $verified = Arr::get($searchParams, 'verified', '');
+        $has_traning = Arr::get($searchParams, 'has_traning', '');
         $county = Arr::get($searchParams, 'county', '');
 
         if (!empty($keyword)) {
@@ -58,6 +62,14 @@ class VolunteersController extends Controller
             $userQuery->where('has_car', '=', $has_car);
         }
 
+        if (!empty($has_traning)) {
+            $userQuery->where('has_traning', '=', $has_traning=="da" ? true : false);
+        }
+
+        if (!empty($verified)) {
+            $userQuery->where('verified', '=', $verified=="da" ? true : false);
+        }
+
         if (!empty($involvement_direction)) {
             $userQuery->where('involvement_direction', '=', $involvement_direction);
         }
@@ -65,6 +77,9 @@ class VolunteersController extends Controller
         if (!empty($county)) {
             $userQuery->where('county', '=', $county);
         }
+
+        $userQuery->where('status', '=', "active");
+        $userQuery->orderBy('created_at',  "DESC");
 
         return new VolunteerCollection($userQuery->paginate($limit));
     }
@@ -109,7 +124,12 @@ class VolunteersController extends Controller
     public function show(Request $request, $id)
     {
         $user = $request->user();
-        return response()->json(["volunteer" => Volunteer::where("user_id", $user->id)->first()]);
+
+        if(!$user->hasRole(["admin","coordonator"])) {
+            $id=-$user->id;
+        }
+
+        return response()->json(["volunteer" => Volunteer::where("user_id", $id)->with("user")->first()]);
     }
 
     /**
@@ -249,5 +269,10 @@ class VolunteersController extends Controller
     {
 
         return response()->json(["volunteers" => Volunteer::whereNotNull("geojson")->select("name", "geojson")->get()]);
+    }
+
+    public function export(){
+
+        return Excel::download(new VolunteersExport(), 'export-voluntari'.date("Y-m-d").'.xlsx');
     }
 }

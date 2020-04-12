@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Exports\SolicitationExport;
 use App\Http\Resources\SolicitationCollection;
 use App\Solicitation;
 use App\Volunteer;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SolicitationsController extends Controller
 {
@@ -60,14 +62,27 @@ class SolicitationsController extends Controller
         if (!empty($keyword)) {
             $userQuery->leftJoin('beneficiaries', 'solicitations.beneficiary_id', '=', 'beneficiaries.id');
 
-            $userQuery->orWhere('beneficiaries.first_name', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.last_name', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.phone', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.address', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
-            $userQuery->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
+            $userQuery->where(function ($q) use ($keyword){
+                $names = explode(" ", $keyword);
+
+                $q->where(function ($sq) use ($names){
+                    $sq->whereIn('beneficiaries.first_name', $names);
+                    $sq->orWhere(function($query) use ($names) {
+                       $query->whereIn('beneficiaries.last_name', $names);
+                     });
+                });
+
+                $q->orWhere('beneficiaries.phone', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.address', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.neighborhood', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('beneficiaries.city', 'LIKE', '%' . $keyword . '%');
+                $q->orWhere('solicitations.code', '=',  $keyword );
+
+            });
+
         }
-        $userQuery->orderBy("created_at","DESC");
+
+        $userQuery->orderBy("solicitations.created_at","DESC");
 
         return new SolicitationCollection($userQuery->paginate($limit));
     }
@@ -225,5 +240,16 @@ class SolicitationsController extends Controller
 
 
         return response()->json($beneficiari);
+    }
+
+    public function export(Request $request){
+
+        $params=$request->toArray();
+
+        $params["type"]=isset($request->type) ? $request->type : "alimente";
+
+        return Excel::download(new SolicitationExport($params), 'solicitari-'.$params["type"].date("Y-m-d").'.xlsx');
+
+
     }
 }

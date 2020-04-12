@@ -25,14 +25,23 @@ const adminRoutes = {
       path: 'list',
       component: () => import('@/views/voluntari/listaVoluntari'),
       name: 'Lista Voluntari',
-      meta: { title: 'Lista voluntari', noCache: true, icon: 'peoples', roles: ['admin', 'dispecer', 'coordonator'] },
+      meta: { title: 'Lista voluntari', noCache: true, icon: 'peoples', roles: ['admin', 'coordonator'] },
+    },
+
+    /** View voluntar */
+    {
+      path: 'edit/:id',
+      component: () => import('@/views/voluntari/view'),
+      name: 'View Voluntar',
+      meta: { title: 'View voluntar', noCache: true, icon: 'peoples', roles: ['admin', 'coordonator'] },
+      hidden: true,
     },
 
     /** Harta voluntari */
     {
       path: 'harta-voluntari',
       component: () => import('@/views/voluntari/index'),
-      name: 'Inregistrare Voluntari',
+      name: 'Harta Voluntari',
       meta: { title: 'Harta voluntari', noCache: true, icon: 'peoples' },
     },
   ],

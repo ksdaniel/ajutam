@@ -23,7 +23,9 @@ class Solicitation extends Model
         "payment_value",
         "code",
         "delivery_observation",
-        "volunteer_confirmation"
+        "volunteer_confirmation",
+        "delivery_period",
+
     ];
 
     protected $casts = [
