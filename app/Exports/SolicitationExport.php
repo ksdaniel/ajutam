@@ -81,7 +81,8 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
                 $solicitation->delivery_observation,
                 $solicitation->additional_responses["tip_cos"],
                 $solicitation->additional_responses["tip_cos"]=="personalizat" ? implode("\n", $solicitation->additional_responses["cos_personalizat"] ) :"",
-                implode("\n",$solicitation->additional_responses["produse_aditionale"] )
+                implode("\n",$solicitation->additional_responses["produse_aditionale"] ),
+                isset($solicitation->additional_responses["condimente"])? implode("\n",$solicitation->additional_responses["condimente"] ):""
             ]);
 
         } else if ($this->params["type"]==="altele") {
@@ -139,7 +140,8 @@ class SolicitationExport implements FromCollection, WithHeadings, WithMapping, S
                 'Observatii Livrare',
                 'Tip Cos',
                 'Continut cos personalizat',
-                'Produse aditionale'
+                'Produse aditionale',
+                'Condimente'
                 ]);
         }
         else if ($this->params["type"]==="altele") {

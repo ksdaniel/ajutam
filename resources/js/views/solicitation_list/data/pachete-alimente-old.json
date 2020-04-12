@@ -1,29 +1,29 @@
-{"pachete":[
-    {
-      "key":"cos1",
-      "label":"COS1 - neperisabile de baza, aprox.32RON",
-      "price":"32",
-      "image":""
-    },
-    {
-      "key":"cos2",
-      "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, aprox.88RON ",
-      "price":"88",
-      "image":""
-    },
-    {
-      "key":"cos3",
-      "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris), aprox.88RON",
-      "price":"88",
-      "image":""
-    },
-    {
-      "key":"cos4",
-      "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui), aprox.107RON",
-      "price":"107.00",
-      "image":""
-    }
-  ],
+{ "pachete":[
+  {
+    "key":"cos1",
+    "label":"COS1 - neperisabile de baza,",
+    "price":"25",
+    "image":""
+  },
+  {
+    "key":"cos2",
+    "label":"COS2- neperisabile, Oua, Lactate, Suc de rosii, Cartofi si paste, Paine, Ceapa-> 1 persoana, cos saptamanal recomandat, fara carne, ",
+    "price":"70",
+    "image":""
+  },
+  {
+    "key":"cos3",
+    "label":"COS3- mai multe fructe, fara carne (lapte si unt, fructe si legume, paste, paine si gris),",
+    "price":"71",
+    "image":""
+  },
+  {
+    "key":"cos4",
+    "label":"COS 4- alimente de baza + carne (neperisabile de baza, oua, lactate, suc de rosii, legume, paine si pui),",
+    "price":"84",
+    "image":""
+  }
+],
 
   "produsePachetPersonalizat":[
     {
@@ -176,12 +176,18 @@
       "price":"1.79"
 
 
+    },
+    {
+      "key":"produs-27",
+      "label":"27. Unicarm Salam Banatean [400g | Unicarm] - 11,5RON",
+      "price":"11.5"
+
     }
   ],
 
   "produseAditionale":[
     {
-      "key":"produs-add-unique",
+      "key":"produs-add-8",
       "label":"Sacosa [1buc | Cora] - 5,00RON",
       "price":"5.00"
     },
@@ -225,69 +231,6 @@
       "key":"produs-add-7",
       "label":"Apa -  [2l X 6 sticle | Bax Borsec] - 16,14RON",
       "price":"16.14"
-
-    },
-    {
-      "key":"produs-add-8",
-      "label":"Unicarm Salam Banatean [400g | Unicarm] - 11,5RON",
-      "price":"11.5"
-
-    },
-    {
-      "key":"produs-add-9",
-      "label":"Hrana uscata pisici [Friskies Sterilised. somon 300g] - 6,50RON",
-      "price":"6.50"
-
-    },
-    {
-      "key":"produs-add-10",
-      "label":"Hrana umeda pisici [cora hrana umeda 4x100g.plic] - 7,80RON",
-      "price":"7.80"
-
-    },
-    {
-      "key":"produs-add-11",
-      "label":"Hrana uscata catei [Reno vita 3 kg] - 10,40RON",
-      "price":"10.40"
-
-    },
-    {
-      "key":"produs-add-12",
-      "label":"Hrana umeda catei [Reno.vita 1240 g.Conserva] - 5,20RON",
-      "price":"5.20"
-
-    }
-  ],
-
-  "Condimente":[
-    {
-      "key":"condimente-1",
-      "label":"Sare [Salrom sare iodata recristalizata] - 2,60RON",
-      "price":"2.60"
-
-    },
-    {
-      "key":"condimente-2",
-      "label":"Piper [Winny piper 30g ] - 2,60RON",
-      "price":"2.60"
-
-    },
-    {
-      "key":"condimente-3",
-      "label":"Boia  [Colonial boia dulce 70g ] - 2,60RON",
-      "price":"2.60"
-
-    },
-    {
-      "key":"condimente-4",
-      "label":"Cimbru [Cora cimbru 15 g] - 1,30RON",
-      "price":"1.30"
-
-    },
-    {
-      "key":"condimente-5",
-      "label":"Busuioc [Busuioc maruntit fuchs 12g] - 3,90RON",
-      "price":"3.90"
 
     }
   ]

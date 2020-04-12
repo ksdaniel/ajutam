@@ -303,6 +303,17 @@
 
             </div>
 
+            <div>
+
+              <el-form-item label="Condimente" class="checkbox-list">
+                <el-checkbox-group v-model="formData.solicitation.additional_responses.condimente" :max="2">
+                  <el-checkbox v-for="produs in Condimente" :key="produs.key" :label="produs.label" name="condimente" :value="produs.key" @change="calculPret" />
+
+                </el-checkbox-group>
+              </el-form-item>
+
+            </div>
+
             <div class="clearfix">
               <el-form-item
                 v-for="(intrebare) in intrebari.intrebariAlimente"
@@ -563,7 +574,7 @@
 <script>
 import axios from 'axios';
 import intrebari from './data/intrebari';
-import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale } from './data/pachete-alimente';
+import { pachete as pacheteAlimente, produsePachetPersonalizat, produseAditionale, Condimente } from './data/pachete-alimente';
 import { mapGetters } from 'vuex';
 import Resource from '@/api/resource';
 const solicitationsResource = new Resource('solicitations');
@@ -599,6 +610,7 @@ export default {
             tip_cos: '',
             cos_personalizat: [],
             produse_aditionale: [],
+            condimente: [],
 
           },
           payment_value: 0,
@@ -616,6 +628,7 @@ export default {
       pacheteAlimente,
       produsePachetPersonalizat,
       produseAditionale,
+      Condimente,
     };
   },
 
@@ -709,6 +722,17 @@ export default {
           priceArray.push(parseFloat(produs.price));
         }
       });
+
+      if (this.formData.solicitation.additional_responses.condimente){
+        this.formData.solicitation.additional_responses.condimente.forEach(res => {
+          const produs = this.Condimente.find(r => r.label === res);
+          if (produs){
+            priceArray.push(parseFloat(produs.price));
+          }
+        });
+      } else {
+        this.formData.solicitation.additional_responses.condimente = [];
+      }
 
       this.formData.solicitation.payment_value = priceArray.reduce((a, b) => a + b, 0).toFixed(2);
     },
